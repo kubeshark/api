@@ -192,6 +192,12 @@ type Error struct {
 	Message string    `json:"msg"`
 }
 
+type Event struct {
+	Source string      `json:"source"`
+	Type   string      `json:"type"`
+	Data   interface{} `json:"data"`
+}
+
 // {Worker}/{Stream}-{Index} uniquely identifies an item
 type Entry struct {
 	Id           string      `json:"id"`
@@ -218,6 +224,7 @@ type Entry struct {
 	Error        *Error      `json:"error"`
 	EntryFile    string      `json:"entryFile"`
 	Record       string      `json:"record"`
+	Event        *Event      `json:"event"`
 	Base         *BaseEntry  `json:"base"`
 }
 
@@ -342,6 +349,7 @@ type BaseEntry struct {
 	Failed       bool               `json:"failed"`
 	Error        *Error             `json:"error"`
 	Record       string             `json:"record"`
+	Event        *Event             `json:"event"`
 }
 
 const (
