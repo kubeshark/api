@@ -76,14 +76,16 @@ type ConnectionInfo struct {
 	ServerIP   string
 	ServerPort string
 	IsOutgoing bool
+	CgroupID   uint64
 }
 
 type TcpID struct {
-	SrcIP   string
-	DstIP   string
-	SrcPort string
-	DstPort string
-	Ident   string
+	SrcIP    string
+	DstIP    string
+	SrcPort  string
+	DstPort  string
+	CgroupID uint64
+	Ident    string
 }
 
 type CounterPair struct {
