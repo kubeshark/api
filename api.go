@@ -71,19 +71,23 @@ type Extension struct {
 }
 
 type ConnectionInfo struct {
-	ClientIP   string
-	ClientPort string
-	ServerIP   string
-	ServerPort string
-	IsOutgoing bool
+	ClientIP       string
+	ClientPort     string
+	ClientCgroupID uint64
+	ServerIP       string
+	ServerPort     string
+	ServerCgroupID uint64
+	IsOutgoing     bool
 }
 
 type TcpID struct {
-	SrcIP   string
-	DstIP   string
-	SrcPort string
-	DstPort string
-	Ident   string
+	SrcIP       string
+	DstIP       string
+	SrcPort     string
+	DstPort     string
+	SrcCgroupID uint64
+	DstCgroupID uint64
+	Ident       string
 }
 
 type CounterPair struct {
