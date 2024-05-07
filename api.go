@@ -76,7 +76,8 @@ type ConnectionInfo struct {
 	ServerIP   string
 	ServerPort string
 	IsOutgoing bool
-	CgroupIDs  []uint64
+	ClientCgroupID  uint64
+	ServerCgroupID  uint64
 }
 
 type TcpID struct {
