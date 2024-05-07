@@ -85,7 +85,8 @@ type TcpID struct {
 	DstIP     string
 	SrcPort   string
 	DstPort   string
-	CgroupIDs []uint64
+	SrcCgroupID uint64
+	DstCgroupID uint64
 	Ident     string
 }
 
