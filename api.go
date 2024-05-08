@@ -145,10 +145,10 @@ type Dissector interface {
 	Dissect(b *bufio.Reader, reader TcpReader) (err error)
 	Analyze(item *OutputChannelItem, resolvedSource *Resolution, resolvedDestination *Resolution) *Entry
 	Summarize(entry *Entry) *BaseEntry
-	Represent(request interface{}, response interface{}) (object []byte, err error)
+	Represent(request interface{}, response interface{}, event *Event) (object []byte, err error)
 	Macros() map[string]string
 	NewResponseRequestMatcher() RequestResponseMatcher
-	Typed(data []byte, requestRef string, responseRef string) (request interface{}, response interface{}, err error)
+	Typed(data []byte, requestRef string, responseRef string, eventRef string) (request interface{}, response interface{}, event *Event, err error)
 }
 
 type RequestResponseMatcher interface {
@@ -229,6 +229,7 @@ type Entry struct {
 	EntryFile    string      `json:"entryFile"`
 	Record       string      `json:"record"`
 	Event        *Event      `json:"event"`
+	EventRef     string      `json:"eventRef"`
 	Base         *BaseEntry  `json:"base"`
 }
 
@@ -353,7 +354,7 @@ type BaseEntry struct {
 	Failed       bool               `json:"failed"`
 	Error        *Error             `json:"error"`
 	Record       string             `json:"record"`
-	Event        *Event             `json:"event"`
+	Event        bool               `json:"event"`
 }
 
 const (
