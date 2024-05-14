@@ -45,9 +45,14 @@ type SpecSummary struct {
 	NodeName string `json:"nodeName"`
 }
 
+type StatusSummary struct {
+	HostIP string `json:"hostIp"`
+}
+
 type PodSummary struct {
-	Metadata *ObjectMeta  `json:"metadata"`
-	Spec     *SpecSummary `json:"spec"`
+	Metadata *ObjectMeta    `json:"metadata"`
+	Spec     *SpecSummary   `json:"spec"`
+	Status   *StatusSummary `json:"status"`
 }
 
 type Object struct {
@@ -258,6 +263,9 @@ func (e *Entry) SourceSummary() *ResolutionSummary {
 			Spec: &SpecSummary{
 				NodeName: e.Source.Pod.Spec.NodeName,
 			},
+			Status: &StatusSummary{
+				HostIP: e.Source.Pod.Status.HostIP,
+			},
 		}
 	}
 
@@ -298,6 +306,9 @@ func (e *Entry) DestinationSummary() *ResolutionSummary {
 			},
 			Spec: &SpecSummary{
 				NodeName: e.Destination.Pod.Spec.NodeName,
+			},
+			Status: &StatusSummary{
+				HostIP: e.Destination.Pod.Status.HostIP,
 			},
 		}
 	}
