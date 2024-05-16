@@ -150,7 +150,7 @@ type Dissector interface {
 	Dissect(b *bufio.Reader, reader TcpReader) (err error)
 	Analyze(item *OutputChannelItem, resolvedSource *Resolution, resolvedDestination *Resolution) *Entry
 	Summarize(entry *Entry) *BaseEntry
-	Represent(request interface{}, response interface{}, event *Event) (representation *Representation, err error)
+	Represent(request interface{}, response interface{}, event *Event) (representation *Representation)
 	Macros() map[string]string
 	NewResponseRequestMatcher() RequestResponseMatcher
 	Typed(data []byte, requestRef string, responseRef string, eventRef string) (request interface{}, response interface{}, event *Event, err error)
