@@ -150,7 +150,7 @@ type Dissector interface {
 	Dissect(b *bufio.Reader, reader TcpReader) (err error)
 	Analyze(item *OutputChannelItem, resolvedSource *Resolution, resolvedDestination *Resolution) *Entry
 	Summarize(entry *Entry) *BaseEntry
-	Represent(request interface{}, response interface{}, event *Event) (object []byte, err error)
+	Represent(request interface{}, response interface{}, event *Event) (representation []*SectionData, err error)
 	Macros() map[string]string
 	NewResponseRequestMatcher() RequestResponseMatcher
 	Typed(data []byte, requestRef string, responseRef string, eventRef string) (request interface{}, response interface{}, event *Event, err error)
@@ -374,12 +374,12 @@ const (
 )
 
 type SectionData struct {
-	Type     string `json:"type"`
-	Title    string `json:"title"`
-	Data     string `json:"data"`
-	Encoding string `json:"encoding,omitempty"`
-	MimeType string `json:"mimeType,omitempty"`
-	Selector string `json:"selector,omitempty"`
+	Type     string      `json:"type"`
+	Title    string      `json:"title"`
+	Data     interface{} `json:"data"`
+	Encoding string      `json:"encoding,omitempty"`
+	MimeType string      `json:"mimeType,omitempty"`
+	Selector string      `json:"selector,omitempty"`
 }
 
 type TableData struct {
