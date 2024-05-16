@@ -335,10 +335,10 @@ func (e *Entry) DestinationSummary() *ResolutionSummary {
 }
 
 type EntryWrapper struct {
-	Protocol       Protocol   `json:"protocol"`
-	Representation string     `json:"representation"`
-	Data           *Entry     `json:"data"`
-	Base           *BaseEntry `json:"base"`
+	Protocol       Protocol       `json:"protocol"`
+	Representation []*SectionData `json:"representation"`
+	Data           *Entry         `json:"data"`
+	Base           *BaseEntry     `json:"base"`
 }
 
 // {Worker}/{Id} uniquely identifies an item
