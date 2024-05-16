@@ -150,7 +150,7 @@ type Dissector interface {
 	Dissect(b *bufio.Reader, reader TcpReader) (err error)
 	Analyze(item *OutputChannelItem, resolvedSource *Resolution, resolvedDestination *Resolution) *Entry
 	Summarize(entry *Entry) *BaseEntry
-	Represent(request interface{}, response interface{}, event *Event) (representation []*SectionData, err error)
+	Represent(request interface{}, response interface{}, event *Event) (representation *Representation, err error)
 	Macros() map[string]string
 	NewResponseRequestMatcher() RequestResponseMatcher
 	Typed(data []byte, requestRef string, responseRef string, eventRef string) (request interface{}, response interface{}, event *Event, err error)
@@ -334,11 +334,16 @@ func (e *Entry) DestinationSummary() *ResolutionSummary {
 	return s
 }
 
+type Representation struct {
+	Request  []*SectionData `json:"request"`
+	Response []*SectionData `json:"response"`
+}
+
 type EntryWrapper struct {
-	Protocol       Protocol       `json:"protocol"`
-	Representation []*SectionData `json:"representation"`
-	Data           *Entry         `json:"data"`
-	Base           *BaseEntry     `json:"base"`
+	Protocol       Protocol        `json:"protocol"`
+	Representation *Representation `json:"representation"`
+	Data           *Entry          `json:"data"`
+	Base           *BaseEntry      `json:"base"`
 }
 
 // {Worker}/{Id} uniquely identifies an item
