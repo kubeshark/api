@@ -337,6 +337,7 @@ func (e *Entry) DestinationSummary() *ResolutionSummary {
 type Representation struct {
 	Request  []*SectionData `json:"request"`
 	Response []*SectionData `json:"response"`
+	Event    []*SectionData `json:"event"`
 }
 
 type EntryWrapper struct {
@@ -379,12 +380,13 @@ const (
 )
 
 type SectionData struct {
-	Type     string      `json:"type"`
-	Title    string      `json:"title"`
-	Data     interface{} `json:"data"`
-	Encoding string      `json:"encoding,omitempty"`
-	MimeType string      `json:"mimeType,omitempty"`
-	Selector string      `json:"selector,omitempty"`
+	Type      string       `json:"type"`
+	Title     string       `json:"title"`
+	TableData []*TableData `json:"data"`
+	Encoding  string       `json:"encoding,omitempty"`
+	MimeType  string       `json:"mimeType,omitempty"`
+	Body      string       `json:"body"`
+	Selector  string       `json:"selector,omitempty"`
 }
 
 type TableData struct {
