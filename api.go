@@ -382,7 +382,7 @@ const (
 type SectionData struct {
 	Type      string       `json:"type"`
 	Title     string       `json:"title"`
-	TableData []*TableData `json:"data"`
+	TableData []*TableData `json:"tableData"`
 	Encoding  string       `json:"encoding,omitempty"`
 	MimeType  string       `json:"mimeType,omitempty"`
 	Body      string       `json:"body"`
