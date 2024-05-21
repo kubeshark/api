@@ -78,6 +78,7 @@ type ConnectionInfo struct {
 	ServerPort     string
 	ServerCgroupID uint64
 	IsOutgoing     bool
+	ContainerId    string
 }
 
 type TcpID struct {
