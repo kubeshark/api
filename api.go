@@ -26,14 +26,27 @@ type Protocol struct {
 	Priority        uint8    `json:"priority"`
 }
 
+type ResolutionMechanism string
+
+const (
+	ResolutionMechanismNone        ResolutionMechanism = "none"
+	ResolutionMechanismIp          ResolutionMechanism = "ip"
+	ResolutionMechanismIpAndPort   ResolutionMechanism = "ip-and-port"
+	ResolutionMechanismDns         ResolutionMechanism = "dns"
+	ResolutionMechanismCgroupID    ResolutionMechanism = "cgroup-id"
+	ResolutionMechanismContainerID ResolutionMechanism = "container-id"
+)
+
 type Resolution struct {
-	IP            string            `json:"ip"`
-	Port          string            `json:"port"`
-	Name          string            `json:"name"`
-	Namespace     string            `json:"namespace"`
-	Pod           *corev1.Pod       `json:"pod"`
-	EndpointSlice *corev1.Endpoints `json:"endpointSlice"`
-	Service       *corev1.Service   `json:"service"`
+	IP                  string              `json:"ip"`
+	Port                string              `json:"port"`
+	Name                string              `json:"name"`
+	Namespace           string              `json:"namespace"`
+	Pod                 *corev1.Pod         `json:"pod"`
+	EndpointSlice       *corev1.Endpoints   `json:"endpointSlice"`
+	Service             *corev1.Service     `json:"service"`
+	Node                *corev1.Node        `json:"node"`
+	ResolutionMechanism ResolutionMechanism `json:"resolutionMechanism"`
 }
 
 type ObjectMeta struct {
@@ -67,6 +80,7 @@ type ResolutionSummary struct {
 	Pod           *PodSummary `json:"pod"`
 	EndpointSlice *Object     `json:"endpointSlice"`
 	Service       *Object     `json:"service"`
+	Node          *Object     `json:"node"`
 }
 
 type Extension struct {
