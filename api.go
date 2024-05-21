@@ -73,14 +73,15 @@ type Object struct {
 }
 
 type ResolutionSummary struct {
-	IP            string      `json:"ip"`
-	Port          string      `json:"port"`
-	Name          string      `json:"name"`
-	Namespace     string      `json:"namespace"`
-	Pod           *PodSummary `json:"pod"`
-	EndpointSlice *Object     `json:"endpointSlice"`
-	Service       *Object     `json:"service"`
-	Node          *Object     `json:"node"`
+	IP                  string              `json:"ip"`
+	Port                string              `json:"port"`
+	Name                string              `json:"name"`
+	Namespace           string              `json:"namespace"`
+	Pod                 *PodSummary         `json:"pod"`
+	EndpointSlice       *Object             `json:"endpointSlice"`
+	Service             *Object             `json:"service"`
+	Node                *Object             `json:"node"`
+	ResolutionMechanism ResolutionMechanism `json:"resolutionMechanism"`
 }
 
 type Extension struct {
