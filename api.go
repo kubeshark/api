@@ -263,10 +263,11 @@ func (e *Entry) BuildFilenames() {
 
 func (e *Entry) SourceSummary() *ResolutionSummary {
 	s := &ResolutionSummary{
-		IP:        e.Source.IP,
-		Port:      e.Source.Port,
-		Name:      e.Source.Name,
-		Namespace: e.Source.Namespace,
+		IP:                  e.Source.IP,
+		Port:                e.Source.Port,
+		Name:                e.Source.Name,
+		Namespace:           e.Source.Namespace,
+		ResolutionMechanism: e.Source.ResolutionMechanism,
 	}
 
 	if e.Source.Pod != nil {
@@ -307,10 +308,11 @@ func (e *Entry) SourceSummary() *ResolutionSummary {
 
 func (e *Entry) DestinationSummary() *ResolutionSummary {
 	s := &ResolutionSummary{
-		IP:        e.Destination.IP,
-		Port:      e.Destination.Port,
-		Name:      e.Destination.Name,
-		Namespace: e.Destination.Namespace,
+		IP:                  e.Destination.IP,
+		Port:                e.Destination.Port,
+		Name:                e.Destination.Name,
+		Namespace:           e.Destination.Namespace,
+		ResolutionMechanism: e.Destination.ResolutionMechanism,
 	}
 
 	if e.Destination.Pod != nil {
