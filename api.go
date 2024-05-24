@@ -45,7 +45,6 @@ type Resolution struct {
 	Pod                 *corev1.Pod         `json:"pod"`
 	EndpointSlice       *corev1.Endpoints   `json:"endpointSlice"`
 	Service             *corev1.Service     `json:"service"`
-	Node                *corev1.Node        `json:"node"`
 	ResolutionMechanism ResolutionMechanism `json:"resolutionMechanism"`
 }
 
@@ -80,7 +79,6 @@ type ResolutionSummary struct {
 	Pod                 *PodSummary         `json:"pod"`
 	EndpointSlice       *Object             `json:"endpointSlice"`
 	Service             *Object             `json:"service"`
-	Node                *Object             `json:"node"`
 	ResolutionMechanism ResolutionMechanism `json:"resolutionMechanism"`
 }
 
