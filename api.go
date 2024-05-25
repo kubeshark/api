@@ -33,6 +33,7 @@ const (
 	ResolutionMechanismIp          ResolutionMechanism = "ip"
 	ResolutionMechanismIpAndPort   ResolutionMechanism = "ip-and-port"
 	ResolutionMechanismDns         ResolutionMechanism = "dns"
+	ResolutionMechanismHttpHeader  ResolutionMechanism = "http-header"
 	ResolutionMechanismCgroupID    ResolutionMechanism = "cgroup-id"
 	ResolutionMechanismContainerID ResolutionMechanism = "container-id"
 )
@@ -96,6 +97,7 @@ type ConnectionInfo struct {
 	ServerPort     string
 	ServerCgroupID uint64
 	IsOutgoing     bool
+	IsKubeProbe    bool
 }
 
 type TcpID struct {
