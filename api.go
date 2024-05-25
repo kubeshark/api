@@ -96,6 +96,7 @@ type ConnectionInfo struct {
 	ServerPort     string
 	ServerCgroupID uint64
 	IsOutgoing     bool
+	IsKubeProbe    bool
 }
 
 type TcpID struct {
