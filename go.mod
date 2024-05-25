@@ -3,7 +3,7 @@ module github.com/kubeshark/api
 go 1.20
 
 require (
-	github.com/kubeshark/gopacket v1.1.28
+	github.com/kubeshark/gopacket v1.1.29
 	k8s.io/api v0.27.2
 )
 
