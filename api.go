@@ -121,6 +121,7 @@ type GenericMessage struct {
 	CaptureTime time.Time
 	CaptureSize int
 	Payload     interface{}
+	IsKubeProbe bool
 }
 
 type RequestResponsePair struct {
