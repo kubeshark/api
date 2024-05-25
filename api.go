@@ -137,6 +137,7 @@ type OutputChannelItem struct {
 	Pair           *RequestResponsePair
 	Tls            bool
 	Error          *Error
+	CaptureBackend gopacket.CaptureBackend
 }
 
 type ReadProgress struct {
@@ -222,33 +223,34 @@ type Event struct {
 
 // {Worker}/{Stream}-{Index} uniquely identifies an item
 type Entry struct {
-	Id           string      `json:"id"`
-	Index        int64       `json:"index"`
-	Stream       string      `json:"stream"`
-	Worker       string      `json:"worker"`
-	Node         *Node       `json:"node"`
-	Protocol     Protocol    `json:"protocol"`
-	Tls          bool        `json:"tls"`
-	Source       *Resolution `json:"src"`
-	Destination  *Resolution `json:"dst"`
-	Outgoing     bool        `json:"outgoing"`
-	Timestamp    int64       `json:"timestamp"`
-	StartTime    time.Time   `json:"startTime"`
-	Request      interface{} `json:"request"`
-	Response     interface{} `json:"response"`
-	RequestRef   string      `json:"requestRef"`
-	ResponseRef  string      `json:"responseRef"`
-	RequestSize  int         `json:"requestSize"`
-	ResponseSize int         `json:"responseSize"`
-	ElapsedTime  int64       `json:"elapsedTime"`
-	Passed       bool        `json:"passed"`
-	Failed       bool        `json:"failed"`
-	Error        *Error      `json:"error"`
-	EntryFile    string      `json:"entryFile"`
-	Record       string      `json:"record"`
-	Event        *Event      `json:"event"`
-	EventRef     string      `json:"eventRef"`
-	Base         *BaseEntry  `json:"base"`
+	Id             string      `json:"id"`
+	Index          int64       `json:"index"`
+	Stream         string      `json:"stream"`
+	Worker         string      `json:"worker"`
+	Node           *Node       `json:"node"`
+	Protocol       Protocol    `json:"protocol"`
+	Tls            bool        `json:"tls"`
+	Source         *Resolution `json:"src"`
+	Destination    *Resolution `json:"dst"`
+	Outgoing       bool        `json:"outgoing"`
+	Timestamp      int64       `json:"timestamp"`
+	StartTime      time.Time   `json:"startTime"`
+	Request        interface{} `json:"request"`
+	Response       interface{} `json:"response"`
+	RequestRef     string      `json:"requestRef"`
+	ResponseRef    string      `json:"responseRef"`
+	RequestSize    int         `json:"requestSize"`
+	ResponseSize   int         `json:"responseSize"`
+	ElapsedTime    int64       `json:"elapsedTime"`
+	Passed         bool        `json:"passed"`
+	Failed         bool        `json:"failed"`
+	Error          *Error      `json:"error"`
+	EntryFile      string      `json:"entryFile"`
+	Record         string      `json:"record"`
+	Event          *Event      `json:"event"`
+	EventRef       string      `json:"eventRef"`
+	Base           *BaseEntry  `json:"base"`
+	CaptureBackend string      `json:"captureBackend"`
 }
 
 func (e *Entry) BuildId() {
@@ -364,29 +366,30 @@ type EntryWrapper struct {
 
 // {Worker}/{Id} uniquely identifies an item
 type BaseEntry struct {
-	Id           string             `json:"id"`
-	Stream       string             `json:"stream"`
-	Worker       string             `json:"worker"`
-	Protocol     Protocol           `json:"proto,omitempty"`
-	Tls          bool               `json:"tls"`
-	Summary      string             `json:"summary,omitempty"`
-	SummaryQuery string             `json:"summaryQuery,omitempty"`
-	Status       int                `json:"status"`
-	StatusQuery  string             `json:"statusQuery"`
-	Method       string             `json:"method,omitempty"`
-	MethodQuery  string             `json:"methodQuery,omitempty"`
-	Timestamp    int64              `json:"timestamp,omitempty"`
-	Source       *ResolutionSummary `json:"src"`
-	Destination  *ResolutionSummary `json:"dst"`
-	Outgoing     bool               `json:"outgoing"`
-	RequestSize  int                `json:"requestSize"`
-	ResponseSize int                `json:"responseSize"`
-	ElapsedTime  int64              `json:"elapsedTime"`
-	Passed       bool               `json:"passed"`
-	Failed       bool               `json:"failed"`
-	Error        *Error             `json:"error"`
-	Record       string             `json:"record"`
-	Event        bool               `json:"event"`
+	Id             string             `json:"id"`
+	Stream         string             `json:"stream"`
+	Worker         string             `json:"worker"`
+	Protocol       Protocol           `json:"proto,omitempty"`
+	Tls            bool               `json:"tls"`
+	Summary        string             `json:"summary,omitempty"`
+	SummaryQuery   string             `json:"summaryQuery,omitempty"`
+	Status         int                `json:"status"`
+	StatusQuery    string             `json:"statusQuery"`
+	Method         string             `json:"method,omitempty"`
+	MethodQuery    string             `json:"methodQuery,omitempty"`
+	Timestamp      int64              `json:"timestamp,omitempty"`
+	Source         *ResolutionSummary `json:"src"`
+	Destination    *ResolutionSummary `json:"dst"`
+	Outgoing       bool               `json:"outgoing"`
+	RequestSize    int                `json:"requestSize"`
+	ResponseSize   int                `json:"responseSize"`
+	ElapsedTime    int64              `json:"elapsedTime"`
+	Passed         bool               `json:"passed"`
+	Failed         bool               `json:"failed"`
+	Error          *Error             `json:"error"`
+	Record         string             `json:"record"`
+	Event          bool               `json:"event"`
+	CaptureBackend string             `json:"captureBackend"`
 }
 
 const (
