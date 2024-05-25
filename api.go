@@ -33,6 +33,7 @@ const (
 	ResolutionMechanismIp          ResolutionMechanism = "ip"
 	ResolutionMechanismIpAndPort   ResolutionMechanism = "ip-and-port"
 	ResolutionMechanismDns         ResolutionMechanism = "dns"
+	ResolutionMechanismHeader      ResolutionMechanism = "header"
 	ResolutionMechanismCgroupID    ResolutionMechanism = "cgroup-id"
 	ResolutionMechanismContainerID ResolutionMechanism = "container-id"
 )
