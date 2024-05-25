@@ -117,15 +117,15 @@ type CounterPair struct {
 }
 
 type GenericMessage struct {
-	IsRequest   bool        `json:"isRequest"`
-	CaptureTime time.Time   `json:"captureTime"`
-	CaptureSize int         `json:"captureSize"`
-	Payload     interface{} `json:"payload"`
+	IsRequest   bool
+	CaptureTime time.Time
+	CaptureSize int
+	Payload     interface{}
 }
 
 type RequestResponsePair struct {
-	Request  *GenericMessage `json:"request"`
-	Response *GenericMessage `json:"response"`
+	Request  *GenericMessage
+	Response *GenericMessage
 }
 
 // {Stream}-{Index} uniquely identifies an item
