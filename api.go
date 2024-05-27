@@ -141,6 +141,7 @@ type OutputChannelItem struct {
 	Tls            bool
 	Error          *Error
 	CaptureBackend gopacket.CaptureBackend
+	Checksums      []string
 }
 
 type ReadProgress struct {
