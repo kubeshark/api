@@ -450,6 +450,8 @@ type TcpStream interface {
 	IncrementItemCount()
 	GetTls() bool
 	GetCaptureBackend() gopacket.CaptureBackend
+	AddChecksum(checksum string)
+	GetChecksums() []string
 }
 
 type TcpStreamMap interface {
