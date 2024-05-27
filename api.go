@@ -254,6 +254,8 @@ type Entry struct {
 	EventRef       string      `json:"eventRef"`
 	Base           *BaseEntry  `json:"base"`
 	CaptureBackend string      `json:"captureBackend"`
+	Checksums      []string    `json:"checksums"`
+	Duplicate      string      `json:"duplicate"`
 }
 
 func (e *Entry) BuildId() {
@@ -393,6 +395,8 @@ type BaseEntry struct {
 	Record         string             `json:"record"`
 	Event          bool               `json:"event"`
 	CaptureBackend string             `json:"captureBackend"`
+	Checksums      []string           `json:"checksums"`
+	Duplicate      string             `json:"duplicate"`
 }
 
 const (
