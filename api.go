@@ -26,14 +26,27 @@ type Protocol struct {
 	Priority        uint8    `json:"priority"`
 }
 
+type ResolutionMechanism string
+
+const (
+	ResolutionMechanismNone        ResolutionMechanism = "none"
+	ResolutionMechanismIp          ResolutionMechanism = "ip"
+	ResolutionMechanismIpAndPort   ResolutionMechanism = "ip-and-port"
+	ResolutionMechanismDns         ResolutionMechanism = "dns"
+	ResolutionMechanismHttpHeader  ResolutionMechanism = "http-header"
+	ResolutionMechanismCgroupID    ResolutionMechanism = "cgroup-id"
+	ResolutionMechanismContainerID ResolutionMechanism = "container-id"
+)
+
 type Resolution struct {
-	IP            string            `json:"ip"`
-	Port          string            `json:"port"`
-	Name          string            `json:"name"`
-	Namespace     string            `json:"namespace"`
-	Pod           *corev1.Pod       `json:"pod"`
-	EndpointSlice *corev1.Endpoints `json:"endpointSlice"`
-	Service       *corev1.Service   `json:"service"`
+	IP                  string              `json:"ip"`
+	Port                string              `json:"port"`
+	Name                string              `json:"name"`
+	Namespace           string              `json:"namespace"`
+	Pod                 *corev1.Pod         `json:"pod"`
+	EndpointSlice       *corev1.Endpoints   `json:"endpointSlice"`
+	Service             *corev1.Service     `json:"service"`
+	ResolutionMechanism ResolutionMechanism `json:"resolutionMechanism"`
 }
 
 type ObjectMeta struct {
@@ -45,9 +58,14 @@ type SpecSummary struct {
 	NodeName string `json:"nodeName"`
 }
 
+type StatusSummary struct {
+	HostIP string `json:"hostIp"`
+}
+
 type PodSummary struct {
-	Metadata *ObjectMeta  `json:"metadata"`
-	Spec     *SpecSummary `json:"spec"`
+	Metadata *ObjectMeta    `json:"metadata"`
+	Spec     *SpecSummary   `json:"spec"`
+	Status   *StatusSummary `json:"status"`
 }
 
 type Object struct {
@@ -55,13 +73,14 @@ type Object struct {
 }
 
 type ResolutionSummary struct {
-	IP            string      `json:"ip"`
-	Port          string      `json:"port"`
-	Name          string      `json:"name"`
-	Namespace     string      `json:"namespace"`
-	Pod           *PodSummary `json:"pod"`
-	EndpointSlice *Object     `json:"endpointSlice"`
-	Service       *Object     `json:"service"`
+	IP                  string              `json:"ip"`
+	Port                string              `json:"port"`
+	Name                string              `json:"name"`
+	Namespace           string              `json:"namespace"`
+	Pod                 *PodSummary         `json:"pod"`
+	EndpointSlice       *Object             `json:"endpointSlice"`
+	Service             *Object             `json:"service"`
+	ResolutionMechanism ResolutionMechanism `json:"resolutionMechanism"`
 }
 
 type Extension struct {
@@ -78,6 +97,7 @@ type ConnectionInfo struct {
 	ServerPort     string
 	ServerCgroupID uint64
 	IsOutgoing     bool
+  IsKubeProbe    bool
 	ContainerId    string
 }
 
@@ -98,15 +118,16 @@ type CounterPair struct {
 }
 
 type GenericMessage struct {
-	IsRequest   bool        `json:"isRequest"`
-	CaptureTime time.Time   `json:"captureTime"`
-	CaptureSize int         `json:"captureSize"`
-	Payload     interface{} `json:"payload"`
+	IsRequest   bool
+	CaptureTime time.Time
+	CaptureSize int
+	Payload     interface{}
+	IsKubeProbe bool
 }
 
 type RequestResponsePair struct {
-	Request  *GenericMessage `json:"request"`
-	Response *GenericMessage `json:"response"`
+	Request  *GenericMessage
+	Response *GenericMessage
 }
 
 // {Stream}-{Index} uniquely identifies an item
@@ -120,6 +141,7 @@ type OutputChannelItem struct {
 	Pair           *RequestResponsePair
 	Tls            bool
 	Error          *Error
+	CaptureBackend gopacket.CaptureBackend
 }
 
 type ReadProgress struct {
@@ -146,7 +168,7 @@ type Dissector interface {
 	Dissect(b *bufio.Reader, reader TcpReader) (err error)
 	Analyze(item *OutputChannelItem, resolvedSource *Resolution, resolvedDestination *Resolution) *Entry
 	Summarize(entry *Entry) *BaseEntry
-	Represent(request interface{}, response interface{}, event *Event) (object []byte, err error)
+	Represent(request interface{}, response interface{}, event *Event) (representation *Representation)
 	Macros() map[string]string
 	NewResponseRequestMatcher() RequestResponseMatcher
 	Typed(data []byte, requestRef string, responseRef string, eventRef string) (request interface{}, response interface{}, event *Event, err error)
@@ -205,33 +227,34 @@ type Event struct {
 
 // {Worker}/{Stream}-{Index} uniquely identifies an item
 type Entry struct {
-	Id           string      `json:"id"`
-	Index        int64       `json:"index"`
-	Stream       string      `json:"stream"`
-	Worker       string      `json:"worker"`
-	Node         *Node       `json:"node"`
-	Protocol     Protocol    `json:"protocol"`
-	Tls          bool        `json:"tls"`
-	Source       *Resolution `json:"src"`
-	Destination  *Resolution `json:"dst"`
-	Outgoing     bool        `json:"outgoing"`
-	Timestamp    int64       `json:"timestamp"`
-	StartTime    time.Time   `json:"startTime"`
-	Request      interface{} `json:"request"`
-	Response     interface{} `json:"response"`
-	RequestRef   string      `json:"requestRef"`
-	ResponseRef  string      `json:"responseRef"`
-	RequestSize  int         `json:"requestSize"`
-	ResponseSize int         `json:"responseSize"`
-	ElapsedTime  int64       `json:"elapsedTime"`
-	Passed       bool        `json:"passed"`
-	Failed       bool        `json:"failed"`
-	Error        *Error      `json:"error"`
-	EntryFile    string      `json:"entryFile"`
-	Record       string      `json:"record"`
-	Event        *Event      `json:"event"`
-	EventRef     string      `json:"eventRef"`
-	Base         *BaseEntry  `json:"base"`
+	Id             string      `json:"id"`
+	Index          int64       `json:"index"`
+	Stream         string      `json:"stream"`
+	Worker         string      `json:"worker"`
+	Node           *Node       `json:"node"`
+	Protocol       Protocol    `json:"protocol"`
+	Tls            bool        `json:"tls"`
+	Source         *Resolution `json:"src"`
+	Destination    *Resolution `json:"dst"`
+	Outgoing       bool        `json:"outgoing"`
+	Timestamp      int64       `json:"timestamp"`
+	StartTime      time.Time   `json:"startTime"`
+	Request        interface{} `json:"request"`
+	Response       interface{} `json:"response"`
+	RequestRef     string      `json:"requestRef"`
+	ResponseRef    string      `json:"responseRef"`
+	RequestSize    int         `json:"requestSize"`
+	ResponseSize   int         `json:"responseSize"`
+	ElapsedTime    int64       `json:"elapsedTime"`
+	Passed         bool        `json:"passed"`
+	Failed         bool        `json:"failed"`
+	Error          *Error      `json:"error"`
+	EntryFile      string      `json:"entryFile"`
+	Record         string      `json:"record"`
+	Event          *Event      `json:"event"`
+	EventRef       string      `json:"eventRef"`
+	Base           *BaseEntry  `json:"base"`
+	CaptureBackend string      `json:"captureBackend"`
 }
 
 func (e *Entry) BuildId() {
@@ -244,10 +267,11 @@ func (e *Entry) BuildFilenames() {
 
 func (e *Entry) SourceSummary() *ResolutionSummary {
 	s := &ResolutionSummary{
-		IP:        e.Source.IP,
-		Port:      e.Source.Port,
-		Name:      e.Source.Name,
-		Namespace: e.Source.Namespace,
+		IP:                  e.Source.IP,
+		Port:                e.Source.Port,
+		Name:                e.Source.Name,
+		Namespace:           e.Source.Namespace,
+		ResolutionMechanism: e.Source.ResolutionMechanism,
 	}
 
 	if e.Source.Pod != nil {
@@ -258,6 +282,9 @@ func (e *Entry) SourceSummary() *ResolutionSummary {
 			},
 			Spec: &SpecSummary{
 				NodeName: e.Source.Pod.Spec.NodeName,
+			},
+			Status: &StatusSummary{
+				HostIP: e.Source.Pod.Status.HostIP,
 			},
 		}
 	}
@@ -285,10 +312,11 @@ func (e *Entry) SourceSummary() *ResolutionSummary {
 
 func (e *Entry) DestinationSummary() *ResolutionSummary {
 	s := &ResolutionSummary{
-		IP:        e.Destination.IP,
-		Port:      e.Destination.Port,
-		Name:      e.Destination.Name,
-		Namespace: e.Destination.Namespace,
+		IP:                  e.Destination.IP,
+		Port:                e.Destination.Port,
+		Name:                e.Destination.Name,
+		Namespace:           e.Destination.Namespace,
+		ResolutionMechanism: e.Destination.ResolutionMechanism,
 	}
 
 	if e.Destination.Pod != nil {
@@ -299,6 +327,9 @@ func (e *Entry) DestinationSummary() *ResolutionSummary {
 			},
 			Spec: &SpecSummary{
 				NodeName: e.Destination.Pod.Spec.NodeName,
+			},
+			Status: &StatusSummary{
+				HostIP: e.Destination.Pod.Status.HostIP,
 			},
 		}
 	}
@@ -324,38 +355,45 @@ func (e *Entry) DestinationSummary() *ResolutionSummary {
 	return s
 }
 
+type Representation struct {
+	Request  []*SectionData `json:"request"`
+	Response []*SectionData `json:"response"`
+	Event    []*SectionData `json:"event"`
+}
+
 type EntryWrapper struct {
-	Protocol       Protocol   `json:"protocol"`
-	Representation string     `json:"representation"`
-	Data           *Entry     `json:"data"`
-	Base           *BaseEntry `json:"base"`
+	Protocol       Protocol        `json:"protocol"`
+	Representation *Representation `json:"representation"`
+	Data           *Entry          `json:"data"`
+	Base           *BaseEntry      `json:"base"`
 }
 
 // {Worker}/{Id} uniquely identifies an item
 type BaseEntry struct {
-	Id           string             `json:"id"`
-	Stream       string             `json:"stream"`
-	Worker       string             `json:"worker"`
-	Protocol     Protocol           `json:"proto,omitempty"`
-	Tls          bool               `json:"tls"`
-	Summary      string             `json:"summary,omitempty"`
-	SummaryQuery string             `json:"summaryQuery,omitempty"`
-	Status       int                `json:"status"`
-	StatusQuery  string             `json:"statusQuery"`
-	Method       string             `json:"method,omitempty"`
-	MethodQuery  string             `json:"methodQuery,omitempty"`
-	Timestamp    int64              `json:"timestamp,omitempty"`
-	Source       *ResolutionSummary `json:"src"`
-	Destination  *ResolutionSummary `json:"dst"`
-	Outgoing     bool               `json:"outgoing"`
-	RequestSize  int                `json:"requestSize"`
-	ResponseSize int                `json:"responseSize"`
-	ElapsedTime  int64              `json:"elapsedTime"`
-	Passed       bool               `json:"passed"`
-	Failed       bool               `json:"failed"`
-	Error        *Error             `json:"error"`
-	Record       string             `json:"record"`
-	Event        bool               `json:"event"`
+	Id             string             `json:"id"`
+	Stream         string             `json:"stream"`
+	Worker         string             `json:"worker"`
+	Protocol       Protocol           `json:"proto,omitempty"`
+	Tls            bool               `json:"tls"`
+	Summary        string             `json:"summary,omitempty"`
+	SummaryQuery   string             `json:"summaryQuery,omitempty"`
+	Status         int                `json:"status"`
+	StatusQuery    string             `json:"statusQuery"`
+	Method         string             `json:"method,omitempty"`
+	MethodQuery    string             `json:"methodQuery,omitempty"`
+	Timestamp      int64              `json:"timestamp,omitempty"`
+	Source         *ResolutionSummary `json:"src"`
+	Destination    *ResolutionSummary `json:"dst"`
+	Outgoing       bool               `json:"outgoing"`
+	RequestSize    int                `json:"requestSize"`
+	ResponseSize   int                `json:"responseSize"`
+	ElapsedTime    int64              `json:"elapsedTime"`
+	Passed         bool               `json:"passed"`
+	Failed         bool               `json:"failed"`
+	Error          *Error             `json:"error"`
+	Record         string             `json:"record"`
+	Event          bool               `json:"event"`
+	CaptureBackend string             `json:"captureBackend"`
 }
 
 const (
@@ -364,12 +402,13 @@ const (
 )
 
 type SectionData struct {
-	Type     string `json:"type"`
-	Title    string `json:"title"`
-	Data     string `json:"data"`
-	Encoding string `json:"encoding,omitempty"`
-	MimeType string `json:"mimeType,omitempty"`
-	Selector string `json:"selector,omitempty"`
+	Type      string       `json:"type"`
+	Title     string       `json:"title"`
+	TableData []*TableData `json:"tableData"`
+	Encoding  string       `json:"encoding,omitempty"`
+	MimeType  string       `json:"mimeType,omitempty"`
+	Body      string       `json:"body"`
+	Selector  string       `json:"selector,omitempty"`
 }
 
 type TableData struct {
@@ -395,6 +434,7 @@ type TcpReader interface {
 	GetCaptureTime() time.Time
 	GetEmitter() Emitter
 	GetIsClosed() bool
+	GetCaptureBackend() gopacket.CaptureBackend
 }
 
 type TcpStream interface {
@@ -405,6 +445,7 @@ type TcpStream interface {
 	GetIsClosed() bool
 	IncrementItemCount()
 	GetTls() bool
+	GetCaptureBackend() gopacket.CaptureBackend
 }
 
 type TcpStreamMap interface {
