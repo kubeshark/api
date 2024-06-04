@@ -142,6 +142,7 @@ type OutputChannelItem struct {
 	Tls            bool
 	Error          *Error
 	CaptureBackend gopacket.CaptureBackend
+	Checksums      []string
 }
 
 type ReadProgress struct {
@@ -255,6 +256,8 @@ type Entry struct {
 	EventRef       string      `json:"eventRef"`
 	Base           *BaseEntry  `json:"base"`
 	CaptureBackend string      `json:"captureBackend"`
+	Checksums      []string    `json:"checksums"`
+	Duplicate      string      `json:"duplicate"`
 }
 
 func (e *Entry) BuildId() {
@@ -394,6 +397,8 @@ type BaseEntry struct {
 	Record         string             `json:"record"`
 	Event          bool               `json:"event"`
 	CaptureBackend string             `json:"captureBackend"`
+	Checksums      []string           `json:"checksums"`
+	Duplicate      string             `json:"duplicate"`
 }
 
 const (
@@ -446,6 +451,7 @@ type TcpStream interface {
 	IncrementItemCount()
 	GetTls() bool
 	GetCaptureBackend() gopacket.CaptureBackend
+	GetChecksums() []string
 }
 
 type TcpStreamMap interface {
