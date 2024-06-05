@@ -19,6 +19,7 @@ type AppStats struct {
 	TlsPacketCount              uint64    `json:"tlsPacketCount"`
 	TlsPacketDropped            uint64    `json:"tlsPacketDropped"`
 	ItemCount                   uint64    `json:"itemCount"`
+	WsItemWriteCount            uint64    `json:"wsItemWriteCount"`
 }
 
 func (as *AppStats) IncMatchedPairs() {
@@ -78,6 +79,10 @@ func (as *AppStats) IncItemCount() {
 	atomic.AddUint64(&as.ItemCount, 1)
 }
 
+func (as *AppStats) IncWsItemWriteCount() {
+	atomic.AddUint64(&as.WsItemWriteCount, 1)
+}
+
 func (as *AppStats) DumpStats() *AppStats {
 	currentAppStats := &AppStats{StartTime: as.StartTime}
 
@@ -92,6 +97,7 @@ func (as *AppStats) DumpStats() *AppStats {
 	currentAppStats.TlsPacketCount = resetUint64(&as.TlsPacketCount)
 	currentAppStats.TlsPacketDropped = resetUint64(&as.TlsPacketDropped)
 	currentAppStats.ItemCount = resetUint64(&as.ItemCount)
+	currentAppStats.WsItemWriteCount = resetUint64(&as.WsItemWriteCount)
 	return currentAppStats
 }
 
