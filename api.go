@@ -90,8 +90,8 @@ type Extension struct {
 }
 
 type Capture struct {
-	Backend string `json:"backend"`
-	Source  string `json:"source"`
+	Backend gopacket.CaptureBackend `json:"backend"`
+	Source  string                  `json:"source"`
 }
 
 type ConnectionInfo struct {
@@ -444,7 +444,7 @@ type TcpReader interface {
 	GetCaptureTime() time.Time
 	GetEmitter() Emitter
 	GetIsClosed() bool
-	GetCaptureBackend() gopacket.CaptureBackend
+	GetCapture() *Capture
 }
 
 type TcpStream interface {
@@ -455,7 +455,7 @@ type TcpStream interface {
 	GetIsClosed() bool
 	IncrementItemCount()
 	GetTls() bool
-	GetCaptureBackend() gopacket.CaptureBackend
+	GetCapture() *Capture
 	GetChecksums() []string
 }
 
