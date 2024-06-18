@@ -90,8 +90,8 @@ type Extension struct {
 }
 
 type Capture struct {
-	Backend gopacket.CaptureBackend `json:"backend"`
-	Source  string                  `json:"source"`
+	Backend string `json:"backend"`
+	Source  string `json:"source"`
 }
 
 type ConnectionInfo struct {
