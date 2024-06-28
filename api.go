@@ -494,6 +494,7 @@ type TargetPod struct {
 	ContainerIDs []string          `json:"containerIDs"`
 	Labels       map[string]string `json:"labels"`
 	Annotations  map[string]string `json:"annotations"`
+	Status       corev1.PodPhase   `json:"status"`
 }
 
 type TargetNode struct {
