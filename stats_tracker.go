@@ -1,6 +1,7 @@
 package api
 
 import (
+	"sync"
 	"sync/atomic"
 	"time"
 )
@@ -20,6 +21,7 @@ type AppStats struct {
 	TlsPacketDropped            uint64    `json:"tlsPacketDropped"`
 	ItemCount                   uint64    `json:"itemCount"`
 	WsItemWriteCount            uint64    `json:"wsItemWriteCount"`
+	sync.Mutex
 }
 
 func (as *AppStats) IncMatchedPairs() {
@@ -64,7 +66,9 @@ func (as *AppStats) UpdateProcessedBytes(size uint64) {
 }
 
 func (as *AppStats) SetStartTime(startTime time.Time) {
+	as.Lock()
 	as.StartTime = startTime
+	as.Unlock()
 }
 
 func (as *AppStats) IncTlsPacketCount() {
@@ -84,7 +88,9 @@ func (as *AppStats) IncWsItemWriteCount() {
 }
 
 func (as *AppStats) DumpStats() *AppStats {
+	as.Lock()
 	currentAppStats := &AppStats{StartTime: as.StartTime}
+	as.Unlock()
 
 	currentAppStats.ProcessedBytes = resetUint64(&as.ProcessedBytes)
 	currentAppStats.PacketsCount = resetUint64(&as.PacketsCount)
