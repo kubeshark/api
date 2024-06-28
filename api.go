@@ -49,6 +49,19 @@ type Resolution struct {
 	ResolutionMechanism ResolutionMechanism `json:"resolutionMechanism"`
 }
 
+func (r *Resolution) New() *Resolution {
+	return &Resolution{
+		IP:                  r.IP,
+		Port:                r.Port,
+		Name:                r.Name,
+		Namespace:           r.Namespace,
+		Pod:                 r.Pod,
+		EndpointSlice:       r.EndpointSlice,
+		Service:             r.Service,
+		ResolutionMechanism: r.ResolutionMechanism,
+	}
+}
+
 type ObjectMeta struct {
 	Name      string `json:"name"`
 	Namespace string `json:"namespace"`
