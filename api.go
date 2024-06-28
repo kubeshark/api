@@ -480,3 +480,23 @@ type TcpStreamMap interface {
 	Close()
 	CloseTimedoutTcpStreamChannels()
 }
+
+type Target struct {
+	Name      string     `json:"name"`
+	Namespace string     `json:"namespace"`
+	Node      TargetNode `json:"node"`
+	Pod       TargetPod  `json:"pod"`
+}
+
+type TargetPod struct {
+	IP           string            `json:"ip"`
+	UID          string            `json:"uid"`
+	ContainerIDs []string          `json:"containerIDs"`
+	Labels       map[string]string `json:"labels"`
+	Annotations  map[string]string `json:"annotations"`
+}
+
+type TargetNode struct {
+	Name string `json:"name"`
+	IP   string `json:"ip"`
+}
