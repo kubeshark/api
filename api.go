@@ -8,6 +8,7 @@ import (
 
 	"github.com/kubeshark/gopacket"
 	corev1 "k8s.io/api/core/v1"
+	"k8s.io/apimachinery/pkg/types"
 )
 
 type Protocol struct {
@@ -485,7 +486,7 @@ type TargetPod struct {
 	Name         string            `json:"name"`
 	Namespace    string            `json:"namespace"`
 	IP           string            `json:"ip"`
-	UID          string            `json:"uid"`
+	UID          types.UID         `json:"uid"`
 	ContainerIDs []string          `json:"containerIDs"`
 	Labels       map[string]string `json:"labels"`
 	Annotations  map[string]string `json:"annotations"`
