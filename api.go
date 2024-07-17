@@ -384,6 +384,7 @@ type Representation struct {
 	Request  []*SectionData `json:"request"`
 	Response []*SectionData `json:"response"`
 	Event    []*SectionData `json:"event"`
+	Data     []*SectionData `json:"data"`
 }
 
 type EntryWrapper struct {
