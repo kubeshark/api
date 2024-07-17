@@ -158,7 +158,7 @@ type OutputChannelItem struct {
 	Timestamp      int64
 	ConnectionInfo *ConnectionInfo
 	Pair           *RequestResponsePair
-	Msg            *GenericMessage
+	Data           *GenericMessage
 	Tls            bool
 	Error          *Error
 	Capture        *Capture
@@ -189,10 +189,10 @@ type Dissector interface {
 	Dissect(b *bufio.Reader, reader TcpReader) (err error)
 	Analyze(item *OutputChannelItem, resolvedSource *Resolution, resolvedDestination *Resolution) *Entry
 	Summarize(entry *Entry) *BaseEntry
-	Represent(request interface{}, response interface{}, event *Event, msg interface{}) (representation *Representation)
+	Represent(request interface{}, response interface{}, event *Event, data interface{}) (representation *Representation)
 	Macros() map[string]string
 	NewResponseRequestMatcher() RequestResponseMatcher
-	Typed(data []byte, requestRef string, responseRef string, eventRef string, msgRef string) (request interface{}, response interface{}, event *Event, msg interface{}, err error)
+	Typed(data []byte, requestRef string, responseRef string, eventRef string, dataRef string) (request interface{}, response interface{}, event *Event, dataValue interface{}, err error)
 }
 
 type RequestResponseMatcher interface {
@@ -278,8 +278,8 @@ type Entry struct {
 	Capture      *Capture    `json:"capture"`
 	Checksums    []string    `json:"checksums"`
 	Duplicate    string      `json:"duplicate"`
-	Msg          interface{} `json:"msg"`
-	MsgRef       string      `json:"msgRef"`
+	Data         interface{} `json:"data"`
+	DataRef      string      `json:"dataRef"`
 }
 
 func (e *Entry) BuildId() {
