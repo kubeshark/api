@@ -44,6 +44,7 @@ type Resolution struct {
 	Port                string              `json:"port"`
 	Name                string              `json:"name"`
 	Namespace           string              `json:"namespace"`
+	ProcessName         string              `json:"processName"`
 	Pod                 *corev1.Pod         `json:"pod"`
 	EndpointSlice       *corev1.Endpoints   `json:"endpointSlice"`
 	Service             *corev1.Service     `json:"service"`
