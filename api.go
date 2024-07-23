@@ -37,6 +37,7 @@ const (
 	ResolutionMechanismHttpHeader  ResolutionMechanism = "http-header"
 	ResolutionMechanismCgroupID    ResolutionMechanism = "cgroup-id"
 	ResolutionMechanismContainerID ResolutionMechanism = "container-id"
+	ResolutionMechanismSyscall     ResolutionMechanism = "syscall"
 )
 
 type Resolution struct {
