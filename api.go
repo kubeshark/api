@@ -6,6 +6,7 @@ import (
 	"sync"
 	"time"
 
+	"github.com/aquasecurity/tracee/types/trace"
 	"github.com/kubeshark/gopacket"
 	corev1 "k8s.io/api/core/v1"
 	"k8s.io/apimachinery/pkg/types"
@@ -48,9 +49,9 @@ type Resolution struct {
 	Pod                 *corev1.Pod         `json:"pod"`
 	EndpointSlice       *corev1.Endpoints   `json:"endpointSlice"`
 	Service             *corev1.Service     `json:"service"`
-	Container           *corev1.Container   `json:"container"`
 	CgroupID            uint                `json:"cgroupId"`
 	ContainerID         string              `json:"containerId"`
+	Container           *trace.Container    `json:"container"`
 	SocketID            uint                `json:"socketId"`
 	ProcessID           int                 `json:"processId"`
 	ParentProcessID     int                 `json:"parentProcessId"`
@@ -105,6 +106,7 @@ type ResolutionSummary struct {
 	Service             *Object             `json:"service"`
 	CgroupID            uint                `json:"cgroupId"`
 	ContainerID         string              `json:"containerId"`
+	Container           *trace.Container    `json:"container"`
 	SocketID            uint                `json:"socketId"`
 	ProcessID           int                 `json:"processId"`
 	ParentProcessID     int                 `json:"parentProcessId"`
@@ -314,6 +316,7 @@ func (e *Entry) SourceSummary() *ResolutionSummary {
 		Namespace:           e.Source.Namespace,
 		CgroupID:            e.Source.CgroupID,
 		ContainerID:         e.Source.ContainerID,
+		Container:           e.Source.Container,
 		SocketID:            e.Source.SocketID,
 		ProcessID:           e.Source.ProcessID,
 		ParentProcessID:     e.Source.ParentProcessID,
@@ -364,13 +367,14 @@ func (e *Entry) DestinationSummary() *ResolutionSummary {
 		Port:                e.Destination.Port,
 		Name:                e.Destination.Name,
 		Namespace:           e.Destination.Namespace,
-		CgroupID:            e.Source.CgroupID,
-		ContainerID:         e.Source.ContainerID,
-		SocketID:            e.Source.SocketID,
-		ProcessID:           e.Source.ProcessID,
-		ParentProcessID:     e.Source.ParentProcessID,
-		HostProcessID:       e.Source.HostProcessID,
-		ProcessName:         e.Source.ProcessName,
+		CgroupID:            e.Destination.CgroupID,
+		ContainerID:         e.Destination.ContainerID,
+		Container:           e.Destination.Container,
+		SocketID:            e.Destination.SocketID,
+		ProcessID:           e.Destination.ProcessID,
+		ParentProcessID:     e.Destination.ParentProcessID,
+		HostProcessID:       e.Destination.HostProcessID,
+		ProcessName:         e.Destination.ProcessName,
 		ResolutionMechanism: e.Destination.ResolutionMechanism,
 	}
 
