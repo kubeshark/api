@@ -15,7 +15,6 @@ type HealthWorkerComponent struct {
 	CPUUsage          float64                 `json:"cpuUsage"`
 	MemoryAlloc       uint64                  `json:"memoryAlloc"`
 	MemoryUsage       float64                 `json:"memoryUsage"`
-	CPUNum            float64                 `json:"cpuNum"`
 	LastRestartReason string                  `json:"lastRestartReason"`
 	Resources         v1.ResourceRequirements `json:"resources"`
 	Restarts          int                     `json:"restarts"`
