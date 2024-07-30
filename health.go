@@ -6,7 +6,6 @@ type HealthWorker struct {
 	// Data set on start
 	Hostname  string `json:"hostname"`
 	ClusterID string `json:"clusterID"`
-	Status    string `json:"status"`
 
 	Sniffer *HealthWorkerComponent `json:"sniffer"`
 	Tracer  *HealthWorkerComponent `json:"tracer"`
