@@ -1,11 +1,8 @@
 module github.com/kubeshark/api
 
-go 1.22.0
-
-toolchain go1.22.4
+go 1.20
 
 require (
-	github.com/aquasecurity/tracee/types v0.0.0-20240429153945-99bc47ed5c38
 	github.com/kubeshark/gopacket v1.1.30
 	k8s.io/api v0.27.2
 	k8s.io/apimachinery v0.27.2

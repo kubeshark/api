@@ -6,7 +6,6 @@ import (
 	"sync"
 	"time"
 
-	"github.com/aquasecurity/tracee/types/trace"
 	"github.com/kubeshark/gopacket"
 	corev1 "k8s.io/api/core/v1"
 	"k8s.io/apimachinery/pkg/types"
@@ -38,7 +37,6 @@ const (
 	ResolutionMechanismHttpHeader  ResolutionMechanism = "http-header"
 	ResolutionMechanismCgroupID    ResolutionMechanism = "cgroup-id"
 	ResolutionMechanismContainerID ResolutionMechanism = "container-id"
-	ResolutionMechanismSyscall     ResolutionMechanism = "syscall"
 )
 
 type Resolution struct {
@@ -49,14 +47,6 @@ type Resolution struct {
 	Pod                 *corev1.Pod         `json:"pod"`
 	EndpointSlice       *corev1.Endpoints   `json:"endpointSlice"`
 	Service             *corev1.Service     `json:"service"`
-	CgroupID            uint                `json:"cgroupId"`
-	ContainerID         string              `json:"containerId"`
-	Container           *trace.Container    `json:"container"`
-	SocketID            uint                `json:"socketId"`
-	ProcessID           int                 `json:"processId"`
-	ParentProcessID     int                 `json:"parentProcessId"`
-	HostProcessID       int                 `json:"hostProcessId"`
-	ProcessName         string              `json:"processName"`
 	ResolutionMechanism ResolutionMechanism `json:"resolutionMechanism"`
 }
 
@@ -104,14 +94,6 @@ type ResolutionSummary struct {
 	Pod                 *PodSummary         `json:"pod"`
 	EndpointSlice       *Object             `json:"endpointSlice"`
 	Service             *Object             `json:"service"`
-	CgroupID            uint                `json:"cgroupId"`
-	ContainerID         string              `json:"containerId"`
-	Container           *trace.Container    `json:"container"`
-	SocketID            uint                `json:"socketId"`
-	ProcessID           int                 `json:"processId"`
-	ParentProcessID     int                 `json:"parentProcessId"`
-	HostProcessID       int                 `json:"hostProcessId"`
-	ProcessName         string              `json:"processName"`
 	ResolutionMechanism ResolutionMechanism `json:"resolutionMechanism"`
 }
 
@@ -314,14 +296,6 @@ func (e *Entry) SourceSummary() *ResolutionSummary {
 		Port:                e.Source.Port,
 		Name:                e.Source.Name,
 		Namespace:           e.Source.Namespace,
-		CgroupID:            e.Source.CgroupID,
-		ContainerID:         e.Source.ContainerID,
-		Container:           e.Source.Container,
-		SocketID:            e.Source.SocketID,
-		ProcessID:           e.Source.ProcessID,
-		ParentProcessID:     e.Source.ParentProcessID,
-		HostProcessID:       e.Source.HostProcessID,
-		ProcessName:         e.Source.ProcessName,
 		ResolutionMechanism: e.Source.ResolutionMechanism,
 	}
 
@@ -367,14 +341,6 @@ func (e *Entry) DestinationSummary() *ResolutionSummary {
 		Port:                e.Destination.Port,
 		Name:                e.Destination.Name,
 		Namespace:           e.Destination.Namespace,
-		CgroupID:            e.Destination.CgroupID,
-		ContainerID:         e.Destination.ContainerID,
-		Container:           e.Destination.Container,
-		SocketID:            e.Destination.SocketID,
-		ProcessID:           e.Destination.ProcessID,
-		ParentProcessID:     e.Destination.ParentProcessID,
-		HostProcessID:       e.Destination.HostProcessID,
-		ProcessName:         e.Destination.ProcessName,
 		ResolutionMechanism: e.Destination.ResolutionMechanism,
 	}
 
