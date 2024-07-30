@@ -291,6 +291,10 @@ func (e *Entry) BuildFilenames() {
 }
 
 func (e *Entry) SourceSummary() *ResolutionSummary {
+	if e.Source == nil {
+		return &ResolutionSummary{}
+	}
+
 	s := &ResolutionSummary{
 		IP:                  e.Source.IP,
 		Port:                e.Source.Port,
@@ -336,6 +340,10 @@ func (e *Entry) SourceSummary() *ResolutionSummary {
 }
 
 func (e *Entry) DestinationSummary() *ResolutionSummary {
+	if e.Destination == nil {
+		return &ResolutionSummary{}
+	}
+
 	s := &ResolutionSummary{
 		IP:                  e.Destination.IP,
 		Port:                e.Destination.Port,
