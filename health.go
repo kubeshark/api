@@ -12,6 +12,7 @@ type HealthWorker struct {
 }
 
 type HealthWorkerComponent struct {
+	Timestamp         string                  `json:"timestamp"`
 	CPUUsage          float64                 `json:"cpuUsage"`
 	MemoryAlloc       uint64                  `json:"memoryAlloc"`
 	MemoryUsage       float64                 `json:"memoryUsage"`
