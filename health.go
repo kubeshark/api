@@ -20,3 +20,16 @@ type HealthWorkerComponent struct {
 	Resources         v1.ResourceRequirements `json:"resources"`
 	Restarts          int                     `json:"restarts"`
 }
+
+type HealthHub struct {
+	Workers           []string                `json:"workers"`
+	Hostname          string                  `json:"hostname"`
+	ClusterID         string                  `json:"clusterID"`
+	Timestamp         string                  `json:"timestamp"`
+	CPUUsage          float64                 `json:"cpuUsage"`
+	MemoryAlloc       uint64                  `json:"memoryAlloc"`
+	MemoryUsage       float64                 `json:"memoryUsage"`
+	LastRestartReason string                  `json:"lastRestartReason"`
+	Resources         v1.ResourceRequirements `json:"resources"`
+	Restarts          int                     `json:"restarts"`
+}
