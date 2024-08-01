@@ -22,7 +22,7 @@ type HealthWorkerComponent struct {
 }
 
 type HealthHub struct {
-	Workers           []string                `json:"workers"`
+	Workers           map[string]string       `json:"workers"`
 	Hostname          string                  `json:"hostname"`
 	ClusterID         string                  `json:"clusterID"`
 	Timestamp         string                  `json:"timestamp"`
