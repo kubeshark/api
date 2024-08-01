@@ -22,7 +22,7 @@ type HealthWorkerComponent struct {
 }
 
 type HealthHub struct {
-	Workers           map[string]string       `json:"workers"`
+	Workers           []HealthHubWorker       `json:"workers"`
 	Hostname          string                  `json:"hostname"`
 	ClusterID         string                  `json:"clusterID"`
 	Timestamp         string                  `json:"timestamp"`
@@ -32,4 +32,9 @@ type HealthHub struct {
 	LastRestartReason string                  `json:"lastRestartReason"`
 	Resources         v1.ResourceRequirements `json:"resources"`
 	Restarts          int                     `json:"restarts"`
+}
+
+type HealthHubWorker struct {
+	Addr    string `json:"addr"`
+	PodName string `json:"podName"`
 }
