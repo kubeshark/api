@@ -6,6 +6,7 @@ type HealthWorker struct {
 	// Data set on start
 	Hostname  string `json:"hostname"`
 	ClusterID string `json:"clusterID"`
+	Version   string `json:"version"`
 
 	Sniffer *HealthWorkerComponent `json:"sniffer"`
 	Tracer  *HealthWorkerComponent `json:"tracer"`
@@ -25,6 +26,7 @@ type HealthHub struct {
 	Workers           []HealthHubWorker       `json:"workers"`
 	Hostname          string                  `json:"hostname"`
 	ClusterID         string                  `json:"clusterID"`
+	Version           string                  `json:"version"`
 	Timestamp         string                  `json:"timestamp"`
 	CPUUsage          float64                 `json:"cpuUsage"`
 	MemoryAlloc       uint64                  `json:"memoryAlloc"`
