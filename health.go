@@ -13,27 +13,29 @@ type HealthWorker struct {
 }
 
 type HealthWorkerComponent struct {
-	Timestamp         string                  `json:"timestamp"`
-	CPUUsage          float64                 `json:"cpuUsage"`
-	MemoryAlloc       uint64                  `json:"memoryAlloc"`
-	MemoryUsage       float64                 `json:"memoryUsage"`
-	LastRestartReason string                  `json:"lastRestartReason"`
-	Resources         v1.ResourceRequirements `json:"resources"`
-	Restarts          int                     `json:"restarts"`
+	Timestamp            string                  `json:"timestamp"`
+	CPUUsage             float64                 `json:"cpuUsage"`
+	MemoryAlloc          uint64                  `json:"memoryAlloc"`
+	MemoryUsage          float64                 `json:"memoryUsage"`
+	LastRestartReason    string                  `json:"lastRestartReason"`
+	LastRestartTimestamp string                  `json:"lastRestartTimestamp"`
+	Resources            v1.ResourceRequirements `json:"resources"`
+	Restarts             int                     `json:"restarts"`
 }
 
 type HealthHub struct {
-	Workers           []HealthHubWorker       `json:"workers"`
-	Hostname          string                  `json:"hostname"`
-	ClusterID         string                  `json:"clusterID"`
-	Version           string                  `json:"version"`
-	Timestamp         string                  `json:"timestamp"`
-	CPUUsage          float64                 `json:"cpuUsage"`
-	MemoryAlloc       uint64                  `json:"memoryAlloc"`
-	MemoryUsage       float64                 `json:"memoryUsage"`
-	LastRestartReason string                  `json:"lastRestartReason"`
-	Resources         v1.ResourceRequirements `json:"resources"`
-	Restarts          int                     `json:"restarts"`
+	Workers              []HealthHubWorker       `json:"workers"`
+	Hostname             string                  `json:"hostname"`
+	ClusterID            string                  `json:"clusterID"`
+	Version              string                  `json:"version"`
+	Timestamp            string                  `json:"timestamp"`
+	CPUUsage             float64                 `json:"cpuUsage"`
+	MemoryAlloc          uint64                  `json:"memoryAlloc"`
+	MemoryUsage          float64                 `json:"memoryUsage"`
+	LastRestartReason    string                  `json:"lastRestartReason"`
+	LastRestartTimestamp string                  `json:"lastRestartTimestamp"`
+	Resources            v1.ResourceRequirements `json:"resources"`
+	Restarts             int                     `json:"restarts"`
 }
 
 type HealthHubWorker struct {
