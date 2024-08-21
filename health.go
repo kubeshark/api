@@ -4,7 +4,7 @@ import v1 "k8s.io/api/core/v1"
 
 type HealthWorker struct {
 	// Data set on start
-	Hostname  string `json:"hostname"`
+	NodeName  string `json:"nodeName"`
 	ClusterID string `json:"clusterID"`
 	Version   string `json:"version"`
 
@@ -25,7 +25,7 @@ type HealthWorkerComponent struct {
 
 type HealthHub struct {
 	Workers              []HealthHubWorker       `json:"workers"`
-	Hostname             string                  `json:"hostname"`
+	NodeName             string                  `json:"nodeName"`
 	ClusterID            string                  `json:"clusterID"`
 	Version              string                  `json:"version"`
 	Timestamp            string                  `json:"timestamp"`
