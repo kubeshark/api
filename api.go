@@ -297,6 +297,7 @@ type Entry struct {
 	Duplicate    string      `json:"duplicate"`
 	Data         interface{} `json:"data"`
 	DataRef      string      `json:"dataRef"`
+	Size         int         `json:"size"`
 }
 
 func (e *Entry) BuildId() {
@@ -463,6 +464,7 @@ type BaseEntry struct {
 	Capture      *Capture           `json:"capture"`
 	Checksums    []string           `json:"checksums"`
 	Duplicate    string             `json:"duplicate"`
+	Size         int                `json:"size"`
 }
 
 const (
