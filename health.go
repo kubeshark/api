@@ -25,7 +25,7 @@ type HealthWorkerComponent struct {
 
 type HealthWorkerStorage struct {
 	Requested uint64 `json:"requested"`
-	Used      uint64 `json:"used"`
+	Usage     uint64 `json:"usage"`
 }
 
 type HealthHub struct {
