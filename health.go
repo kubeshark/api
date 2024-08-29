@@ -4,12 +4,12 @@ import v1 "k8s.io/api/core/v1"
 
 type HealthWorker struct {
 	// Data set on start
-	NodeName  string `json:"nodeName"`
-	ClusterID string `json:"clusterID"`
-	Version   string `json:"version"`
-
-	Sniffer *HealthWorkerComponent `json:"sniffer"`
-	Tracer  *HealthWorkerComponent `json:"tracer"`
+	NodeName  string                 `json:"nodeName"`
+	ClusterID string                 `json:"clusterID"`
+	Version   string                 `json:"version"`
+	Storage   *HealthWorkerStorage   `json:"storage"`
+	Sniffer   *HealthWorkerComponent `json:"sniffer"`
+	Tracer    *HealthWorkerComponent `json:"tracer"`
 }
 
 type HealthWorkerComponent struct {
@@ -21,6 +21,11 @@ type HealthWorkerComponent struct {
 	LastRestartTimestamp string                  `json:"lastRestartTimestamp"`
 	Resources            v1.ResourceRequirements `json:"resources"`
 	Restarts             int                     `json:"restarts"`
+}
+
+type HealthWorkerStorage struct {
+	Requested uint64 `json:"requested"`
+	Usage     uint64 `json:"usage"`
 }
 
 type HealthHub struct {
