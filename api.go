@@ -506,6 +506,7 @@ type TcpReader interface {
 	GetEmitter() Emitter
 	GetIsClosed() bool
 	GetCapture() *Capture
+	Rewind()
 }
 
 type TcpStream interface {
