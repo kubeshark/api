@@ -120,9 +120,15 @@ type Extension struct {
 	Dissector Dissector
 }
 
+type VLAN struct {
+	ID    uint16 `json:"id"`
+	Dot1Q bool   `json:"dot1q"`
+}
+
 type Capture struct {
 	Backend string `json:"backend"`
 	Source  string `json:"source"`
+	VLAN    *VLAN  `json:"vlan"`
 }
 
 type ConnectionInfo struct {
