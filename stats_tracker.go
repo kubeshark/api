@@ -11,8 +11,9 @@ type AppStats struct {
 	ProcessedBytes              uint64    `json:"processedBytes"`
 	PacketsCount                uint64    `json:"packetsCount"`
 	TcpPacketsCount             uint64    `json:"tcpPacketsCount"`
-	DnsPacketsCount             uint64    `json:"dnsPacketsCount"`
+	UdpPacketsCount             uint64    `json:"udpPacketsCount"`
 	IcmpPacketsCount            uint64    `json:"icmpPacketsCount"`
+	SctpPacketsCount            uint64    `json:"sctpPacketsCount"`
 	ReassembledTcpPayloadsCount uint64    `json:"reassembledTcpPayloadsCount"`
 	MatchedPairs                uint64    `json:"matchedPairs"`
 	DroppedTcpStreams           uint64    `json:"droppedTcpStreams"`
@@ -41,12 +42,16 @@ func (as *AppStats) IncTcpPacketsCount() {
 	atomic.AddUint64(&as.TcpPacketsCount, 1)
 }
 
-func (as *AppStats) IncDnsPacketsCount() {
-	atomic.AddUint64(&as.DnsPacketsCount, 1)
+func (as *AppStats) IncUdpPacketsCount() {
+	atomic.AddUint64(&as.UdpPacketsCount, 1)
 }
 
 func (as *AppStats) IncIcmpPacketsCount() {
 	atomic.AddUint64(&as.IcmpPacketsCount, 1)
+}
+
+func (as *AppStats) IncSctpPacketsCount() {
+	atomic.AddUint64(&as.SctpPacketsCount, 1)
 }
 
 func (as *AppStats) IncReassembledTcpPayloadsCount() {
@@ -95,7 +100,9 @@ func (as *AppStats) DumpStats() *AppStats {
 	currentAppStats.ProcessedBytes = resetUint64(&as.ProcessedBytes)
 	currentAppStats.PacketsCount = resetUint64(&as.PacketsCount)
 	currentAppStats.TcpPacketsCount = resetUint64(&as.TcpPacketsCount)
-	currentAppStats.DnsPacketsCount = resetUint64(&as.DnsPacketsCount)
+	currentAppStats.UdpPacketsCount = resetUint64(&as.UdpPacketsCount)
+	currentAppStats.IcmpPacketsCount = resetUint64(&as.IcmpPacketsCount)
+	currentAppStats.SctpPacketsCount = resetUint64(&as.SctpPacketsCount)
 	currentAppStats.ReassembledTcpPayloadsCount = resetUint64(&as.ReassembledTcpPayloadsCount)
 	currentAppStats.MatchedPairs = resetUint64(&as.MatchedPairs)
 	currentAppStats.DroppedTcpStreams = resetUint64(&as.DroppedTcpStreams)
