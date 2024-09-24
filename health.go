@@ -10,6 +10,7 @@ type HealthWorker struct {
 	Storage   *HealthWorkerStorage   `json:"storage"`
 	Sniffer   *HealthWorkerComponent `json:"sniffer"`
 	Tracer    *HealthWorkerComponent `json:"tracer"`
+	BPFFilter string                 `json:"bpfFilter"`
 }
 
 type HealthWorkerComponent struct {
