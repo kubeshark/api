@@ -16,7 +16,6 @@ type HealthWorker struct {
 type HealthWorkerComponent struct {
 	Timestamp            string                  `json:"timestamp"`
 	CPUUsage             float64                 `json:"cpuUsage"`
-	MemoryAlloc          uint64                  `json:"memoryAlloc"`
 	MemoryUsage          float64                 `json:"memoryUsage"`
 	LastRestartReason    string                  `json:"lastRestartReason"`
 	LastRestartTimestamp string                  `json:"lastRestartTimestamp"`
@@ -36,7 +35,6 @@ type HealthHub struct {
 	Version              string                  `json:"version"`
 	Timestamp            string                  `json:"timestamp"`
 	CPUUsage             float64                 `json:"cpuUsage"`
-	MemoryAlloc          uint64                  `json:"memoryAlloc"`
 	MemoryUsage          float64                 `json:"memoryUsage"`
 	LastRestartReason    string                  `json:"lastRestartReason"`
 	LastRestartTimestamp string                  `json:"lastRestartTimestamp"`
