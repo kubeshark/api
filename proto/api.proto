@@ -22,15 +22,15 @@ message Protocol {
   int32 priority = 13;
 }
 
-enum ResolutionMechanism {
-  RESOLUTION_MECHANISM_NONE = 0;
-  RESOLUTION_MECHANISM_IP = 1;
-  RESOLUTION_MECHANISM_IP_AND_PORT = 2;
-  RESOLUTION_MECHANISM_DNS = 3;
-  RESOLUTION_MECHANISM_HTTP_HEADER = 4;
-  RESOLUTION_MECHANISM_CGROUP_ID = 5;
-  RESOLUTION_MECHANISM_CONTAINER_ID = 6;
-  RESOLUTION_MECHANISM_SYSCALL = 7;
+enum RESOLUTION_MECHANISM {
+  NONE = 0;
+  IP = 1;
+  IP_AND_PORT = 2;
+  DNS = 3;
+  HTTP_HEADER = 4;
+  CGROUP_ID = 5;
+  CONTAINER_ID = 6;
+  SYSCALL = 7;
 }
 
 message Resolution {
@@ -49,7 +49,7 @@ message Resolution {
   int64 hostProcessId = 13;
   int64 hostParentProcessId = 14;
   string processName = 15;
-  ResolutionMechanism resolutionMechanism = 16;
+  RESOLUTION_MECHANISM resolutionMechanism = 16;
 }
 
 message Vlan {
