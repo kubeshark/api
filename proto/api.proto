@@ -68,14 +68,14 @@ message Node {
   string name = 2;
 }
 
-enum ErrorType {
-  DISSECTION_ERROR = 0;
-  CONNECTION_ERROR = 1;
-  TIMEOUT_ERROR = 2;
+enum ERROR_TYPE {
+  DISSECTION = 0;
+  CONNECTION = 1;
+  TIMEOUT = 2;
 }
 
 message Error {
-  ErrorType errorType = 1;
+  ERROR_TYPE type = 1;
   string message = 2;
 }
 
