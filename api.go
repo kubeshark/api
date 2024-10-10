@@ -76,7 +76,7 @@ type RequestResponsePair struct {
 type OutputChannelItem struct {
 	Index          int64
 	Stream         string
-	Protocol       Protocol
+	Protocol       *Protocol
 	Timestamp      int64
 	ConnectionInfo *ConnectionInfo
 	Pair           *RequestResponsePair
