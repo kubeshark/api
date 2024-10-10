@@ -4,6 +4,7 @@ package api;
 option go_package  = "/api";
 
 import "k8s.io/api/core/v1/generated.proto";
+import "google/protobuf/any.proto";
 
 message Protocol {
   string name = 1;
@@ -81,12 +82,12 @@ message Error {
 message Event {
   string source = 1;
   string type = 2;
-  bytes data = 3;
+  google.protobuf.Any data = 3;
 }
 
 message TableData {
   string name = 1;
-  bytes value = 2;
+  google.protobuf.Any value = 2;
   string selector = 3;
 }
 
@@ -144,8 +145,8 @@ message Entry {
 	bool outgoing = 10;
 	int64 timestamp = 11;
 	int64 startTime = 12;
-	bytes request = 13;
-	bytes response = 14;
+	google.protobuf.Any request = 13;
+	google.protobuf.Any response = 14;
 	string requestRef = 15;
 	string responseRef = 16;
 	int64 requestSize = 17;
@@ -162,7 +163,7 @@ message Entry {
 	Capture capture = 28;
 	repeated string checksums = 29;
 	string duplicate = 30;
-	bytes data = 31;
+	google.protobuf.Any data = 31;
 	string dataRef = 32;
 	int64 size = 33;
 }
