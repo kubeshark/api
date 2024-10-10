@@ -1,4 +1,4 @@
-syntax = "proto2";
+syntax = "proto3";
 package api;
 
 option go_package  = "/api";
@@ -6,19 +6,19 @@ option go_package  = "/api";
 import "k8s.io/api/core/v1/generated.proto";
 
 message Protocol {
-  required string name = 1;
-  required string version = 2;
-  required string abbr = 3;
-  required string longName = 4;
-  required string macro = 5;
-  required string backgroundColor = 6;
-  required string foregroundColor = 7;
-  required int32 fontSize = 8;
-  required string referenceLink = 9;
+  string name = 1;
+  string version = 2;
+  string abbr = 3;
+  string longName = 4;
+  string macro = 5;
+  string backgroundColor = 6;
+  string foregroundColor = 7;
+  int32 fontSize = 8;
+  string referenceLink = 9;
   repeated string ports = 10;
-  optional string layer4 = 11;
-  optional string layer3 = 12;
-  required int32 priority = 13;
+  string layer4 = 11;
+  string layer3 = 12;
+  int32 priority = 13;
 }
 
 enum ResolutionMechanism {
@@ -33,38 +33,38 @@ enum ResolutionMechanism {
 }
 
 message Resolution {
-  required string ip = 1;
-  required string port = 2;
-  optional string name = 3;
-  optional string namespace = 4;
-  optional k8s.io.api.core.v1.Pod pod = 5;
-  optional k8s.io.api.core.v1.Endpoints endpointSlice = 6;
-  optional k8s.io.api.core.v1.Service service = 7;
-  optional uint64 cgroupId = 8;
-  optional string containerId = 9;
-  optional uint64 socketId = 10;
-  optional int64 processId = 11;
-  optional int64 parentProcessId = 12;
-  optional int64 hostProcessId = 13;
-  optional int64 hostParentProcessId = 14;
-  optional string processName = 15;
-  required ResolutionMechanism resolutionMechanism = 16;
+  string ip = 1;
+  string port = 2;
+  string name = 3;
+  string namespace = 4;
+  k8s.io.api.core.v1.Pod pod = 5;
+  k8s.io.api.core.v1.Endpoints endpointSlice = 6;
+  k8s.io.api.core.v1.Service service = 7;
+  uint64 cgroupId = 8;
+  string containerId = 9;
+  uint64 socketId = 10;
+  int64 processId = 11;
+  int64 parentProcessId = 12;
+  int64 hostProcessId = 13;
+  int64 hostParentProcessId = 14;
+  string processName = 15;
+  ResolutionMechanism resolutionMechanism = 16;
 }
 
 message Vlan {
-  required uint32 id = 1;
-	required bool dot1q = 2;
+  uint32 id = 1;
+	bool dot1q = 2;
 }
 
 message Capture {
-  required string backend = 1;
-  required string source = 2;
-  optional Vlan vlan = 3;
+  string backend = 1;
+  string source = 2;
+  Vlan vlan = 3;
 }
 
 message Node {
-  required string ip = 1;
-  required string name = 2;
+  string ip = 1;
+  string name = 2;
 }
 
 enum ErrorType {
@@ -74,97 +74,97 @@ enum ErrorType {
 }
 
 message Error {
-  required ErrorType errorType = 1;
-  required string message = 2;
+  ErrorType errorType = 1;
+  string message = 2;
 }
 
 message Event {
-  required string source = 1;
-  required string type = 2;
-  required bytes data = 3;
+  string source = 1;
+  string type = 2;
+  bytes data = 3;
 }
 
 message TableData {
-  required string name = 1;
-  required bytes value = 2;
-  required string selector = 3;
+  string name = 1;
+  bytes value = 2;
+  string selector = 3;
 }
 
 message SectionData {
-  required string type = 1;
-  required string title = 2;
+  string type = 1;
+  string title = 2;
   repeated TableData tableData = 3;
-  required string encoding = 4;
-  required string mimeType = 5;
-  required string body = 6;
-  required string selector = 7;
+  string encoding = 4;
+  string mimeType = 5;
+  string body = 6;
+  string selector = 7;
 }
 
 message BaseEntry {
-  required string id = 1;
-	required string stream = 2;
-	required string worker = 3;
-	required Protocol protocol = 4;
-	required bool tls = 5;
-	required string summary = 6;
-	required string summaryQuery = 7;
-	required int64 status = 8;
-	required string statusQuery = 9;
-	required string method = 10;
-	required string methodQuery = 11;
-	required int64 timestamp = 12;
-	optional Resolution source = 13;
-	optional Resolution destination = 14;
-	required bool outgoing = 15;
-	required int64 requestSize = 16;
-	required int64 responseSize = 17;
-	required int64 elapsedTime = 18;
-	optional bool passed = 19;
-	optional bool failed = 20;
-	optional Error error = 21;
-	optional string record = 22;
-	optional bool event = 23;
-	required Capture capture = 24;
+  string id = 1;
+	string stream = 2;
+	string worker = 3;
+	Protocol protocol = 4;
+	bool tls = 5;
+	string summary = 6;
+	string summaryQuery = 7;
+	int64 status = 8;
+	string statusQuery = 9;
+	string method = 10;
+	string methodQuery = 11;
+	int64 timestamp = 12;
+	Resolution source = 13;
+	Resolution destination = 14;
+	bool outgoing = 15;
+	int64 requestSize = 16;
+	int64 responseSize = 17;
+	int64 elapsedTime = 18;
+	bool passed = 19;
+	bool failed = 20;
+	Error error = 21;
+	string record = 22;
+	bool event = 23;
+	Capture capture = 24;
 	repeated string checksums = 25;
-	required string duplicate = 26;
-	required int64 size = 27;
+	string duplicate = 26;
+	int64 size = 27;
 }
 
 // {worker}/{stream}-{index} uniquely identifies an item
 message Entry {
-	required string id = 1;
-	required int64 index = 2;
-	required string stream = 3;
-	required string worker = 4;
-	required Node node = 5;
-	required Protocol protocol = 6;
-	required bool tls = 7;
-	optional Resolution source = 8;
-	optional Resolution destination = 9;
-	required bool outgoing = 10;
-	required int64 timestamp = 11;
-	required int64 startTime = 12;
-	required bytes request = 13;
-	required bytes response = 14;
-	required string requestRef = 15;
-	required string responseRef = 16;
-	required int64 requestSize = 17;
-	required int64 responseSize = 18;
-	required int64 elapsedTime = 19;
-	required bool passed = 20;
-	required bool failed = 21;
-	optional Error error = 22;
-	required string entryFile = 23;
-	required string record = 24;
-	required Event event = 25;
-	required string eventRef = 26;
-	optional BaseEntry base = 27;
-	required Capture capture = 28;
+	string id = 1;
+	int64 index = 2;
+	string stream = 3;
+	string worker = 4;
+	Node node = 5;
+	Protocol protocol = 6;
+	bool tls = 7;
+	Resolution source = 8;
+	Resolution destination = 9;
+	bool outgoing = 10;
+	int64 timestamp = 11;
+	int64 startTime = 12;
+	bytes request = 13;
+	bytes response = 14;
+	string requestRef = 15;
+	string responseRef = 16;
+	int64 requestSize = 17;
+	int64 responseSize = 18;
+	int64 elapsedTime = 19;
+	bool passed = 20;
+	bool failed = 21;
+	Error error = 22;
+	string entryFile = 23;
+	string record = 24;
+	Event event = 25;
+	string eventRef = 26;
+	BaseEntry base = 27;
+	Capture capture = 28;
 	repeated string checksums = 29;
-	required string duplicate = 30;
-	optional bytes data = 31;
-	required string dataRef = 32;
-	required int64 size = 33;
+	string duplicate = 30;
+	bytes data = 31;
+	string dataRef = 32;
+	int64 size = 33;
 }
 
 message Representation {
@@ -175,8 +175,8 @@ message Representation {
 }
 
 message EntryWrapper {
-  required Protocol protocol = 1;
-  required Representation representation = 2;
-  required Entry data = 3;
-  required BaseEntry base = 4;
+  Protocol protocol = 1;
+  Representation representation = 2;
+  Entry data = 3;
+  BaseEntry base = 4;
 }
