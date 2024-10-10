@@ -18,7 +18,7 @@ message Protocol {
   repeated string ports = 10;
   optional string layer4 = 11;
   optional string layer3 = 12;
-  repeated int32 priority = 13;
+  required int32 priority = 13;
 }
 
 enum ResolutionMechanism {

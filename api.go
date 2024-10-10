@@ -11,6 +11,38 @@ import (
 	"k8s.io/apimachinery/pkg/types"
 )
 
+func NewProtocol(
+	name string,
+	version string,
+	abbr string,
+	longName string,
+	macro string,
+	backgroundColor string,
+	foregroundColor string,
+	fontSize int32,
+	referenceLink string,
+	ports []string,
+	layer4 string,
+	layer3 string,
+	priority int32,
+) Protocol {
+	return Protocol{
+		Name:            &name,
+		Version:         &version,
+		Abbr:            &abbr,
+		LongName:        &longName,
+		Macro:           &macro,
+		BackgroundColor: &backgroundColor,
+		ForegroundColor: &foregroundColor,
+		FontSize:        &fontSize,
+		ReferenceLink:   &referenceLink,
+		Ports:           ports,
+		Layer4:          &layer4,
+		Layer3:          &layer3,
+		Priority:        &priority,
+	}
+}
+
 func (r *Resolution) New() *Resolution {
 	return &Resolution{
 		Ip:                  r.Ip,
