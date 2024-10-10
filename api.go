@@ -13,13 +13,13 @@ import (
 
 func (r *Resolution) New() *Resolution {
 	return &Resolution{
-		Ip:        r.Ip,
-		Port:      r.Port,
-		Name:      r.Name,
-		Namespace: r.Namespace,
-		// Pod:                 r.Pod,
-		// EndpointSlice:       r.EndpointSlice,
-		// Service:             r.Service,
+		Ip:                  r.Ip,
+		Port:                r.Port,
+		Name:                r.Name,
+		Namespace:           r.Namespace,
+		Pod:                 r.Pod,
+		EndpointSlice:       r.EndpointSlice,
+		Service:             r.Service,
 		ResolutionMechanism: r.ResolutionMechanism,
 	}
 }

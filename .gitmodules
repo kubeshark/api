@@ -1,6 +1,6 @@
-[submodule "proto/api"]
-	path = proto/api
+[submodule "k8s/api"]
+	path = k8s/api
 	url = git@github.com:kubernetes/api.git
-[submodule "proto/apimachinery"]
-	path = proto/apimachinery
+[submodule "k8s/apimachinery"]
+	path = k8s/apimachinery
 	url = git@github.com:kubernetes/apimachinery.git
