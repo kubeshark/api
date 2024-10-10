@@ -1,0 +1,6 @@
+[submodule "proto/api"]
+	path = proto/api
+	url = git@github.com:kubernetes/api.git
+[submodule "proto/apimachinery"]
+	path = proto/apimachinery
+	url = git@github.com:kubernetes/apimachinery.git

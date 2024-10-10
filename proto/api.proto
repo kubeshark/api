@@ -1,0 +1,180 @@
+syntax = "proto2";
+package api;
+
+option go_package  = "/api";
+
+// import "proto/api/core/v1/generated.proto";
+
+message Protocol {
+  required string name = 1;
+  required string version = 2;
+  required string abbr = 3;
+  required string longName = 4;
+  required string macro = 5;
+  required string backgroundColor = 6;
+  required string foregroundColor = 7;
+  required int32 fontSize = 8;
+  required string referenceLink = 9;
+  repeated string ports = 10;
+  optional string layer4 = 11;
+  optional string layer3 = 12;
+  repeated int32 priority = 13;
+}
+
+enum ResolutionMechanism {
+  RESOLUTION_MECHANISM_NONE = 0;
+  RESOLUTION_MECHANISM_IP = 1;
+  RESOLUTION_MECHANISM_IP_AND_PORT = 2;
+  RESOLUTION_MECHANISM_DNS = 3;
+  RESOLUTION_MECHANISM_HTTP_HEADER = 4;
+  RESOLUTION_MECHANISM_CGROUP_ID = 5;
+  RESOLUTION_MECHANISM_CONTAINER_ID = 6;
+  RESOLUTION_MECHANISM_SYSCALL = 7;
+}
+
+message Resolution {
+  required string ip = 1;
+  required string port = 2;
+  optional string name = 3;
+  optional string namespace = 4;
+  // optional k8s.io.api.core.v1.Pod pod = 5;
+  optional uint64 cgroupId = 8;
+  optional string containerId = 9;
+  optional uint64 socketId = 10;
+  optional int64 processId = 11;
+  optional int64 parentProcessId = 12;
+  optional int64 hostProcessId = 13;
+  optional int64 hostParentProcessId = 14;
+  optional string processName = 15;
+  required ResolutionMechanism resolutionMechanism = 16;
+}
+
+message Vlan {
+  required uint32 id = 1;
+	required bool dot1q = 2;
+}
+
+message Capture {
+  required string backend = 1;
+  required string source = 2;
+  optional Vlan vlan = 3;
+}
+
+message Node {
+  required string ip = 1;
+  required string name = 2;
+}
+
+enum ErrorType {
+  DISSECTION_ERROR = 0;
+  CONNECTION_ERROR = 1;
+  TIMEOUT_ERROR = 2;
+}
+
+message Error {
+  required ErrorType errorType = 1;
+  required string message = 2;
+}
+
+message Event {
+  required string source = 1;
+  required string type = 2;
+  required bytes data = 3;
+}
+
+message TableData {
+  required string name = 1;
+  required bytes value = 2;
+  required string selector = 3;
+}
+
+message SectionData {
+  required string type = 1;
+  required string title = 2;
+  repeated TableData tableData = 3;
+  required string encoding = 4;
+  required string mimeType = 5;
+  required string body = 6;
+  required string selector = 7;
+}
+
+message BaseEntry {
+  required string id = 1;
+	required string stream = 2;
+	required string worker = 3;
+	required Protocol protocol = 4;
+	required bool tls = 5;
+	required string summary = 6;
+	required string summaryQuery = 7;
+	required int64 status = 8;
+	required string statusQuery = 9;
+	required string method = 10;
+	required string methodQuery = 11;
+	required int64 timestamp = 12;
+	optional Resolution source = 13;
+	optional Resolution destination = 14;
+	required bool outgoing = 15;
+	required int64 requestSize = 16;
+	required int64 responseSize = 17;
+	required int64 elapsedTime = 18;
+	optional bool passed = 19;
+	optional bool failed = 20;
+	optional Error error = 21;
+	optional string record = 22;
+	optional bool event = 23;
+	required Capture capture = 24;
+	repeated string checksums = 25;
+	required string duplicate = 26;
+	required int64 size = 27;
+}
+
+// {worker}/{stream}-{index} uniquely identifies an item
+message Entry {
+	required string id = 1;
+	required int64 index = 2;
+	required string stream = 3;
+	required string worker = 4;
+	required Node node = 5;
+	required Protocol protocol = 6;
+	required bool tls = 7;
+	optional Resolution source = 8;
+	optional Resolution destination = 9;
+	required bool outgoing = 10;
+	required int64 timestamp = 11;
+	required int64 startTime = 12;
+	required bytes request = 13;
+	required bytes response = 14;
+	required string requestRef = 15;
+	required string responseRef = 16;
+	required int64 requestSize = 17;
+	required int64 responseSize = 18;
+	required int64 elapsedTime = 19;
+	required bool passed = 20;
+	required bool failed = 21;
+	optional Error error = 22;
+	required string entryFile = 23;
+	required string record = 24;
+	required Event event = 25;
+	required string eventRef = 26;
+	optional BaseEntry base = 27;
+	required Capture capture = 28;
+	repeated string checksums = 29;
+	required string duplicate = 30;
+	optional bytes data = 31;
+	required string dataRef = 32;
+	required int64 size = 33;
+}
+
+message Representation {
+  repeated SectionData request = 1;
+  repeated SectionData response = 2;
+  repeated SectionData event = 3;
+  repeated SectionData data = 4;
+}
+
+message EntryWrapper {
+  required Protocol protocol = 1;
+  required Representation representation = 2;
+  required Entry data = 3;
+  required BaseEntry base = 4;
+}
