@@ -147,25 +147,21 @@ message Entry {
 	int64 startTime = 12;
 	google.protobuf.Any request = 13;
 	google.protobuf.Any response = 14;
-	string requestRef = 15;
-	string responseRef = 16;
-	int64 requestSize = 17;
-	int64 responseSize = 18;
-	int64 elapsedTime = 19;
-	bool passed = 20;
-	bool failed = 21;
-	Error error = 22;
-	string entryFile = 23;
-	string record = 24;
-	Event event = 25;
-	string eventRef = 26;
-	BaseEntry base = 27;
-	Capture capture = 28;
-	repeated string checksums = 29;
-	string duplicate = 30;
-	google.protobuf.Any data = 31;
-	string dataRef = 32;
-	int64 size = 33;
+	int64 requestSize = 15;
+	int64 responseSize = 16;
+	int64 elapsedTime = 17;
+	bool passed = 18;
+	bool failed = 19;
+	Error error = 20;
+	string entryFile = 21;
+	string record = 22;
+	Event event = 23;
+	BaseEntry base = 24;
+	Capture capture = 25;
+	repeated string checksums = 26;
+	string duplicate = 27;
+	google.protobuf.Any data = 28;
+	int64 size = 29;
 }
 
 message Representation {
