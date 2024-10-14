@@ -114,7 +114,6 @@ type Dissector interface {
 	Represent(request interface{}, response interface{}, event *Event, data interface{}) (representation *Representation)
 	Macros() map[string]string
 	NewResponseRequestMatcher() RequestResponseMatcher
-	Typed(data []byte, requestRef string, responseRef string, eventRef string, dataRef string) (request interface{}, response interface{}, event *Event, dataValue interface{}, err error)
 }
 
 type RequestResponseMatcher interface {
