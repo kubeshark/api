@@ -124,10 +124,15 @@ type VLAN struct {
 	Dot1Q bool   `json:"dot1q"`
 }
 
+type Proxy struct {
+	Name string `json:"name"`
+	Pid  string `json:"pid"`
+}
+
 type Capture struct {
 	Backend string `json:"backend"`
 	Source  string `json:"source"`
-	Pid     string `json:"pid"`
+	Proxy   *Proxy `json:"proxy"`
 	VLAN    *VLAN  `json:"vlan"`
 }
 
