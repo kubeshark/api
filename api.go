@@ -29,14 +29,15 @@ type Protocol struct {
 type ResolutionMechanism string
 
 const (
-	ResolutionMechanismNone        ResolutionMechanism = "none"
-	ResolutionMechanismIp          ResolutionMechanism = "ip"
-	ResolutionMechanismIpAndPort   ResolutionMechanism = "ip-and-port"
-	ResolutionMechanismDns         ResolutionMechanism = "dns"
-	ResolutionMechanismHttpHeader  ResolutionMechanism = "http-header"
-	ResolutionMechanismCgroupID    ResolutionMechanism = "cgroup-id"
-	ResolutionMechanismContainerID ResolutionMechanism = "container-id"
-	ResolutionMechanismSyscall     ResolutionMechanism = "syscall"
+	ResolutionMechanismNone         ResolutionMechanism = "none"
+	ResolutionMechanismIp           ResolutionMechanism = "ip"
+	ResolutionMechanismIpAndPort    ResolutionMechanism = "ip-and-port"
+	ResolutionMechanismDns          ResolutionMechanism = "dns"
+	ResolutionMechanismHttpHeader   ResolutionMechanism = "http-header"
+	ResolutionMechanismCgroupID     ResolutionMechanism = "cgroup-id"
+	ResolutionMechanismContainerID  ResolutionMechanism = "container-id"
+	ResolutionMechanismSyscall      ResolutionMechanism = "syscall"
+	ResolutionMechanismSidecarProxy ResolutionMechanism = "sidecar-proxy"
 )
 
 type Resolution struct {
