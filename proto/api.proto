@@ -57,10 +57,16 @@ message Vlan {
 	bool dot1q = 2;
 }
 
+message Proxy {
+  string name = 1;
+  string pid = 2;
+}
+
 message Capture {
   string backend = 1;
   string source = 2;
-  Vlan vlan = 3;
+  Proxy proxy = 3;
+  Vlan vlan = 4;
 }
 
 message Node {
