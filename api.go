@@ -7,8 +7,6 @@ import (
 	"time"
 
 	"github.com/kubeshark/gopacket"
-	corev1 "k8s.io/api/core/v1"
-	"k8s.io/apimachinery/pkg/types"
 )
 
 func (r *Resolution) New() *Resolution {
@@ -196,21 +194,4 @@ type TcpStreamMap interface {
 	NextId() int64
 	Close()
 	CloseTimedoutTcpStreamChannels()
-}
-
-type TargetPod struct {
-	Name         string            `json:"name"`
-	Namespace    string            `json:"namespace"`
-	IP           string            `json:"ip"`
-	UID          types.UID         `json:"uid"`
-	ContainerIDs []string          `json:"containerIDs"`
-	Labels       map[string]string `json:"labels"`
-	Annotations  map[string]string `json:"annotations"`
-	Status       corev1.PodPhase   `json:"status"`
-	Node         TargetPodNode     `json:"node"`
-}
-
-type TargetPodNode struct {
-	Name string `json:"name"`
-	IP   string `json:"ip"`
 }
