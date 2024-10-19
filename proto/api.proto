@@ -121,8 +121,8 @@ message BaseEntry {
   string method = 10;
   string methodQuery = 11;
   int64 timestamp = 12;
-  Resolution source = 13;
-  Resolution destination = 14;
+  Resolution src = 13;
+  Resolution dst = 14;
   bool outgoing = 15;
   int64 requestSize = 16;
   int64 responseSize = 17;
