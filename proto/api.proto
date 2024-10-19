@@ -112,7 +112,7 @@ message BaseEntry {
   string id = 1;
 	string stream = 2;
 	string worker = 3;
-	Protocol protocol = 4;
+	Protocol proto = 4;
 	bool tls = 5;
 	string summary = 6;
 	string summaryQuery = 7;
@@ -147,8 +147,8 @@ message Entry {
 	Node node = 5;
 	Protocol protocol = 6;
 	bool tls = 7;
-	Resolution source = 8;
-	Resolution destination = 9;
+	Resolution src = 8;
+	Resolution dst = 9;
 	bool outgoing = 10;
 	int64 timestamp = 11;
 	int64 startTime = 12;
