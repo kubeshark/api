@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"github.com/kubeshark/gopacket"
+	"google.golang.org/protobuf/types/known/anypb"
 )
 
 func (r *Resolution) New() *Resolution {
@@ -109,7 +110,7 @@ type Dissector interface {
 	Dissect(b *bufio.Reader, reader TcpReader) (err error)
 	Analyze(item *OutputChannelItem, resolvedSource *Resolution, resolvedDestination *Resolution) *Entry
 	Summarize(entry *Entry) *BaseEntry
-	Represent(request interface{}, response interface{}, event *Event, data interface{}) (representation *Representation)
+	Represent(request *anypb.Any, response *anypb.Any, event *Event, data *anypb.Any) (representation *Representation)
 	Macros() map[string]string
 	NewResponseRequestMatcher() RequestResponseMatcher
 }
