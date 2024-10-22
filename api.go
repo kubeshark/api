@@ -6,7 +6,6 @@ import (
 	"sync"
 	"time"
 
-	structpb "github.com/golang/protobuf/ptypes/struct"
 	"github.com/kubeshark/gopacket"
 )
 
@@ -108,9 +107,7 @@ func (p *ReadProgress) Reset() {
 type Dissector interface {
 	Register(*Extension)
 	Dissect(b *bufio.Reader, reader TcpReader) (err error)
-	Analyze(item *OutputChannelItem, resolvedSource *Resolution, resolvedDestination *Resolution) *Entry
-	Summarize(entry *Entry) *BaseEntry
-	Represent(request *structpb.Value, response *structpb.Value, event *Event, data *structpb.Value) (representation *Representation)
+	Analyze(item *OutputChannelItem, resolvedSource *Resolution, resolvedDestination *Resolution) *EntryWrapper
 	Macros() map[string]string
 	NewResponseRequestMatcher() RequestResponseMatcher
 }

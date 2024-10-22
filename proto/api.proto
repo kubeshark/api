@@ -109,33 +109,12 @@ message SectionData {
 }
 
 message BaseEntry {
-  string id = 1;
-  string stream = 2;
-  string worker = 3;
-  Protocol proto = 4;
-  bool tls = 5;
-  string summary = 6;
-  string summaryQuery = 7;
-  int64 status = 8;
-  string statusQuery = 9;
-  string method = 10;
-  string methodQuery = 11;
-  int64 timestamp = 12;
-  Resolution src = 13;
-  Resolution dst = 14;
-  bool outgoing = 15;
-  int64 requestSize = 16;
-  int64 responseSize = 17;
-  int64 elapsedTime = 18;
-  bool passed = 19;
-  bool failed = 20;
-  Error error = 21;
-  string record = 22;
-  bool event = 23;
-  Capture capture = 24;
-  repeated string checksums = 25;
-  string duplicate = 26;
-  int64 size = 27;
+  string summary = 1;
+  string summaryQuery = 2;
+  int64 status = 3;
+  string statusQuery = 4;
+  string method = 5;
+  string methodQuery = 6;
 }
 
 // {worker}/{stream}-{index} uniquely identifies an item
@@ -163,12 +142,11 @@ message Entry {
   string entryFile = 21;
   string record = 22;
   Event event = 23;
-  BaseEntry base = 24;
-  Capture capture = 25;
-  repeated string checksums = 26;
-  string duplicate = 27;
-  google.protobuf.Value data = 28;
-  int64 size = 29;
+  Capture capture = 24;
+  repeated string checksums = 25;
+  string duplicate = 26;
+  google.protobuf.Value data = 27;
+  int64 size = 28;
 }
 
 message Representation {
