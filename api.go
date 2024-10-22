@@ -6,8 +6,8 @@ import (
 	"sync"
 	"time"
 
+	structpb "github.com/golang/protobuf/ptypes/struct"
 	"github.com/kubeshark/gopacket"
-	"google.golang.org/protobuf/types/known/anypb"
 )
 
 func (r *Resolution) New() *Resolution {
@@ -110,7 +110,7 @@ type Dissector interface {
 	Dissect(b *bufio.Reader, reader TcpReader) (err error)
 	Analyze(item *OutputChannelItem, resolvedSource *Resolution, resolvedDestination *Resolution) *Entry
 	Summarize(entry *Entry) *BaseEntry
-	Represent(request *anypb.Any, response *anypb.Any, event *Event, data *anypb.Any) (representation *Representation)
+	Represent(request *structpb.Struct, response *structpb.Struct, event *Event, data *structpb.Struct) (representation *Representation)
 	Macros() map[string]string
 	NewResponseRequestMatcher() RequestResponseMatcher
 }
