@@ -89,7 +89,7 @@ message Error {
 message Event {
   string source = 1;
   string type = 2;
-  google.protobuf.Value data = 3;
+  google.protobuf.Struct data = 3;
 }
 
 message TableData {
@@ -152,8 +152,8 @@ message Entry {
   bool outgoing = 10;
   int64 timestamp = 11;
   int64 startTime = 12;
-  google.protobuf.Value request = 13;
-  google.protobuf.Value response = 14;
+  google.protobuf.Struct request = 13;
+  google.protobuf.Struct response = 14;
   int64 requestSize = 15;
   int64 responseSize = 16;
   int64 elapsedTime = 17;
@@ -167,7 +167,7 @@ message Entry {
   Capture capture = 25;
   repeated string checksums = 26;
   string duplicate = 27;
-  google.protobuf.Value data = 28;
+  google.protobuf.Struct data = 28;
   int64 size = 29;
 }
 
