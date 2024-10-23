@@ -1,0 +1,186 @@
+syntax = "proto3";
+package api;
+
+option go_package  = "/api";
+
+import "k8s.io/api/core/v1/generated.proto";
+import "google/protobuf/struct.proto";
+
+message Protocol {
+  string name = 1;
+  string version = 2;
+  string abbr = 3;
+  string longName = 4;
+  string macro = 5;
+  string backgroundColor = 6;
+  string foregroundColor = 7;
+  int32 fontSize = 8;
+  string referenceLink = 9;
+  repeated string ports = 10;
+  string layer4 = 11;
+  string layer3 = 12;
+  int32 priority = 13;
+}
+
+enum RESOLUTION_MECHANISM {
+  NONE = 0;
+  IP = 1;
+  IP_AND_PORT = 2;
+  DNS = 3;
+  HTTP_HEADER = 4;
+  CGROUP_ID = 5;
+  CONTAINER_ID = 6;
+  SYSCALL = 7;
+  SIDECAR_PROXY = 8;
+}
+
+message Resolution {
+  string ip = 1;
+  string port = 2;
+  string name = 3;
+  string namespace = 4;
+  k8s.io.api.core.v1.Pod pod = 5;
+  k8s.io.api.core.v1.Endpoints endpointSlice = 6;
+  k8s.io.api.core.v1.Service service = 7;
+  uint64 cgroupId = 8;
+  string containerId = 9;
+  uint64 socketId = 10;
+  int64 processId = 11;
+  int64 parentProcessId = 12;
+  int64 hostProcessId = 13;
+  int64 hostParentProcessId = 14;
+  string processName = 15;
+  RESOLUTION_MECHANISM resolutionMechanism = 16;
+}
+
+message Vlan {
+  uint32 id = 1;
+	bool dot1q = 2;
+}
+
+message Proxy {
+  string name = 1;
+  string pid = 2;
+}
+
+message Capture {
+  string backend = 1;
+  string source = 2;
+  Proxy proxy = 3;
+  Vlan vlan = 4;
+}
+
+message Node {
+  string ip = 1;
+  string name = 2;
+}
+
+enum ERROR_TYPE {
+  DISSECTION = 0;
+  CONNECTION = 1;
+  TIMEOUT = 2;
+}
+
+message Error {
+  ERROR_TYPE type = 1;
+  string message = 2;
+}
+
+message Event {
+  string source = 1;
+  string type = 2;
+  google.protobuf.Struct data = 3;
+}
+
+message TableData {
+  string name = 1;
+  google.protobuf.Value value = 2;
+  string selector = 3;
+}
+
+message SectionData {
+  string type = 1;
+  string title = 2;
+  repeated TableData tableData = 3;
+  string encoding = 4;
+  string mimeType = 5;
+  string body = 6;
+  string selector = 7;
+}
+
+message BaseEntry {
+  string id = 1;
+  string stream = 2;
+  string worker = 3;
+  Protocol proto = 4;
+  bool tls = 5;
+  string summary = 6;
+  string summaryQuery = 7;
+  int64 status = 8;
+  string statusQuery = 9;
+  string method = 10;
+  string methodQuery = 11;
+  int64 timestamp = 12;
+  Resolution src = 13;
+  Resolution dst = 14;
+  bool outgoing = 15;
+  int64 requestSize = 16;
+  int64 responseSize = 17;
+  int64 elapsedTime = 18;
+  bool passed = 19;
+  bool failed = 20;
+  Error error = 21;
+  string record = 22;
+  bool event = 23;
+  Capture capture = 24;
+  repeated string checksums = 25;
+  string duplicate = 26;
+  int64 size = 27;
+}
+
+// {worker}/{stream}-{index} uniquely identifies an item
+message Entry {
+  string id = 1;
+  int64 index = 2;
+  string stream = 3;
+  string worker = 4;
+  Node node = 5;
+  Protocol protocol = 6;
+  bool tls = 7;
+  Resolution src = 8;
+  Resolution dst = 9;
+  bool outgoing = 10;
+  int64 timestamp = 11;
+  int64 startTime = 12;
+  google.protobuf.Struct request = 13;
+  google.protobuf.Struct response = 14;
+  int64 requestSize = 15;
+  int64 responseSize = 16;
+  int64 elapsedTime = 17;
+  bool passed = 18;
+  bool failed = 19;
+  Error error = 20;
+  string entryFile = 21;
+  string record = 22;
+  Event event = 23;
+  BaseEntry base = 24;
+  Capture capture = 25;
+  repeated string checksums = 26;
+  string duplicate = 27;
+  google.protobuf.Struct data = 28;
+  int64 size = 29;
+}
+
+message Representation {
+  repeated SectionData request = 1;
+  repeated SectionData response = 2;
+  repeated SectionData event = 3;
+  repeated SectionData data = 4;
+}
+
+message EntryWrapper {
+  Protocol protocol = 1;
+  Representation representation = 2;
+  Entry data = 3;
+  BaseEntry base = 4;
+}
