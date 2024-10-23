@@ -143,19 +143,19 @@ type Protocol struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Name            string   `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	Version         string   `protobuf:"bytes,2,opt,name=version,proto3" json:"version,omitempty"`
-	Abbr            string   `protobuf:"bytes,3,opt,name=abbr,proto3" json:"abbr,omitempty"`
-	LongName        string   `protobuf:"bytes,4,opt,name=longName,proto3" json:"longName,omitempty"`
-	Macro           string   `protobuf:"bytes,5,opt,name=macro,proto3" json:"macro,omitempty"`
-	BackgroundColor string   `protobuf:"bytes,6,opt,name=backgroundColor,proto3" json:"backgroundColor,omitempty"`
-	ForegroundColor string   `protobuf:"bytes,7,opt,name=foregroundColor,proto3" json:"foregroundColor,omitempty"`
-	FontSize        int32    `protobuf:"varint,8,opt,name=fontSize,proto3" json:"fontSize,omitempty"`
-	ReferenceLink   string   `protobuf:"bytes,9,opt,name=referenceLink,proto3" json:"referenceLink,omitempty"`
-	Ports           []string `protobuf:"bytes,10,rep,name=ports,proto3" json:"ports,omitempty"`
-	Layer4          string   `protobuf:"bytes,11,opt,name=layer4,proto3" json:"layer4,omitempty"`
-	Layer3          string   `protobuf:"bytes,12,opt,name=layer3,proto3" json:"layer3,omitempty"`
-	Priority        int32    `protobuf:"varint,13,opt,name=priority,proto3" json:"priority,omitempty"`
+	Name            string   `protobuf:"bytes,1,opt,name=name,proto3" json:"name"`
+	Version         string   `protobuf:"bytes,2,opt,name=version,proto3" json:"version"`
+	Abbr            string   `protobuf:"bytes,3,opt,name=abbr,proto3" json:"abbr"`
+	LongName        string   `protobuf:"bytes,4,opt,name=longName,proto3" json:"longName"`
+	Macro           string   `protobuf:"bytes,5,opt,name=macro,proto3" json:"macro"`
+	BackgroundColor string   `protobuf:"bytes,6,opt,name=backgroundColor,proto3" json:"backgroundColor"`
+	ForegroundColor string   `protobuf:"bytes,7,opt,name=foregroundColor,proto3" json:"foregroundColor"`
+	FontSize        int32    `protobuf:"varint,8,opt,name=fontSize,proto3" json:"fontSize"`
+	ReferenceLink   string   `protobuf:"bytes,9,opt,name=referenceLink,proto3" json:"referenceLink"`
+	Ports           []string `protobuf:"bytes,10,rep,name=ports,proto3" json:"ports"`
+	Layer4          string   `protobuf:"bytes,11,opt,name=layer4,proto3" json:"layer4"`
+	Layer3          string   `protobuf:"bytes,12,opt,name=layer3,proto3" json:"layer3"`
+	Priority        int32    `protobuf:"varint,13,opt,name=priority,proto3" json:"priority"`
 }
 
 func (x *Protocol) Reset() {
@@ -286,22 +286,22 @@ type Resolution struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Ip                  string               `protobuf:"bytes,1,opt,name=ip,proto3" json:"ip,omitempty"`
-	Port                string               `protobuf:"bytes,2,opt,name=port,proto3" json:"port,omitempty"`
-	Name                string               `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
-	Namespace           string               `protobuf:"bytes,4,opt,name=namespace,proto3" json:"namespace,omitempty"`
-	Pod                 *v1.Pod              `protobuf:"bytes,5,opt,name=pod,proto3" json:"pod,omitempty"`
-	EndpointSlice       *v1.Endpoints        `protobuf:"bytes,6,opt,name=endpointSlice,proto3" json:"endpointSlice,omitempty"`
-	Service             *v1.Service          `protobuf:"bytes,7,opt,name=service,proto3" json:"service,omitempty"`
-	CgroupId            uint64               `protobuf:"varint,8,opt,name=cgroupId,proto3" json:"cgroupId,omitempty"`
-	ContainerId         string               `protobuf:"bytes,9,opt,name=containerId,proto3" json:"containerId,omitempty"`
-	SocketId            uint64               `protobuf:"varint,10,opt,name=socketId,proto3" json:"socketId,omitempty"`
-	ProcessId           int64                `protobuf:"varint,11,opt,name=processId,proto3" json:"processId,omitempty"`
-	ParentProcessId     int64                `protobuf:"varint,12,opt,name=parentProcessId,proto3" json:"parentProcessId,omitempty"`
-	HostProcessId       int64                `protobuf:"varint,13,opt,name=hostProcessId,proto3" json:"hostProcessId,omitempty"`
-	HostParentProcessId int64                `protobuf:"varint,14,opt,name=hostParentProcessId,proto3" json:"hostParentProcessId,omitempty"`
-	ProcessName         string               `protobuf:"bytes,15,opt,name=processName,proto3" json:"processName,omitempty"`
-	ResolutionMechanism RESOLUTION_MECHANISM `protobuf:"varint,16,opt,name=resolutionMechanism,proto3,enum=api.RESOLUTION_MECHANISM" json:"resolutionMechanism,omitempty"`
+	Ip                  string               `protobuf:"bytes,1,opt,name=ip,proto3" json:"ip"`
+	Port                string               `protobuf:"bytes,2,opt,name=port,proto3" json:"port"`
+	Name                string               `protobuf:"bytes,3,opt,name=name,proto3" json:"name"`
+	Namespace           string               `protobuf:"bytes,4,opt,name=namespace,proto3" json:"namespace"`
+	Pod                 *v1.Pod              `protobuf:"bytes,5,opt,name=pod,proto3" json:"pod"`
+	EndpointSlice       *v1.Endpoints        `protobuf:"bytes,6,opt,name=endpointSlice,proto3" json:"endpointSlice"`
+	Service             *v1.Service          `protobuf:"bytes,7,opt,name=service,proto3" json:"service"`
+	CgroupId            uint64               `protobuf:"varint,8,opt,name=cgroupId,proto3" json:"cgroupId"`
+	ContainerId         string               `protobuf:"bytes,9,opt,name=containerId,proto3" json:"containerId"`
+	SocketId            uint64               `protobuf:"varint,10,opt,name=socketId,proto3" json:"socketId"`
+	ProcessId           int64                `protobuf:"varint,11,opt,name=processId,proto3" json:"processId"`
+	ParentProcessId     int64                `protobuf:"varint,12,opt,name=parentProcessId,proto3" json:"parentProcessId"`
+	HostProcessId       int64                `protobuf:"varint,13,opt,name=hostProcessId,proto3" json:"hostProcessId"`
+	HostParentProcessId int64                `protobuf:"varint,14,opt,name=hostParentProcessId,proto3" json:"hostParentProcessId"`
+	ProcessName         string               `protobuf:"bytes,15,opt,name=processName,proto3" json:"processName"`
+	ResolutionMechanism RESOLUTION_MECHANISM `protobuf:"varint,16,opt,name=resolutionMechanism,proto3,enum=api.RESOLUTION_MECHANISM" json:"resolutionMechanism"`
 }
 
 func (x *Resolution) Reset() {
@@ -453,8 +453,8 @@ type Vlan struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id    uint32 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	Dot1Q bool   `protobuf:"varint,2,opt,name=dot1q,proto3" json:"dot1q,omitempty"`
+	Id    uint32 `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
+	Dot1Q bool   `protobuf:"varint,2,opt,name=dot1q,proto3" json:"dot1q"`
 }
 
 func (x *Vlan) Reset() {
@@ -508,8 +508,8 @@ type Proxy struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	Pid  string `protobuf:"bytes,2,opt,name=pid,proto3" json:"pid,omitempty"`
+	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name"`
+	Pid  string `protobuf:"bytes,2,opt,name=pid,proto3" json:"pid"`
 }
 
 func (x *Proxy) Reset() {
@@ -563,10 +563,10 @@ type Capture struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Backend string `protobuf:"bytes,1,opt,name=backend,proto3" json:"backend,omitempty"`
-	Source  string `protobuf:"bytes,2,opt,name=source,proto3" json:"source,omitempty"`
-	Proxy   *Proxy `protobuf:"bytes,3,opt,name=proxy,proto3" json:"proxy,omitempty"`
-	Vlan    *Vlan  `protobuf:"bytes,4,opt,name=vlan,proto3" json:"vlan,omitempty"`
+	Backend string `protobuf:"bytes,1,opt,name=backend,proto3" json:"backend"`
+	Source  string `protobuf:"bytes,2,opt,name=source,proto3" json:"source"`
+	Proxy   *Proxy `protobuf:"bytes,3,opt,name=proxy,proto3" json:"proxy"`
+	Vlan    *Vlan  `protobuf:"bytes,4,opt,name=vlan,proto3" json:"vlan"`
 }
 
 func (x *Capture) Reset() {
@@ -634,8 +634,8 @@ type Node struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Ip   string `protobuf:"bytes,1,opt,name=ip,proto3" json:"ip,omitempty"`
-	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Ip   string `protobuf:"bytes,1,opt,name=ip,proto3" json:"ip"`
+	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name"`
 }
 
 func (x *Node) Reset() {
@@ -689,8 +689,8 @@ type Error struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Type    ERROR_TYPE `protobuf:"varint,1,opt,name=type,proto3,enum=api.ERROR_TYPE" json:"type,omitempty"`
-	Message string     `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"`
+	Type    ERROR_TYPE `protobuf:"varint,1,opt,name=type,proto3,enum=api.ERROR_TYPE" json:"type"`
+	Message string     `protobuf:"bytes,2,opt,name=message,proto3" json:"message"`
 }
 
 func (x *Error) Reset() {
@@ -744,9 +744,9 @@ type Event struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Source string          `protobuf:"bytes,1,opt,name=source,proto3" json:"source,omitempty"`
-	Type   string          `protobuf:"bytes,2,opt,name=type,proto3" json:"type,omitempty"`
-	Data   *_struct.Struct `protobuf:"bytes,3,opt,name=data,proto3" json:"data,omitempty"`
+	Source string          `protobuf:"bytes,1,opt,name=source,proto3" json:"source"`
+	Type   string          `protobuf:"bytes,2,opt,name=type,proto3" json:"type"`
+	Data   *_struct.Struct `protobuf:"bytes,3,opt,name=data,proto3" json:"data"`
 }
 
 func (x *Event) Reset() {
@@ -807,9 +807,9 @@ type TableData struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Name     string         `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	Value    *_struct.Value `protobuf:"bytes,2,opt,name=value,proto3" json:"value,omitempty"`
-	Selector string         `protobuf:"bytes,3,opt,name=selector,proto3" json:"selector,omitempty"`
+	Name     string         `protobuf:"bytes,1,opt,name=name,proto3" json:"name"`
+	Value    *_struct.Value `protobuf:"bytes,2,opt,name=value,proto3" json:"value"`
+	Selector string         `protobuf:"bytes,3,opt,name=selector,proto3" json:"selector"`
 }
 
 func (x *TableData) Reset() {
@@ -870,13 +870,13 @@ type SectionData struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Type      string       `protobuf:"bytes,1,opt,name=type,proto3" json:"type,omitempty"`
-	Title     string       `protobuf:"bytes,2,opt,name=title,proto3" json:"title,omitempty"`
-	TableData []*TableData `protobuf:"bytes,3,rep,name=tableData,proto3" json:"tableData,omitempty"`
-	Encoding  string       `protobuf:"bytes,4,opt,name=encoding,proto3" json:"encoding,omitempty"`
-	MimeType  string       `protobuf:"bytes,5,opt,name=mimeType,proto3" json:"mimeType,omitempty"`
-	Body      string       `protobuf:"bytes,6,opt,name=body,proto3" json:"body,omitempty"`
-	Selector  string       `protobuf:"bytes,7,opt,name=selector,proto3" json:"selector,omitempty"`
+	Type      string       `protobuf:"bytes,1,opt,name=type,proto3" json:"type"`
+	Title     string       `protobuf:"bytes,2,opt,name=title,proto3" json:"title"`
+	TableData []*TableData `protobuf:"bytes,3,rep,name=tableData,proto3" json:"tableData"`
+	Encoding  string       `protobuf:"bytes,4,opt,name=encoding,proto3" json:"encoding"`
+	MimeType  string       `protobuf:"bytes,5,opt,name=mimeType,proto3" json:"mimeType"`
+	Body      string       `protobuf:"bytes,6,opt,name=body,proto3" json:"body"`
+	Selector  string       `protobuf:"bytes,7,opt,name=selector,proto3" json:"selector"`
 }
 
 func (x *SectionData) Reset() {
@@ -965,33 +965,33 @@ type BaseEntry struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id           string      `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	Stream       string      `protobuf:"bytes,2,opt,name=stream,proto3" json:"stream,omitempty"`
-	Worker       string      `protobuf:"bytes,3,opt,name=worker,proto3" json:"worker,omitempty"`
-	Proto        *Protocol   `protobuf:"bytes,4,opt,name=proto,proto3" json:"proto,omitempty"`
-	Tls          bool        `protobuf:"varint,5,opt,name=tls,proto3" json:"tls,omitempty"`
-	Summary      string      `protobuf:"bytes,6,opt,name=summary,proto3" json:"summary,omitempty"`
-	SummaryQuery string      `protobuf:"bytes,7,opt,name=summaryQuery,proto3" json:"summaryQuery,omitempty"`
-	Status       int64       `protobuf:"varint,8,opt,name=status,proto3" json:"status,omitempty"`
-	StatusQuery  string      `protobuf:"bytes,9,opt,name=statusQuery,proto3" json:"statusQuery,omitempty"`
-	Method       string      `protobuf:"bytes,10,opt,name=method,proto3" json:"method,omitempty"`
-	MethodQuery  string      `protobuf:"bytes,11,opt,name=methodQuery,proto3" json:"methodQuery,omitempty"`
-	Timestamp    int64       `protobuf:"varint,12,opt,name=timestamp,proto3" json:"timestamp,omitempty"`
-	Src          *Resolution `protobuf:"bytes,13,opt,name=src,proto3" json:"src,omitempty"`
-	Dst          *Resolution `protobuf:"bytes,14,opt,name=dst,proto3" json:"dst,omitempty"`
-	Outgoing     bool        `protobuf:"varint,15,opt,name=outgoing,proto3" json:"outgoing,omitempty"`
-	RequestSize  int64       `protobuf:"varint,16,opt,name=requestSize,proto3" json:"requestSize,omitempty"`
-	ResponseSize int64       `protobuf:"varint,17,opt,name=responseSize,proto3" json:"responseSize,omitempty"`
-	ElapsedTime  int64       `protobuf:"varint,18,opt,name=elapsedTime,proto3" json:"elapsedTime,omitempty"`
-	Passed       bool        `protobuf:"varint,19,opt,name=passed,proto3" json:"passed,omitempty"`
-	Failed       bool        `protobuf:"varint,20,opt,name=failed,proto3" json:"failed,omitempty"`
-	Error        *Error      `protobuf:"bytes,21,opt,name=error,proto3" json:"error,omitempty"`
-	Record       string      `protobuf:"bytes,22,opt,name=record,proto3" json:"record,omitempty"`
-	Event        bool        `protobuf:"varint,23,opt,name=event,proto3" json:"event,omitempty"`
-	Capture      *Capture    `protobuf:"bytes,24,opt,name=capture,proto3" json:"capture,omitempty"`
-	Checksums    []string    `protobuf:"bytes,25,rep,name=checksums,proto3" json:"checksums,omitempty"`
-	Duplicate    string      `protobuf:"bytes,26,opt,name=duplicate,proto3" json:"duplicate,omitempty"`
-	Size         int64       `protobuf:"varint,27,opt,name=size,proto3" json:"size,omitempty"`
+	Id           string      `protobuf:"bytes,1,opt,name=id,proto3" json:"id"`
+	Stream       string      `protobuf:"bytes,2,opt,name=stream,proto3" json:"stream"`
+	Worker       string      `protobuf:"bytes,3,opt,name=worker,proto3" json:"worker"`
+	Proto        *Protocol   `protobuf:"bytes,4,opt,name=proto,proto3" json:"proto"`
+	Tls          bool        `protobuf:"varint,5,opt,name=tls,proto3" json:"tls"`
+	Summary      string      `protobuf:"bytes,6,opt,name=summary,proto3" json:"summary"`
+	SummaryQuery string      `protobuf:"bytes,7,opt,name=summaryQuery,proto3" json:"summaryQuery"`
+	Status       int64       `protobuf:"varint,8,opt,name=status,proto3" json:"status"`
+	StatusQuery  string      `protobuf:"bytes,9,opt,name=statusQuery,proto3" json:"statusQuery"`
+	Method       string      `protobuf:"bytes,10,opt,name=method,proto3" json:"method"`
+	MethodQuery  string      `protobuf:"bytes,11,opt,name=methodQuery,proto3" json:"methodQuery"`
+	Timestamp    int64       `protobuf:"varint,12,opt,name=timestamp,proto3" json:"timestamp"`
+	Src          *Resolution `protobuf:"bytes,13,opt,name=src,proto3" json:"src"`
+	Dst          *Resolution `protobuf:"bytes,14,opt,name=dst,proto3" json:"dst"`
+	Outgoing     bool        `protobuf:"varint,15,opt,name=outgoing,proto3" json:"outgoing"`
+	RequestSize  int64       `protobuf:"varint,16,opt,name=requestSize,proto3" json:"requestSize"`
+	ResponseSize int64       `protobuf:"varint,17,opt,name=responseSize,proto3" json:"responseSize"`
+	ElapsedTime  int64       `protobuf:"varint,18,opt,name=elapsedTime,proto3" json:"elapsedTime"`
+	Passed       bool        `protobuf:"varint,19,opt,name=passed,proto3" json:"passed"`
+	Failed       bool        `protobuf:"varint,20,opt,name=failed,proto3" json:"failed"`
+	Error        *Error      `protobuf:"bytes,21,opt,name=error,proto3" json:"error"`
+	Record       string      `protobuf:"bytes,22,opt,name=record,proto3" json:"record"`
+	Event        bool        `protobuf:"varint,23,opt,name=event,proto3" json:"event"`
+	Capture      *Capture    `protobuf:"bytes,24,opt,name=capture,proto3" json:"capture"`
+	Checksums    []string    `protobuf:"bytes,25,rep,name=checksums,proto3" json:"checksums"`
+	Duplicate    string      `protobuf:"bytes,26,opt,name=duplicate,proto3" json:"duplicate"`
+	Size         int64       `protobuf:"varint,27,opt,name=size,proto3" json:"size"`
 }
 
 func (x *BaseEntry) Reset() {
@@ -1221,35 +1221,35 @@ type Entry struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id           string          `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	Index        int64           `protobuf:"varint,2,opt,name=index,proto3" json:"index,omitempty"`
-	Stream       string          `protobuf:"bytes,3,opt,name=stream,proto3" json:"stream,omitempty"`
-	Worker       string          `protobuf:"bytes,4,opt,name=worker,proto3" json:"worker,omitempty"`
-	Node         *Node           `protobuf:"bytes,5,opt,name=node,proto3" json:"node,omitempty"`
-	Protocol     *Protocol       `protobuf:"bytes,6,opt,name=protocol,proto3" json:"protocol,omitempty"`
-	Tls          bool            `protobuf:"varint,7,opt,name=tls,proto3" json:"tls,omitempty"`
-	Src          *Resolution     `protobuf:"bytes,8,opt,name=src,proto3" json:"src,omitempty"`
-	Dst          *Resolution     `protobuf:"bytes,9,opt,name=dst,proto3" json:"dst,omitempty"`
-	Outgoing     bool            `protobuf:"varint,10,opt,name=outgoing,proto3" json:"outgoing,omitempty"`
-	Timestamp    int64           `protobuf:"varint,11,opt,name=timestamp,proto3" json:"timestamp,omitempty"`
-	StartTime    int64           `protobuf:"varint,12,opt,name=startTime,proto3" json:"startTime,omitempty"`
-	Request      *_struct.Struct `protobuf:"bytes,13,opt,name=request,proto3" json:"request,omitempty"`
-	Response     *_struct.Struct `protobuf:"bytes,14,opt,name=response,proto3" json:"response,omitempty"`
-	RequestSize  int64           `protobuf:"varint,15,opt,name=requestSize,proto3" json:"requestSize,omitempty"`
-	ResponseSize int64           `protobuf:"varint,16,opt,name=responseSize,proto3" json:"responseSize,omitempty"`
-	ElapsedTime  int64           `protobuf:"varint,17,opt,name=elapsedTime,proto3" json:"elapsedTime,omitempty"`
-	Passed       bool            `protobuf:"varint,18,opt,name=passed,proto3" json:"passed,omitempty"`
-	Failed       bool            `protobuf:"varint,19,opt,name=failed,proto3" json:"failed,omitempty"`
-	Error        *Error          `protobuf:"bytes,20,opt,name=error,proto3" json:"error,omitempty"`
-	EntryFile    string          `protobuf:"bytes,21,opt,name=entryFile,proto3" json:"entryFile,omitempty"`
-	Record       string          `protobuf:"bytes,22,opt,name=record,proto3" json:"record,omitempty"`
-	Event        *Event          `protobuf:"bytes,23,opt,name=event,proto3" json:"event,omitempty"`
-	Base         *BaseEntry      `protobuf:"bytes,24,opt,name=base,proto3" json:"base,omitempty"`
-	Capture      *Capture        `protobuf:"bytes,25,opt,name=capture,proto3" json:"capture,omitempty"`
-	Checksums    []string        `protobuf:"bytes,26,rep,name=checksums,proto3" json:"checksums,omitempty"`
-	Duplicate    string          `protobuf:"bytes,27,opt,name=duplicate,proto3" json:"duplicate,omitempty"`
-	Data         *_struct.Struct `protobuf:"bytes,28,opt,name=data,proto3" json:"data,omitempty"`
-	Size         int64           `protobuf:"varint,29,opt,name=size,proto3" json:"size,omitempty"`
+	Id           string          `protobuf:"bytes,1,opt,name=id,proto3" json:"id"`
+	Index        int64           `protobuf:"varint,2,opt,name=index,proto3" json:"index"`
+	Stream       string          `protobuf:"bytes,3,opt,name=stream,proto3" json:"stream"`
+	Worker       string          `protobuf:"bytes,4,opt,name=worker,proto3" json:"worker"`
+	Node         *Node           `protobuf:"bytes,5,opt,name=node,proto3" json:"node"`
+	Protocol     *Protocol       `protobuf:"bytes,6,opt,name=protocol,proto3" json:"protocol"`
+	Tls          bool            `protobuf:"varint,7,opt,name=tls,proto3" json:"tls"`
+	Src          *Resolution     `protobuf:"bytes,8,opt,name=src,proto3" json:"src"`
+	Dst          *Resolution     `protobuf:"bytes,9,opt,name=dst,proto3" json:"dst"`
+	Outgoing     bool            `protobuf:"varint,10,opt,name=outgoing,proto3" json:"outgoing"`
+	Timestamp    int64           `protobuf:"varint,11,opt,name=timestamp,proto3" json:"timestamp"`
+	StartTime    int64           `protobuf:"varint,12,opt,name=startTime,proto3" json:"startTime"`
+	Request      *_struct.Struct `protobuf:"bytes,13,opt,name=request,proto3" json:"request"`
+	Response     *_struct.Struct `protobuf:"bytes,14,opt,name=response,proto3" json:"response"`
+	RequestSize  int64           `protobuf:"varint,15,opt,name=requestSize,proto3" json:"requestSize"`
+	ResponseSize int64           `protobuf:"varint,16,opt,name=responseSize,proto3" json:"responseSize"`
+	ElapsedTime  int64           `protobuf:"varint,17,opt,name=elapsedTime,proto3" json:"elapsedTime"`
+	Passed       bool            `protobuf:"varint,18,opt,name=passed,proto3" json:"passed"`
+	Failed       bool            `protobuf:"varint,19,opt,name=failed,proto3" json:"failed"`
+	Error        *Error          `protobuf:"bytes,20,opt,name=error,proto3" json:"error"`
+	EntryFile    string          `protobuf:"bytes,21,opt,name=entryFile,proto3" json:"entryFile"`
+	Record       string          `protobuf:"bytes,22,opt,name=record,proto3" json:"record"`
+	Event        *Event          `protobuf:"bytes,23,opt,name=event,proto3" json:"event"`
+	Base         *BaseEntry      `protobuf:"bytes,24,opt,name=base,proto3" json:"base"`
+	Capture      *Capture        `protobuf:"bytes,25,opt,name=capture,proto3" json:"capture"`
+	Checksums    []string        `protobuf:"bytes,26,rep,name=checksums,proto3" json:"checksums"`
+	Duplicate    string          `protobuf:"bytes,27,opt,name=duplicate,proto3" json:"duplicate"`
+	Data         *_struct.Struct `protobuf:"bytes,28,opt,name=data,proto3" json:"data"`
+	Size         int64           `protobuf:"varint,29,opt,name=size,proto3" json:"size"`
 }
 
 func (x *Entry) Reset() {
@@ -1492,10 +1492,10 @@ type Representation struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Request  []*SectionData `protobuf:"bytes,1,rep,name=request,proto3" json:"request,omitempty"`
-	Response []*SectionData `protobuf:"bytes,2,rep,name=response,proto3" json:"response,omitempty"`
-	Event    []*SectionData `protobuf:"bytes,3,rep,name=event,proto3" json:"event,omitempty"`
-	Data     []*SectionData `protobuf:"bytes,4,rep,name=data,proto3" json:"data,omitempty"`
+	Request  []*SectionData `protobuf:"bytes,1,rep,name=request,proto3" json:"request"`
+	Response []*SectionData `protobuf:"bytes,2,rep,name=response,proto3" json:"response"`
+	Event    []*SectionData `protobuf:"bytes,3,rep,name=event,proto3" json:"event"`
+	Data     []*SectionData `protobuf:"bytes,4,rep,name=data,proto3" json:"data"`
 }
 
 func (x *Representation) Reset() {
@@ -1563,10 +1563,10 @@ type EntryWrapper struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Protocol       *Protocol       `protobuf:"bytes,1,opt,name=protocol,proto3" json:"protocol,omitempty"`
-	Representation *Representation `protobuf:"bytes,2,opt,name=representation,proto3" json:"representation,omitempty"`
-	Data           *Entry          `protobuf:"bytes,3,opt,name=data,proto3" json:"data,omitempty"`
-	Base           *BaseEntry      `protobuf:"bytes,4,opt,name=base,proto3" json:"base,omitempty"`
+	Protocol       *Protocol       `protobuf:"bytes,1,opt,name=protocol,proto3" json:"protocol"`
+	Representation *Representation `protobuf:"bytes,2,opt,name=representation,proto3" json:"representation"`
+	Data           *Entry          `protobuf:"bytes,3,opt,name=data,proto3" json:"data"`
+	Base           *BaseEntry      `protobuf:"bytes,4,opt,name=base,proto3" json:"base"`
 }
 
 func (x *EntryWrapper) Reset() {
