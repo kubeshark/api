@@ -3,7 +3,6 @@ module github.com/kubeshark/api
 go 1.20
 
 require (
-	github.com/golang/protobuf v1.5.3
 	github.com/kubeshark/gopacket v1.1.30
 	google.golang.org/protobuf v1.28.1
 	k8s.io/api v0.27.2

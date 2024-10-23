@@ -6,8 +6,8 @@ import (
 	"sync"
 	"time"
 
-	structpb "github.com/golang/protobuf/ptypes/struct"
 	"github.com/kubeshark/gopacket"
+	structpb "google.golang.org/protobuf/types/known/structpb"
 )
 
 func (r *Resolution) New() *Resolution {
