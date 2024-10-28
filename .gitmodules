@@ -1,6 +1,0 @@
-[submodule "k8s.io/api"]
-	path = k8s.io/api
-	url = git@github.com:kubernetes/api.git
-[submodule "k8s.io/apimachinery"]
-	path = k8s.io/apimachinery
-	url = git@github.com:kubernetes/apimachinery.git
