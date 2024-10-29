@@ -195,22 +195,30 @@ type OutputChannelItem struct {
 }
 
 type ReadProgress struct {
-	readBytes   int
-	lastCurrent int
+	readBytes      int
+	lastCheckpoint int
+	sync.Mutex
 }
 
 func (p *ReadProgress) Feed(n int) {
+	p.Lock()
 	p.readBytes += n
+	p.Unlock()
 }
 
 func (p *ReadProgress) Current() (n int) {
-	p.lastCurrent = p.readBytes - p.lastCurrent
-	return p.lastCurrent
+	p.Lock()
+	current := p.readBytes - p.lastCheckpoint
+	p.lastCheckpoint = p.readBytes
+	p.Unlock()
+	return current
 }
 
 func (p *ReadProgress) Reset() {
+	p.Lock()
 	p.readBytes = 0
-	p.lastCurrent = 0
+	p.lastCheckpoint = 0
+	p.Unlock()
 }
 
 type Dissector interface {
