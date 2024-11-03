@@ -270,6 +270,8 @@ const (
 	DissectionError ErrorType = iota
 	ConnectionError
 	TimeoutError
+	PairNotFoundError
+	FailedRequestError
 )
 
 type Error struct {
