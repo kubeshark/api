@@ -2,6 +2,7 @@ package api
 
 import (
 	"bufio"
+	"errors"
 	"fmt"
 	"sync"
 	"time"
@@ -277,6 +278,45 @@ const (
 type Error struct {
 	Type    ErrorType `json:"type"`
 	Message string    `json:"msg"`
+}
+
+func (e *ErrorType) MarshalJSON() ([]byte, error) {
+	var val []byte
+	switch *e {
+	case DissectionError:
+		val = []byte("dissection")
+	case ConnectionError:
+		val = []byte("connection")
+	case TimeoutError:
+		val = []byte("timeout")
+	case PairNotFoundError:
+		val = []byte("pair-not-found")
+	case FailedRequestError:
+		val = []byte("failed-request")
+	default:
+		return val, errors.New("the error type is unknown")
+	}
+
+	return val, nil
+}
+
+func (e *ErrorType) UnmarshalJSON(data []byte) error {
+	switch string(data) {
+	case "dissection":
+		*e = DissectionError
+	case "connection":
+		*e = ConnectionError
+	case "timeout":
+		*e = TimeoutError
+	case "pair-not-found":
+		*e = PairNotFoundError
+	case "failed-request":
+		*e = FailedRequestError
+	default:
+		return errors.New("the error type is unknown")
+	}
+
+	return nil
 }
 
 type Event struct {
