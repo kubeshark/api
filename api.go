@@ -273,7 +273,6 @@ const (
 	ConnectionError
 	TimeoutError
 	PairNotFoundError
-	FailedRequestError
 )
 
 type Error struct {
@@ -292,8 +291,6 @@ func (e *ErrorType) MarshalJSON() ([]byte, error) {
 		val = "timeout"
 	case PairNotFoundError:
 		val = "pair-not-found"
-	case FailedRequestError:
-		val = "failed-request"
 	default:
 		return []byte{}, errors.New("the error type is unknown")
 	}
@@ -316,8 +313,6 @@ func (e *ErrorType) UnmarshalJSON(data []byte) error {
 		*e = TimeoutError
 	case "pair-not-found":
 		*e = PairNotFoundError
-	case "failed-request":
-		*e = FailedRequestError
 	default:
 		return errors.New("the error type is unknown")
 	}
