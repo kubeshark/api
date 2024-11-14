@@ -2,6 +2,7 @@ package api
 
 import (
 	"bufio"
+	"encoding/json"
 	"errors"
 	"fmt"
 	"sync"
@@ -281,27 +282,32 @@ type Error struct {
 }
 
 func (e *ErrorType) MarshalJSON() ([]byte, error) {
-	var val []byte
+	var val string
 	switch *e {
 	case DissectionError:
-		val = []byte("dissection")
+		val = "dissection"
 	case ConnectionError:
-		val = []byte("connection")
+		val = "connection"
 	case TimeoutError:
-		val = []byte("timeout")
+		val = "timeout"
 	case PairNotFoundError:
-		val = []byte("pair-not-found")
+		val = "pair-not-found"
 	case FailedRequestError:
-		val = []byte("failed-request")
+		val = "failed-request"
 	default:
-		return val, errors.New("the error type is unknown")
+		return []byte{}, errors.New("the error type is unknown")
 	}
 
-	return val, nil
+	return json.Marshal(val)
 }
 
 func (e *ErrorType) UnmarshalJSON(data []byte) error {
-	switch string(data) {
+	var s string
+	err := json.Unmarshal(data, &s)
+	if err != nil {
+		return err
+	}
+	switch s {
 	case "dissection":
 		*e = DissectionError
 	case "connection":
