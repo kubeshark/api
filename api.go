@@ -58,6 +58,7 @@ type Resolution struct {
 	HostProcessID       int                 `json:"hostProcessId"`
 	HostParentProcessID int                 `json:"hostParentProcessId"`
 	ProcessName         string              `json:"processName"`
+	ProcessPath         string              `json:"processPath"`
 	ResolutionMechanism ResolutionMechanism `json:"resolutionMechanism"`
 }
 
