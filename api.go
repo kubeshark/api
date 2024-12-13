@@ -150,6 +150,7 @@ type ConnectionInfo struct {
 	IsOutgoing     bool
 	IsKubeProbe    bool
 	ContainerId    string
+	sync.Mutex
 }
 
 type TcpID struct {
