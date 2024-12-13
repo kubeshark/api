@@ -807,7 +807,6 @@ type Entry struct {
 	Tls          bool        `json:"tls"`
 	Source       *Resolution `json:"src"`
 	Destination  *Resolution `json:"dst"`
-	Outgoing     bool        `json:"outgoing"`
 	Timestamp    int64       `json:"timestamp"`
 	StartTime    time.Time   `json:"startTime"`
 	Request      interface{} `json:"request"`
@@ -985,7 +984,6 @@ type BaseEntry struct {
 	Timestamp    int64              `json:"timestamp,omitempty"`
 	Source       *ResolutionSummary `json:"src"`
 	Destination  *ResolutionSummary `json:"dst"`
-	Outgoing     bool               `json:"outgoing"`
 	RequestSize  int                `json:"requestSize"`
 	ResponseSize int                `json:"responseSize"`
 	ElapsedTime  int64              `json:"elapsedTime"`
