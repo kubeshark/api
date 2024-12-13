@@ -530,6 +530,105 @@ type TcpID struct {
 	SrcCgroupID uint64
 	DstCgroupID uint64
 	Ident       string
+	sync.Mutex
+}
+
+func (tcpid *TcpID) GetSrcIP() string {
+	tcpid.Lock()
+	srcIP := tcpid.SrcIP
+	tcpid.Unlock()
+	return srcIP
+}
+
+func (tcpid *TcpID) GetDstIP() string {
+	tcpid.Lock()
+	dstIP := tcpid.DstIP
+	tcpid.Unlock()
+	return dstIP
+}
+
+func (tcpid *TcpID) GetSrcPort() string {
+	tcpid.Lock()
+	srcPort := tcpid.SrcPort
+	tcpid.Unlock()
+	return srcPort
+}
+
+func (tcpid *TcpID) GetDstPort() string {
+	tcpid.Lock()
+	dstPort := tcpid.DstPort
+	tcpid.Unlock()
+	return dstPort
+}
+
+func (tcpid *TcpID) GetSrcCgroupID() uint64 {
+	tcpid.Lock()
+	srcCgroupID := tcpid.SrcCgroupID
+	tcpid.Unlock()
+	return srcCgroupID
+}
+
+func (tcpid *TcpID) GetDstCgroupID() uint64 {
+	tcpid.Lock()
+	dstCgroupID := tcpid.DstCgroupID
+	tcpid.Unlock()
+	return dstCgroupID
+}
+
+func (tcpid *TcpID) GetIdent() string {
+	tcpid.Lock()
+	ident := tcpid.Ident
+	tcpid.Unlock()
+	return ident
+}
+
+func (tcpid *TcpID) SetSrcIP(SrcIP string) *TcpID {
+	tcpid.Lock()
+	tcpid.SrcIP = SrcIP
+	tcpid.Unlock()
+	return tcpid
+}
+
+func (tcpid *TcpID) SetDstIP(DstIP string) *TcpID {
+	tcpid.Lock()
+	tcpid.DstIP = DstIP
+	tcpid.Unlock()
+	return tcpid
+}
+
+func (tcpid *TcpID) SetSrcPort(SrcPort string) *TcpID {
+	tcpid.Lock()
+	tcpid.SrcPort = SrcPort
+	tcpid.Unlock()
+	return tcpid
+}
+
+func (tcpid *TcpID) SetDstPort(DstPort string) *TcpID {
+	tcpid.Lock()
+	tcpid.DstPort = DstPort
+	tcpid.Unlock()
+	return tcpid
+}
+
+func (tcpid *TcpID) SetSrcCgroupID(SrcCgroupID uint64) *TcpID {
+	tcpid.Lock()
+	tcpid.SrcCgroupID = SrcCgroupID
+	tcpid.Unlock()
+	return tcpid
+}
+
+func (tcpid *TcpID) SetDstCgroupID(DstCgroupID uint64) *TcpID {
+	tcpid.Lock()
+	tcpid.DstCgroupID = DstCgroupID
+	tcpid.Unlock()
+	return tcpid
+}
+
+func (tcpid *TcpID) SetIdent(Ident string) *TcpID {
+	tcpid.Lock()
+	tcpid.Ident = Ident
+	tcpid.Unlock()
+	return tcpid
 }
 
 type CounterPair struct {
