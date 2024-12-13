@@ -529,7 +529,6 @@ type TcpID struct {
 	DstPort     string
 	SrcCgroupID uint64
 	DstCgroupID uint64
-	Ident       string
 	sync.Mutex
 }
 
@@ -575,13 +574,6 @@ func (tcpid *TcpID) GetDstCgroupID() uint64 {
 	return dstCgroupID
 }
 
-func (tcpid *TcpID) GetIdent() string {
-	tcpid.Lock()
-	ident := tcpid.Ident
-	tcpid.Unlock()
-	return ident
-}
-
 func (tcpid *TcpID) SetSrcIP(SrcIP string) *TcpID {
 	tcpid.Lock()
 	tcpid.SrcIP = SrcIP
@@ -620,13 +612,6 @@ func (tcpid *TcpID) SetSrcCgroupID(SrcCgroupID uint64) *TcpID {
 func (tcpid *TcpID) SetDstCgroupID(DstCgroupID uint64) *TcpID {
 	tcpid.Lock()
 	tcpid.DstCgroupID = DstCgroupID
-	tcpid.Unlock()
-	return tcpid
-}
-
-func (tcpid *TcpID) SetIdent(Ident string) *TcpID {
-	tcpid.Lock()
-	tcpid.Ident = Ident
 	tcpid.Unlock()
 	return tcpid
 }
