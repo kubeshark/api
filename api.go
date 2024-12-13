@@ -60,10 +60,250 @@ type Resolution struct {
 	ProcessName         string              `json:"processName"`
 	ProcessPath         string              `json:"processPath"`
 	ResolutionMechanism ResolutionMechanism `json:"resolutionMechanism"`
+	sync.Mutex
+}
+
+func (resolution *Resolution) GetIP() string {
+	resolution.Lock()
+	iP := resolution.IP
+	resolution.Unlock()
+	return iP
+}
+
+func (resolution *Resolution) GetPort() string {
+	resolution.Lock()
+	port := resolution.Port
+	resolution.Unlock()
+	return port
+}
+
+func (resolution *Resolution) GetName() string {
+	resolution.Lock()
+	name := resolution.Name
+	resolution.Unlock()
+	return name
+}
+
+func (resolution *Resolution) GetNamespace() string {
+	resolution.Lock()
+	namespace := resolution.Namespace
+	resolution.Unlock()
+	return namespace
+}
+
+func (resolution *Resolution) GetPod() *corev1.Pod {
+	resolution.Lock()
+	pod := resolution.Pod
+	resolution.Unlock()
+	return pod
+}
+
+func (resolution *Resolution) GetEndpointSlice() *corev1.Endpoints {
+	resolution.Lock()
+	endpointSlice := resolution.EndpointSlice
+	resolution.Unlock()
+	return endpointSlice
+}
+
+func (resolution *Resolution) GetService() *corev1.Service {
+	resolution.Lock()
+	service := resolution.Service
+	resolution.Unlock()
+	return service
+}
+
+func (resolution *Resolution) GetCgroupID() uint {
+	resolution.Lock()
+	cgroupID := resolution.CgroupID
+	resolution.Unlock()
+	return cgroupID
+}
+
+func (resolution *Resolution) GetContainerID() string {
+	resolution.Lock()
+	containerID := resolution.ContainerID
+	resolution.Unlock()
+	return containerID
+}
+
+func (resolution *Resolution) GetSocketID() uint {
+	resolution.Lock()
+	socketID := resolution.SocketID
+	resolution.Unlock()
+	return socketID
+}
+
+func (resolution *Resolution) GetProcessID() int {
+	resolution.Lock()
+	processID := resolution.ProcessID
+	resolution.Unlock()
+	return processID
+}
+
+func (resolution *Resolution) GetParentProcessID() int {
+	resolution.Lock()
+	parentProcessID := resolution.ParentProcessID
+	resolution.Unlock()
+	return parentProcessID
+}
+
+func (resolution *Resolution) GetHostProcessID() int {
+	resolution.Lock()
+	hostProcessID := resolution.HostProcessID
+	resolution.Unlock()
+	return hostProcessID
+}
+
+func (resolution *Resolution) GetHostParentProcessID() int {
+	resolution.Lock()
+	hostParentProcessID := resolution.HostParentProcessID
+	resolution.Unlock()
+	return hostParentProcessID
+}
+
+func (resolution *Resolution) GetProcessName() string {
+	resolution.Lock()
+	processName := resolution.ProcessName
+	resolution.Unlock()
+	return processName
+}
+
+func (resolution *Resolution) GetProcessPath() string {
+	resolution.Lock()
+	processPath := resolution.ProcessPath
+	resolution.Unlock()
+	return processPath
+}
+
+func (resolution *Resolution) GetResolutionMechanism() ResolutionMechanism {
+	resolution.Lock()
+	resolutionMechanism := resolution.ResolutionMechanism
+	resolution.Unlock()
+	return resolutionMechanism
+}
+
+func (resolution *Resolution) SetIP(IP string) *Resolution {
+	resolution.Lock()
+	resolution.IP = IP
+	resolution.Unlock()
+	return resolution
+}
+
+func (resolution *Resolution) SetPort(Port string) *Resolution {
+	resolution.Lock()
+	resolution.Port = Port
+	resolution.Unlock()
+	return resolution
+}
+
+func (resolution *Resolution) SetName(Name string) *Resolution {
+	resolution.Lock()
+	resolution.Name = Name
+	resolution.Unlock()
+	return resolution
+}
+
+func (resolution *Resolution) SetNamespace(Namespace string) *Resolution {
+	resolution.Lock()
+	resolution.Namespace = Namespace
+	resolution.Unlock()
+	return resolution
+}
+
+func (resolution *Resolution) SetPod(Pod *corev1.Pod) *Resolution {
+	resolution.Lock()
+	resolution.Pod = Pod
+	resolution.Unlock()
+	return resolution
+}
+
+func (resolution *Resolution) SetEndpointSlice(EndpointSlice *corev1.Endpoints) *Resolution {
+	resolution.Lock()
+	resolution.EndpointSlice = EndpointSlice
+	resolution.Unlock()
+	return resolution
+}
+
+func (resolution *Resolution) SetService(Service *corev1.Service) *Resolution {
+	resolution.Lock()
+	resolution.Service = Service
+	resolution.Unlock()
+	return resolution
+}
+
+func (resolution *Resolution) SetCgroupID(CgroupID uint) *Resolution {
+	resolution.Lock()
+	resolution.CgroupID = CgroupID
+	resolution.Unlock()
+	return resolution
+}
+
+func (resolution *Resolution) SetContainerID(ContainerID string) *Resolution {
+	resolution.Lock()
+	resolution.ContainerID = ContainerID
+	resolution.Unlock()
+	return resolution
+}
+
+func (resolution *Resolution) SetSocketID(SocketID uint) *Resolution {
+	resolution.Lock()
+	resolution.SocketID = SocketID
+	resolution.Unlock()
+	return resolution
+}
+
+func (resolution *Resolution) SetProcessID(ProcessID int) *Resolution {
+	resolution.Lock()
+	resolution.ProcessID = ProcessID
+	resolution.Unlock()
+	return resolution
+}
+
+func (resolution *Resolution) SetParentProcessID(ParentProcessID int) *Resolution {
+	resolution.Lock()
+	resolution.ParentProcessID = ParentProcessID
+	resolution.Unlock()
+	return resolution
+}
+
+func (resolution *Resolution) SetHostProcessID(HostProcessID int) *Resolution {
+	resolution.Lock()
+	resolution.HostProcessID = HostProcessID
+	resolution.Unlock()
+	return resolution
+}
+
+func (resolution *Resolution) SetHostParentProcessID(HostParentProcessID int) *Resolution {
+	resolution.Lock()
+	resolution.HostParentProcessID = HostParentProcessID
+	resolution.Unlock()
+	return resolution
+}
+
+func (resolution *Resolution) SetProcessName(ProcessName string) *Resolution {
+	resolution.Lock()
+	resolution.ProcessName = ProcessName
+	resolution.Unlock()
+	return resolution
+}
+
+func (resolution *Resolution) SetProcessPath(ProcessPath string) *Resolution {
+	resolution.Lock()
+	resolution.ProcessPath = ProcessPath
+	resolution.Unlock()
+	return resolution
+}
+
+func (resolution *Resolution) SetResolutionMechanism(ResolutionMechanism ResolutionMechanism) *Resolution {
+	resolution.Lock()
+	resolution.ResolutionMechanism = ResolutionMechanism
+	resolution.Unlock()
+	return resolution
 }
 
 func (r *Resolution) New() *Resolution {
-	return &Resolution{
+	r.Lock()
+	newR := &Resolution{
 		IP:                  r.IP,
 		Port:                r.Port,
 		Name:                r.Name,
@@ -73,6 +313,9 @@ func (r *Resolution) New() *Resolution {
 		Service:             r.Service,
 		ResolutionMechanism: r.ResolutionMechanism,
 	}
+	r.Unlock()
+
+	return newR
 }
 
 type ObjectMeta struct {
