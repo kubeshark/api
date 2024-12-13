@@ -396,6 +396,132 @@ type ConnectionInfo struct {
 	sync.Mutex
 }
 
+func (connectioninfo *ConnectionInfo) GetClientIP() string {
+	connectioninfo.Lock()
+	clientip := connectioninfo.ClientIP
+	connectioninfo.Unlock()
+	return clientip
+}
+
+func (connectioninfo *ConnectionInfo) GetClientPort() string {
+	connectioninfo.Lock()
+	clientport := connectioninfo.ClientPort
+	connectioninfo.Unlock()
+	return clientport
+}
+
+func (connectioninfo *ConnectionInfo) GetClientCgroupID() uint64 {
+	connectioninfo.Lock()
+	clientcgroupid := connectioninfo.ClientCgroupID
+	connectioninfo.Unlock()
+	return clientcgroupid
+}
+
+func (connectioninfo *ConnectionInfo) GetServerIP() string {
+	connectioninfo.Lock()
+	serverip := connectioninfo.ServerIP
+	connectioninfo.Unlock()
+	return serverip
+}
+
+func (connectioninfo *ConnectionInfo) GetServerPort() string {
+	connectioninfo.Lock()
+	serverport := connectioninfo.ServerPort
+	connectioninfo.Unlock()
+	return serverport
+}
+
+func (connectioninfo *ConnectionInfo) GetServerCgroupID() uint64 {
+	connectioninfo.Lock()
+	servercgroupid := connectioninfo.ServerCgroupID
+	connectioninfo.Unlock()
+	return servercgroupid
+}
+
+func (connectioninfo *ConnectionInfo) GetIsOutgoing() bool {
+	connectioninfo.Lock()
+	isoutgoing := connectioninfo.IsOutgoing
+	connectioninfo.Unlock()
+	return isoutgoing
+}
+
+func (connectioninfo *ConnectionInfo) GetIsKubeProbe() bool {
+	connectioninfo.Lock()
+	iskubeprobe := connectioninfo.IsKubeProbe
+	connectioninfo.Unlock()
+	return iskubeprobe
+}
+
+func (connectioninfo *ConnectionInfo) GetContainerId() string {
+	connectioninfo.Lock()
+	containerid := connectioninfo.ContainerId
+	connectioninfo.Unlock()
+	return containerid
+}
+
+func (connectioninfo *ConnectionInfo) SetClientIP(ClientIP string) *ConnectionInfo {
+	connectioninfo.Lock()
+	connectioninfo.ClientIP = ClientIP
+	connectioninfo.Unlock()
+	return connectioninfo
+}
+
+func (connectioninfo *ConnectionInfo) SetClientPort(ClientPort string) *ConnectionInfo {
+	connectioninfo.Lock()
+	connectioninfo.ClientPort = ClientPort
+	connectioninfo.Unlock()
+	return connectioninfo
+}
+
+func (connectioninfo *ConnectionInfo) SetClientCgroupID(ClientCgroupID uint64) *ConnectionInfo {
+	connectioninfo.Lock()
+	connectioninfo.ClientCgroupID = ClientCgroupID
+	connectioninfo.Unlock()
+	return connectioninfo
+}
+
+func (connectioninfo *ConnectionInfo) SetServerIP(ServerIP string) *ConnectionInfo {
+	connectioninfo.Lock()
+	connectioninfo.ServerIP = ServerIP
+	connectioninfo.Unlock()
+	return connectioninfo
+}
+
+func (connectioninfo *ConnectionInfo) SetServerPort(ServerPort string) *ConnectionInfo {
+	connectioninfo.Lock()
+	connectioninfo.ServerPort = ServerPort
+	connectioninfo.Unlock()
+	return connectioninfo
+}
+
+func (connectioninfo *ConnectionInfo) SetServerCgroupID(ServerCgroupID uint64) *ConnectionInfo {
+	connectioninfo.Lock()
+	connectioninfo.ServerCgroupID = ServerCgroupID
+	connectioninfo.Unlock()
+	return connectioninfo
+}
+
+func (connectioninfo *ConnectionInfo) SetIsOutgoing(IsOutgoing bool) *ConnectionInfo {
+	connectioninfo.Lock()
+	connectioninfo.IsOutgoing = IsOutgoing
+	connectioninfo.Unlock()
+	return connectioninfo
+}
+
+func (connectioninfo *ConnectionInfo) SetIsKubeProbe(IsKubeProbe bool) *ConnectionInfo {
+	connectioninfo.Lock()
+	connectioninfo.IsKubeProbe = IsKubeProbe
+	connectioninfo.Unlock()
+	return connectioninfo
+}
+
+func (connectioninfo *ConnectionInfo) SetContainerId(ContainerId string) *ConnectionInfo {
+	connectioninfo.Lock()
+	connectioninfo.ContainerId = ContainerId
+	connectioninfo.Unlock()
+	return connectioninfo
+}
+
 type TcpID struct {
 	SrcIP       string
 	DstIP       string
