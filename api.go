@@ -631,6 +631,36 @@ func (tcpid *TcpID) SetIdent(Ident string) *TcpID {
 	return tcpid
 }
 
+func (tcpid *TcpID) NewConnectionInfo(Ident string) *ConnectionInfo {
+	tcpid.Lock()
+	connectioninfo := &ConnectionInfo{
+		ClientIP:       tcpid.SrcIP,
+		ClientPort:     tcpid.SrcPort,
+		ClientCgroupID: tcpid.SrcCgroupID,
+		ServerIP:       tcpid.DstIP,
+		ServerPort:     tcpid.DstPort,
+		ServerCgroupID: tcpid.DstCgroupID,
+	}
+	tcpid.Unlock()
+
+	return connectioninfo
+}
+
+func (tcpid *TcpID) NewConnectionInfoFlipped(Ident string) *ConnectionInfo {
+	tcpid.Lock()
+	connectioninfo := &ConnectionInfo{
+		ClientIP:       tcpid.DstIP,
+		ClientPort:     tcpid.DstPort,
+		ClientCgroupID: tcpid.DstCgroupID,
+		ServerIP:       tcpid.SrcIP,
+		ServerPort:     tcpid.SrcPort,
+		ServerCgroupID: tcpid.SrcCgroupID,
+	}
+	tcpid.Unlock()
+
+	return connectioninfo
+}
+
 type CounterPair struct {
 	Request  uint
 	Response uint
