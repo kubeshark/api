@@ -390,7 +390,6 @@ type ConnectionInfo struct {
 	ServerIP       string
 	ServerPort     string
 	ServerCgroupID uint64
-	IsOutgoing     bool
 	IsKubeProbe    bool
 	ContainerId    string
 	sync.Mutex
@@ -436,13 +435,6 @@ func (connectioninfo *ConnectionInfo) GetServerCgroupID() uint64 {
 	servercgroupid := connectioninfo.ServerCgroupID
 	connectioninfo.Unlock()
 	return servercgroupid
-}
-
-func (connectioninfo *ConnectionInfo) GetIsOutgoing() bool {
-	connectioninfo.Lock()
-	isoutgoing := connectioninfo.IsOutgoing
-	connectioninfo.Unlock()
-	return isoutgoing
 }
 
 func (connectioninfo *ConnectionInfo) GetIsKubeProbe() bool {
@@ -497,13 +489,6 @@ func (connectioninfo *ConnectionInfo) SetServerPort(ServerPort string) *Connecti
 func (connectioninfo *ConnectionInfo) SetServerCgroupID(ServerCgroupID uint64) *ConnectionInfo {
 	connectioninfo.Lock()
 	connectioninfo.ServerCgroupID = ServerCgroupID
-	connectioninfo.Unlock()
-	return connectioninfo
-}
-
-func (connectioninfo *ConnectionInfo) SetIsOutgoing(IsOutgoing bool) *ConnectionInfo {
-	connectioninfo.Lock()
-	connectioninfo.IsOutgoing = IsOutgoing
 	connectioninfo.Unlock()
 	return connectioninfo
 }
