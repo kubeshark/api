@@ -601,7 +601,7 @@ func (tcpid *TcpID) SetDstCgroupID(DstCgroupID uint64) *TcpID {
 	return tcpid
 }
 
-func (tcpid *TcpID) NewConnectionInfo(Ident string) *ConnectionInfo {
+func (tcpid *TcpID) NewConnectionInfo() *ConnectionInfo {
 	tcpid.Lock()
 	connectioninfo := &ConnectionInfo{
 		ClientIP:       tcpid.SrcIP,
@@ -616,7 +616,7 @@ func (tcpid *TcpID) NewConnectionInfo(Ident string) *ConnectionInfo {
 	return connectioninfo
 }
 
-func (tcpid *TcpID) NewConnectionInfoFlipped(Ident string) *ConnectionInfo {
+func (tcpid *TcpID) NewConnectionInfoFlipped() *ConnectionInfo {
 	tcpid.Lock()
 	connectioninfo := &ConnectionInfo{
 		ClientIP:       tcpid.DstIP,
