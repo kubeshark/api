@@ -65,239 +65,222 @@ type Resolution struct {
 
 func (resolution *Resolution) GetIP() string {
 	resolution.Lock()
-	iP := resolution.IP
-	resolution.Unlock()
-	return iP
+	defer resolution.Unlock()
+	return resolution.IP
 }
 
 func (resolution *Resolution) GetPort() string {
 	resolution.Lock()
-	port := resolution.Port
-	resolution.Unlock()
-	return port
+	defer resolution.Unlock()
+	return resolution.Port
 }
 
 func (resolution *Resolution) GetName() string {
 	resolution.Lock()
-	name := resolution.Name
-	resolution.Unlock()
-	return name
+	defer resolution.Unlock()
+	return resolution.Name
 }
 
 func (resolution *Resolution) GetNamespace() string {
 	resolution.Lock()
-	namespace := resolution.Namespace
-	resolution.Unlock()
-	return namespace
+	defer resolution.Unlock()
+	return resolution.Namespace
 }
 
 func (resolution *Resolution) GetPod() *corev1.Pod {
 	resolution.Lock()
-	pod := resolution.Pod
-	resolution.Unlock()
-	return pod
+	defer resolution.Unlock()
+	return resolution.Pod
 }
 
 func (resolution *Resolution) GetEndpointSlice() *corev1.Endpoints {
 	resolution.Lock()
-	endpointSlice := resolution.EndpointSlice
-	resolution.Unlock()
-	return endpointSlice
+	defer resolution.Unlock()
+	return resolution.EndpointSlice
 }
 
 func (resolution *Resolution) GetService() *corev1.Service {
 	resolution.Lock()
-	service := resolution.Service
-	resolution.Unlock()
-	return service
+	defer resolution.Unlock()
+	return resolution.Service
 }
 
 func (resolution *Resolution) GetCgroupID() uint {
 	resolution.Lock()
-	cgroupID := resolution.CgroupID
-	resolution.Unlock()
-	return cgroupID
+	defer resolution.Unlock()
+	return resolution.CgroupID
 }
 
 func (resolution *Resolution) GetContainerID() string {
 	resolution.Lock()
-	containerID := resolution.ContainerID
-	resolution.Unlock()
-	return containerID
+	defer resolution.Unlock()
+	return resolution.ContainerID
 }
 
 func (resolution *Resolution) GetSocketID() uint {
 	resolution.Lock()
-	socketID := resolution.SocketID
-	resolution.Unlock()
-	return socketID
+	defer resolution.Unlock()
+	return resolution.SocketID
 }
 
 func (resolution *Resolution) GetProcessID() int {
 	resolution.Lock()
-	processID := resolution.ProcessID
-	resolution.Unlock()
-	return processID
+	defer resolution.Unlock()
+	return resolution.ProcessID
 }
 
 func (resolution *Resolution) GetParentProcessID() int {
 	resolution.Lock()
-	parentProcessID := resolution.ParentProcessID
-	resolution.Unlock()
-	return parentProcessID
+	defer resolution.Unlock()
+	return resolution.ParentProcessID
 }
 
 func (resolution *Resolution) GetHostProcessID() int {
 	resolution.Lock()
-	hostProcessID := resolution.HostProcessID
-	resolution.Unlock()
-	return hostProcessID
+	defer resolution.Unlock()
+	return resolution.HostProcessID
 }
 
 func (resolution *Resolution) GetHostParentProcessID() int {
 	resolution.Lock()
-	hostParentProcessID := resolution.HostParentProcessID
-	resolution.Unlock()
-	return hostParentProcessID
+	defer resolution.Unlock()
+	return resolution.HostParentProcessID
 }
 
 func (resolution *Resolution) GetProcessName() string {
 	resolution.Lock()
-	processName := resolution.ProcessName
-	resolution.Unlock()
-	return processName
+	defer resolution.Unlock()
+	return resolution.ProcessName
 }
 
 func (resolution *Resolution) GetProcessPath() string {
 	resolution.Lock()
-	processPath := resolution.ProcessPath
-	resolution.Unlock()
-	return processPath
+	defer resolution.Unlock()
+	return resolution.ProcessPath
 }
 
 func (resolution *Resolution) GetResolutionMechanism() ResolutionMechanism {
 	resolution.Lock()
-	resolutionMechanism := resolution.ResolutionMechanism
-	resolution.Unlock()
-	return resolutionMechanism
+	defer resolution.Unlock()
+	return resolution.ResolutionMechanism
 }
 
 func (resolution *Resolution) SetIP(IP string) *Resolution {
 	resolution.Lock()
+	defer resolution.Unlock()
 	resolution.IP = IP
-	resolution.Unlock()
 	return resolution
 }
 
 func (resolution *Resolution) SetPort(Port string) *Resolution {
 	resolution.Lock()
+	defer resolution.Unlock()
 	resolution.Port = Port
-	resolution.Unlock()
 	return resolution
 }
 
 func (resolution *Resolution) SetName(Name string) *Resolution {
 	resolution.Lock()
+	defer resolution.Unlock()
 	resolution.Name = Name
-	resolution.Unlock()
 	return resolution
 }
 
 func (resolution *Resolution) SetNamespace(Namespace string) *Resolution {
 	resolution.Lock()
+	defer resolution.Unlock()
 	resolution.Namespace = Namespace
-	resolution.Unlock()
 	return resolution
 }
 
 func (resolution *Resolution) SetPod(Pod *corev1.Pod) *Resolution {
 	resolution.Lock()
+	defer resolution.Unlock()
 	resolution.Pod = Pod
-	resolution.Unlock()
 	return resolution
 }
 
 func (resolution *Resolution) SetEndpointSlice(EndpointSlice *corev1.Endpoints) *Resolution {
 	resolution.Lock()
+	defer resolution.Unlock()
 	resolution.EndpointSlice = EndpointSlice
-	resolution.Unlock()
 	return resolution
 }
 
 func (resolution *Resolution) SetService(Service *corev1.Service) *Resolution {
 	resolution.Lock()
+	defer resolution.Unlock()
 	resolution.Service = Service
-	resolution.Unlock()
 	return resolution
 }
 
 func (resolution *Resolution) SetCgroupID(CgroupID uint) *Resolution {
 	resolution.Lock()
+	defer resolution.Unlock()
 	resolution.CgroupID = CgroupID
-	resolution.Unlock()
 	return resolution
 }
 
 func (resolution *Resolution) SetContainerID(ContainerID string) *Resolution {
 	resolution.Lock()
+	defer resolution.Unlock()
 	resolution.ContainerID = ContainerID
-	resolution.Unlock()
 	return resolution
 }
 
 func (resolution *Resolution) SetSocketID(SocketID uint) *Resolution {
 	resolution.Lock()
+	defer resolution.Unlock()
 	resolution.SocketID = SocketID
-	resolution.Unlock()
 	return resolution
 }
 
 func (resolution *Resolution) SetProcessID(ProcessID int) *Resolution {
 	resolution.Lock()
+	defer resolution.Unlock()
 	resolution.ProcessID = ProcessID
-	resolution.Unlock()
 	return resolution
 }
 
 func (resolution *Resolution) SetParentProcessID(ParentProcessID int) *Resolution {
 	resolution.Lock()
+	defer resolution.Unlock()
 	resolution.ParentProcessID = ParentProcessID
-	resolution.Unlock()
 	return resolution
 }
 
 func (resolution *Resolution) SetHostProcessID(HostProcessID int) *Resolution {
 	resolution.Lock()
+	defer resolution.Unlock()
 	resolution.HostProcessID = HostProcessID
-	resolution.Unlock()
 	return resolution
 }
 
 func (resolution *Resolution) SetHostParentProcessID(HostParentProcessID int) *Resolution {
 	resolution.Lock()
+	defer resolution.Unlock()
 	resolution.HostParentProcessID = HostParentProcessID
-	resolution.Unlock()
 	return resolution
 }
 
 func (resolution *Resolution) SetProcessName(ProcessName string) *Resolution {
 	resolution.Lock()
+	defer resolution.Unlock()
 	resolution.ProcessName = ProcessName
-	resolution.Unlock()
 	return resolution
 }
 
 func (resolution *Resolution) SetProcessPath(ProcessPath string) *Resolution {
 	resolution.Lock()
+	defer resolution.Unlock()
 	resolution.ProcessPath = ProcessPath
-	resolution.Unlock()
 	return resolution
 }
 
 func (resolution *Resolution) SetResolutionMechanism(ResolutionMechanism ResolutionMechanism) *Resolution {
 	resolution.Lock()
+	defer resolution.Unlock()
 	resolution.ResolutionMechanism = ResolutionMechanism
-	resolution.Unlock()
 	return resolution
 }
 
@@ -397,113 +380,105 @@ type ConnectionInfo struct {
 
 func (connectioninfo *ConnectionInfo) GetClientIP() string {
 	connectioninfo.Lock()
-	clientip := connectioninfo.ClientIP
-	connectioninfo.Unlock()
-	return clientip
+	defer connectioninfo.Unlock()
+	return connectioninfo.ClientIP
 }
 
 func (connectioninfo *ConnectionInfo) GetClientPort() string {
 	connectioninfo.Lock()
-	clientport := connectioninfo.ClientPort
-	connectioninfo.Unlock()
-	return clientport
+	defer connectioninfo.Unlock()
+	return connectioninfo.ClientPort
 }
 
 func (connectioninfo *ConnectionInfo) GetClientCgroupID() uint64 {
 	connectioninfo.Lock()
-	clientcgroupid := connectioninfo.ClientCgroupID
-	connectioninfo.Unlock()
-	return clientcgroupid
+	defer connectioninfo.Unlock()
+	return connectioninfo.ClientCgroupID
 }
 
 func (connectioninfo *ConnectionInfo) GetServerIP() string {
 	connectioninfo.Lock()
-	serverip := connectioninfo.ServerIP
-	connectioninfo.Unlock()
-	return serverip
+	defer connectioninfo.Unlock()
+	return connectioninfo.ServerIP
 }
 
 func (connectioninfo *ConnectionInfo) GetServerPort() string {
 	connectioninfo.Lock()
-	serverport := connectioninfo.ServerPort
-	connectioninfo.Unlock()
-	return serverport
+	defer connectioninfo.Unlock()
+	return connectioninfo.ServerPort
 }
 
 func (connectioninfo *ConnectionInfo) GetServerCgroupID() uint64 {
 	connectioninfo.Lock()
-	servercgroupid := connectioninfo.ServerCgroupID
-	connectioninfo.Unlock()
-	return servercgroupid
+	defer connectioninfo.Unlock()
+	return connectioninfo.ServerCgroupID
 }
 
 func (connectioninfo *ConnectionInfo) GetIsKubeProbe() bool {
 	connectioninfo.Lock()
-	iskubeprobe := connectioninfo.IsKubeProbe
-	connectioninfo.Unlock()
-	return iskubeprobe
+	defer connectioninfo.Unlock()
+	return connectioninfo.IsKubeProbe
 }
 
 func (connectioninfo *ConnectionInfo) GetContainerId() string {
 	connectioninfo.Lock()
-	containerid := connectioninfo.ContainerId
-	connectioninfo.Unlock()
-	return containerid
+	defer connectioninfo.Unlock()
+	return connectioninfo.ContainerId
 }
 
 func (connectioninfo *ConnectionInfo) SetClientIP(ClientIP string) *ConnectionInfo {
 	connectioninfo.Lock()
+	defer connectioninfo.Unlock()
 	connectioninfo.ClientIP = ClientIP
-	connectioninfo.Unlock()
 	return connectioninfo
 }
 
 func (connectioninfo *ConnectionInfo) SetClientPort(ClientPort string) *ConnectionInfo {
 	connectioninfo.Lock()
+	defer connectioninfo.Unlock()
 	connectioninfo.ClientPort = ClientPort
-	connectioninfo.Unlock()
 	return connectioninfo
 }
 
 func (connectioninfo *ConnectionInfo) SetClientCgroupID(ClientCgroupID uint64) *ConnectionInfo {
 	connectioninfo.Lock()
+	defer connectioninfo.Unlock()
 	connectioninfo.ClientCgroupID = ClientCgroupID
-	connectioninfo.Unlock()
 	return connectioninfo
 }
 
 func (connectioninfo *ConnectionInfo) SetServerIP(ServerIP string) *ConnectionInfo {
 	connectioninfo.Lock()
+	defer connectioninfo.Unlock()
 	connectioninfo.ServerIP = ServerIP
-	connectioninfo.Unlock()
 	return connectioninfo
 }
 
 func (connectioninfo *ConnectionInfo) SetServerPort(ServerPort string) *ConnectionInfo {
 	connectioninfo.Lock()
+	defer connectioninfo.Unlock()
 	connectioninfo.ServerPort = ServerPort
-	connectioninfo.Unlock()
 	return connectioninfo
 }
 
 func (connectioninfo *ConnectionInfo) SetServerCgroupID(ServerCgroupID uint64) *ConnectionInfo {
 	connectioninfo.Lock()
+	defer connectioninfo.Unlock()
 	connectioninfo.ServerCgroupID = ServerCgroupID
-	connectioninfo.Unlock()
 	return connectioninfo
 }
 
 func (connectioninfo *ConnectionInfo) SetIsKubeProbe(IsKubeProbe bool) *ConnectionInfo {
 	connectioninfo.Lock()
+	defer connectioninfo.Unlock()
 	connectioninfo.IsKubeProbe = IsKubeProbe
-	connectioninfo.Unlock()
 	return connectioninfo
 }
 
 func (connectioninfo *ConnectionInfo) SetContainerId(ContainerId string) *ConnectionInfo {
 	connectioninfo.Lock()
+	defer connectioninfo.Unlock()
 	connectioninfo.ContainerId = ContainerId
-	connectioninfo.Unlock()
 	return connectioninfo
 }
 
@@ -519,85 +494,79 @@ type TcpID struct {
 
 func (tcpid *TcpID) GetSrcIP() string {
 	tcpid.Lock()
-	srcIP := tcpid.SrcIP
-	tcpid.Unlock()
-	return srcIP
+	defer tcpid.Unlock()
+	return tcpid.SrcIP
 }
 
 func (tcpid *TcpID) GetDstIP() string {
 	tcpid.Lock()
-	dstIP := tcpid.DstIP
-	tcpid.Unlock()
-	return dstIP
+	defer tcpid.Unlock()
+	return tcpid.DstIP
 }
 
 func (tcpid *TcpID) GetSrcPort() string {
 	tcpid.Lock()
-	srcPort := tcpid.SrcPort
-	tcpid.Unlock()
-	return srcPort
+	defer tcpid.Unlock()
+	return tcpid.SrcPort
 }
 
 func (tcpid *TcpID) GetDstPort() string {
 	tcpid.Lock()
-	dstPort := tcpid.DstPort
-	tcpid.Unlock()
-	return dstPort
+	defer tcpid.Unlock()
+	return tcpid.DstPort
 }
 
 func (tcpid *TcpID) GetSrcCgroupID() uint64 {
 	tcpid.Lock()
-	srcCgroupID := tcpid.SrcCgroupID
-	tcpid.Unlock()
-	return srcCgroupID
+	defer tcpid.Unlock()
+	return tcpid.SrcCgroupID
 }
 
 func (tcpid *TcpID) GetDstCgroupID() uint64 {
 	tcpid.Lock()
-	dstCgroupID := tcpid.DstCgroupID
-	tcpid.Unlock()
-	return dstCgroupID
+	defer tcpid.Unlock()
+	return tcpid.DstCgroupID
 }
 
 func (tcpid *TcpID) SetSrcIP(SrcIP string) *TcpID {
 	tcpid.Lock()
+	defer tcpid.Unlock()
 	tcpid.SrcIP = SrcIP
-	tcpid.Unlock()
 	return tcpid
 }
 
 func (tcpid *TcpID) SetDstIP(DstIP string) *TcpID {
 	tcpid.Lock()
+	defer tcpid.Unlock()
 	tcpid.DstIP = DstIP
-	tcpid.Unlock()
 	return tcpid
 }
 
 func (tcpid *TcpID) SetSrcPort(SrcPort string) *TcpID {
 	tcpid.Lock()
+	defer tcpid.Unlock()
 	tcpid.SrcPort = SrcPort
-	tcpid.Unlock()
 	return tcpid
 }
 
 func (tcpid *TcpID) SetDstPort(DstPort string) *TcpID {
 	tcpid.Lock()
+	defer tcpid.Unlock()
 	tcpid.DstPort = DstPort
-	tcpid.Unlock()
 	return tcpid
 }
 
 func (tcpid *TcpID) SetSrcCgroupID(SrcCgroupID uint64) *TcpID {
 	tcpid.Lock()
+	defer tcpid.Unlock()
 	tcpid.SrcCgroupID = SrcCgroupID
-	tcpid.Unlock()
 	return tcpid
 }
 
 func (tcpid *TcpID) SetDstCgroupID(DstCgroupID uint64) *TcpID {
 	tcpid.Lock()
+	defer tcpid.Unlock()
 	tcpid.DstCgroupID = DstCgroupID
-	tcpid.Unlock()
 	return tcpid
 }
 
