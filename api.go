@@ -1007,6 +1007,8 @@ type TcpReader interface {
 	GetIsClosed() bool
 	GetCapture() *Capture
 	Rewind()
+	Lock()
+	Unlock()
 }
 
 type TcpStream interface {
@@ -1019,6 +1021,8 @@ type TcpStream interface {
 	GetTls() bool
 	GetCapture() *Capture
 	GetChecksums() []string
+	Lock()
+	Unlock()
 }
 
 type TcpStreamMap interface {
