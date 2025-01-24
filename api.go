@@ -482,6 +482,21 @@ func (connectioninfo *ConnectionInfo) SetContainerId(ContainerId string) *Connec
 	return connectioninfo
 }
 
+func (connectioninfo *ConnectionInfo) NewConnectionInfoFlipped() *ConnectionInfo {
+	connectioninfo.Lock()
+	defer connectioninfo.Unlock()
+	return &ConnectionInfo{
+		ClientIP:       connectioninfo.ServerIP,
+		ClientPort:     connectioninfo.ServerPort,
+		ClientCgroupID: connectioninfo.ServerCgroupID,
+		ServerIP:       connectioninfo.ClientIP,
+		ServerPort:     connectioninfo.ClientPort,
+		ServerCgroupID: connectioninfo.ClientCgroupID,
+		IsKubeProbe:    connectioninfo.IsKubeProbe,
+		ContainerId:    connectioninfo.ContainerId,
+	}
+}
+
 type TcpID struct {
 	SrcIP       string
 	DstIP       string
