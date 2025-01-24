@@ -22,7 +22,7 @@ type Protocol struct {
 	ForegroundColor string   `json:"foregroundColor"`
 	FontSize        int8     `json:"fontSize"`
 	ReferenceLink   string   `json:"referenceLink"`
-	Ports           []string `json:"ports"`
+	Ports           []uint16 `json:"ports"`
 	Layer4          string   `json:"layer4"`
 	Layer3          string   `json:"layer3"`
 	Priority        uint8    `json:"priority"`
