@@ -368,10 +368,10 @@ type Capture struct {
 
 type ConnectionInfo struct {
 	ClientIP       string
-	ClientPort     uint16
+	ClientPort     string
 	ClientCgroupID uint64
 	ServerIP       string
-	ServerPort     uint16
+	ServerPort     string
 	ServerCgroupID uint64
 	IsKubeProbe    bool
 	ContainerId    string
@@ -384,7 +384,7 @@ func (connectioninfo *ConnectionInfo) GetClientIP() string {
 	return connectioninfo.ClientIP
 }
 
-func (connectioninfo *ConnectionInfo) GetClientPort() uint16 {
+func (connectioninfo *ConnectionInfo) GetClientPort() string {
 	connectioninfo.Lock()
 	defer connectioninfo.Unlock()
 	return connectioninfo.ClientPort
@@ -402,7 +402,7 @@ func (connectioninfo *ConnectionInfo) GetServerIP() string {
 	return connectioninfo.ServerIP
 }
 
-func (connectioninfo *ConnectionInfo) GetServerPort() uint16 {
+func (connectioninfo *ConnectionInfo) GetServerPort() string {
 	connectioninfo.Lock()
 	defer connectioninfo.Unlock()
 	return connectioninfo.ServerPort
@@ -433,7 +433,7 @@ func (connectioninfo *ConnectionInfo) SetClientIP(ClientIP string) *ConnectionIn
 	return connectioninfo
 }
 
-func (connectioninfo *ConnectionInfo) SetClientPort(ClientPort uint16) *ConnectionInfo {
+func (connectioninfo *ConnectionInfo) SetClientPort(ClientPort string) *ConnectionInfo {
 	connectioninfo.Lock()
 	defer connectioninfo.Unlock()
 	connectioninfo.ClientPort = ClientPort
@@ -454,7 +454,7 @@ func (connectioninfo *ConnectionInfo) SetServerIP(ServerIP string) *ConnectionIn
 	return connectioninfo
 }
 
-func (connectioninfo *ConnectionInfo) SetServerPort(ServerPort uint16) *ConnectionInfo {
+func (connectioninfo *ConnectionInfo) SetServerPort(ServerPort string) *ConnectionInfo {
 	connectioninfo.Lock()
 	defer connectioninfo.Unlock()
 	connectioninfo.ServerPort = ServerPort
@@ -500,8 +500,8 @@ func (connectioninfo *ConnectionInfo) NewConnectionInfoFlipped() *ConnectionInfo
 type TcpID struct {
 	SrcIP       string
 	DstIP       string
-	SrcPort     uint16
-	DstPort     uint16
+	SrcPort     string
+	DstPort     string
 	SrcCgroupID uint64
 	DstCgroupID uint64
 	sync.Mutex
@@ -519,13 +519,13 @@ func (tcpid *TcpID) GetDstIP() string {
 	return tcpid.DstIP
 }
 
-func (tcpid *TcpID) GetSrcPort() uint16 {
+func (tcpid *TcpID) GetSrcPort() string {
 	tcpid.Lock()
 	defer tcpid.Unlock()
 	return tcpid.SrcPort
 }
 
-func (tcpid *TcpID) GetDstPort() uint16 {
+func (tcpid *TcpID) GetDstPort() string {
 	tcpid.Lock()
 	defer tcpid.Unlock()
 	return tcpid.DstPort
@@ -557,14 +557,14 @@ func (tcpid *TcpID) SetDstIP(DstIP string) *TcpID {
 	return tcpid
 }
 
-func (tcpid *TcpID) SetSrcPort(SrcPort uint16) *TcpID {
+func (tcpid *TcpID) SetSrcPort(SrcPort string) *TcpID {
 	tcpid.Lock()
 	defer tcpid.Unlock()
 	tcpid.SrcPort = SrcPort
 	return tcpid
 }
 
-func (tcpid *TcpID) SetDstPort(DstPort uint16) *TcpID {
+func (tcpid *TcpID) SetDstPort(DstPort string) *TcpID {
 	tcpid.Lock()
 	defer tcpid.Unlock()
 	tcpid.DstPort = DstPort
