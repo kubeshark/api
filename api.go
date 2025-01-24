@@ -44,7 +44,7 @@ const (
 
 type Resolution struct {
 	IP                  string              `json:"ip"`
-	Port                uint16              `json:"port"`
+	Port                string              `json:"port"`
 	Name                string              `json:"name"`
 	Namespace           string              `json:"namespace"`
 	Pod                 *corev1.Pod         `json:"pod"`
@@ -69,7 +69,7 @@ func (resolution *Resolution) GetIP() string {
 	return resolution.IP
 }
 
-func (resolution *Resolution) GetPort() uint16 {
+func (resolution *Resolution) GetPort() string {
 	resolution.Lock()
 	defer resolution.Unlock()
 	return resolution.Port
@@ -172,7 +172,7 @@ func (resolution *Resolution) SetIP(IP string) *Resolution {
 	return resolution
 }
 
-func (resolution *Resolution) SetPort(Port uint16) *Resolution {
+func (resolution *Resolution) SetPort(Port string) *Resolution {
 	resolution.Lock()
 	defer resolution.Unlock()
 	resolution.Port = Port
@@ -326,7 +326,7 @@ type Object struct {
 
 type ResolutionSummary struct {
 	IP                  string              `json:"ip"`
-	Port                uint16              `json:"port"`
+	Port                string              `json:"port"`
 	Name                string              `json:"name"`
 	Namespace           string              `json:"namespace"`
 	Pod                 *PodSummary         `json:"pod"`
