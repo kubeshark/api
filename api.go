@@ -585,6 +585,21 @@ func (tcpid *TcpID) SetDstCgroupID(DstCgroupID uint64) *TcpID {
 	return tcpid
 }
 
+func (tcpid *TcpID) NewTcpIDFlipped() *TcpID {
+	tcpid.Lock()
+	newtcpid := &TcpID{
+		SrcIP:       tcpid.DstIP,
+		DstIP:       tcpid.SrcIP,
+		SrcPort:     tcpid.DstPort,
+		DstPort:     tcpid.SrcPort,
+		SrcCgroupID: tcpid.DstCgroupID,
+		DstCgroupID: tcpid.SrcCgroupID,
+	}
+	tcpid.Unlock()
+
+	return newtcpid
+}
+
 func (tcpid *TcpID) NewConnectionInfo() *ConnectionInfo {
 	tcpid.Lock()
 	connectioninfo := &ConnectionInfo{
