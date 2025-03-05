@@ -30,12 +30,12 @@ type HealthWorkerStorage struct {
 }
 
 type WorkerStats struct {
-	ProcessedBytes           int64 `json:"processedBytes"`
-	ItemsGenerated           int64 `json:"itemsGenerated"`
-	WsWrites                 int64 `json:"wsWrites"`
-	StartTime                int64 `json:"startTime"`
-	PacketsCountTotalSniffer int64 `json:"packetsCountTotalSniffer"`
-	PacketsCountTotalTracer  int64 `json:"packetsCountTotalTracer"`
+	ProcessedBytes      int64 `json:"processedBytes"`
+	ItemsGenerated      int64 `json:"itemsGenerated"`
+	WsWrites            int64 `json:"wsWrites"`
+	StartTime           int64 `json:"startTime"`
+	SnifferTotalPackets int64 `json:"snifferTotalPackets"`
+	TracerTotalPackets  int64 `json:"tracerTotalPackets"`
 }
 
 type HealthHub struct {
