@@ -4,14 +4,16 @@ import v1 "k8s.io/api/core/v1"
 
 type HealthWorker struct {
 	// Data set on start
-	NodeName    string                  `json:"nodeName"`
-	ClusterID   string                  `json:"clusterID"`
-	Version     string                  `json:"version"`
-	Storage     *HealthWorkerStorage    `json:"storage"`
-	Sniffer     *HealthWorkerComponent  `json:"sniffer"`
-	Tracer      *HealthWorkerComponent  `json:"tracer"`
-	BPFFilter   string                  `json:"bpfFilter"`
-	LicenseData HealthWorkerLicenseData `json:"licenseData"`
+	NodeName     string                  `json:"nodeName"`
+	ClusterID    string                  `json:"clusterID"`
+	Version      string                  `json:"version"`
+	Storage      *HealthWorkerStorage    `json:"storage"`
+	Sniffer      *HealthWorkerComponent  `json:"sniffer"`
+	SnifferStats interface{}             `json:"snifferStats"`
+	Tracer       *HealthWorkerComponent  `json:"tracer"`
+	TracerStats  interface{}             `json:"tracerStats"`
+	BPFFilter    string                  `json:"bpfFilter"`
+	LicenseData  HealthWorkerLicenseData `json:"licenseData"`
 }
 
 type HealthWorkerComponent struct {
