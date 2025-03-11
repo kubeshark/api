@@ -1036,7 +1036,6 @@ type TcpReader interface {
 	GetEmitter() Emitter
 	GetIsClosed() bool
 	GetCapture() *Capture
-	GetLayer4() string
 	Rewind()
 	Lock()
 	Unlock()
