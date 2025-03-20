@@ -11,7 +11,7 @@ type HealthWorker struct {
 	Sniffer      *HealthWorkerComponent  `json:"sniffer"`
 	SnifferStats interface{}             `json:"snifferStats"`
 	Tracer       *HealthWorkerComponent  `json:"tracer"`
-	TracerStats  interface{}             `json:"tracerStats"`
+	TracerStats  TracerAllStats          `json:"tracerStats"`
 	BPFFilter    string                  `json:"bpfFilter"`
 	LicenseData  HealthWorkerLicenseData `json:"licenseData"`
 }
@@ -55,4 +55,55 @@ type HealthHub struct {
 type HealthHubWorker struct {
 	Addr    string `json:"addr"`
 	PodName string `json:"podName"`
+}
+
+type TracerAllStats struct {
+	Pktmt struct {
+		PacketsTotal          uint64
+		PacketsProgramEnabled uint64
+		PacketsMatchedCgroup  uint64
+		PacketsIpv4           uint64
+		PacketsIpv6           uint64
+		PacketsParsePassed    uint64
+		PacketsParseFailed    uint64
+		SaveStats             struct {
+			SavePackets         uint64
+			SaveFailedLogic     uint64
+			SaveFailedNotOpened uint64
+			SaveFailedFull      uint64
+			SaveFailedOther     uint64
+		}
+	}
+	OpensslStats struct {
+		UprobesTotal         uint64
+		UprobesEnabled       uint64
+		UprobesMatched       uint64
+		UprobesErrUpdate     uint64
+		UretprobesTotal      uint64
+		UretprobesEnabled    uint64
+		UretprobesMatched    uint64
+		UretprobesErrContext uint64
+		SaveStats            struct {
+			SavePackets         uint64
+			SaveFailedLogic     uint64
+			SaveFailedNotOpened uint64
+			SaveFailedFull      uint64
+			SaveFailedOther     uint64
+		}
+	}
+	GotlsStats struct {
+		UprobesTotal      uint64
+		UprobesEnabled    uint64
+		UprobesMatched    uint64
+		UretprobesTotal   uint64
+		UretprobesEnabled uint64
+		UretprobesMatched uint64
+		SaveStats         struct {
+			SavePackets         uint64
+			SaveFailedLogic     uint64
+			SaveFailedNotOpened uint64
+			SaveFailedFull      uint64
+			SaveFailedOther     uint64
+		}
+	}
 }
