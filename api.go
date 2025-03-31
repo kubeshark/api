@@ -972,6 +972,7 @@ type BaseEntry struct {
 	Id           string             `json:"id"`
 	Stream       string             `json:"stream"`
 	Worker       string             `json:"worker"`
+	Node         *Node              `json:"node"`
 	Protocol     Protocol           `json:"proto,omitempty"`
 	Tls          bool               `json:"tls"`
 	Summary      string             `json:"summary,omitempty"`
