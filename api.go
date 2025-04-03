@@ -663,6 +663,7 @@ type OutputChannelItem struct {
 	Error          *Error
 	Capture        *Capture
 	Checksums      []string
+	MatcherKey     string
 }
 
 type ReadProgress struct {
@@ -829,6 +830,7 @@ type Entry struct {
 	Data         interface{} `json:"data"`
 	DataRef      string      `json:"dataRef"`
 	Size         int         `json:"size"`
+	MatcherKey   string      `json:"matcherKey"`
 }
 
 func (e *Entry) BuildId() {
