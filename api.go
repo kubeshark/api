@@ -631,9 +631,46 @@ func (tcpid *TcpID) NewConnectionInfoFlipped() *ConnectionInfo {
 }
 
 type CounterPair struct {
-	Request  uint
-	Response uint
+	request  uint
+	response uint
 	sync.Mutex
+}
+
+func (counterPair *CounterPair) IncrementRequest() uint {
+	counterPair.Lock()
+	defer counterPair.Unlock()
+	counterPair.request++
+	return counterPair.request
+}
+
+func (counterPair *CounterPair) IncrementResponse() uint {
+	counterPair.Lock()
+	defer counterPair.Unlock()
+	counterPair.response++
+	return counterPair.response
+}
+
+func (counterPair *CounterPair) ResetRequest() {
+	counterPair.Lock()
+	defer counterPair.Unlock()
+	counterPair.request = 0
+}
+
+func (counterPair *CounterPair) ResetResponse() {
+	counterPair.Lock()
+	defer counterPair.Unlock()
+	counterPair.response = 0
+}
+
+func (counterPair *CounterPair) Reset() {
+	counterPair.Lock()
+	defer counterPair.Unlock()
+	counterPair.request = 0
+	counterPair.response = 0
+}
+
+func NewCounterPair() *CounterPair {
+	return &CounterPair{}
 }
 
 type GenericMessage struct {
