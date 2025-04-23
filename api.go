@@ -1021,17 +1021,17 @@ type TableData struct {
 }
 
 type Flow struct {
-	TimeBegin       uint64      `json:"timeBegin"`
-	TimeEnd         uint64      `json:"timeEnd"`
-	Proto           string      `json:"proto"`
-	LocalPeer       string      `json:"localPeer"`
-	RemotePeer      string      `json:"remotePeer"`
-	PacketsSent     uint64      `json:"packetsSent"`
-	PacketsReceived uint64      `json:"packetsReceived"`
-	BytesSent       uint64      `json:"bytesSent"`
-	BytesReceived   uint64      `json:"bytesReceived"`
-	ResolvedLocal   *Resolution `json:"resolvedLocal"`
-	ResolvedRemote  *Resolution `json:"resolvedRemote"`
+	TimeBegin       uint64             `json:"timeBegin"`
+	TimeEnd         uint64             `json:"timeEnd"`
+	Proto           string             `json:"proto"`
+	LocalPeer       string             `json:"localPeer"`
+	RemotePeer      string             `json:"remotePeer"`
+	PacketsSent     uint64             `json:"packetsSent"`
+	PacketsReceived uint64             `json:"packetsReceived"`
+	BytesSent       uint64             `json:"bytesSent"`
+	BytesReceived   uint64             `json:"bytesReceived"`
+	ResolvedLocal   *ResolutionSummary `json:"resolvedLocal"`
+	ResolvedRemote  *ResolutionSummary `json:"resolvedRemote"`
 }
 
 type TcpReaderDataMsg interface {
