@@ -636,6 +636,18 @@ type CounterPair struct {
 	sync.Mutex
 }
 
+func (counterPair *CounterPair) GetRequest() uint {
+	counterPair.Lock()
+	defer counterPair.Unlock()
+	return counterPair.request
+}
+
+func (counterPair *CounterPair) GetResponse() uint {
+	counterPair.Lock()
+	defer counterPair.Unlock()
+	return counterPair.response
+}
+
 func (counterPair *CounterPair) IncrementRequest() uint {
 	counterPair.Lock()
 	defer counterPair.Unlock()
