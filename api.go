@@ -871,7 +871,7 @@ type Entry struct {
 }
 
 func (e *Entry) BuildId() {
-	e.Id = fmt.Sprintf("%s/%s-%d", e.Worker, e.Stream, e.Index)
+	e.Id = fmt.Sprintf("%s-%d", e.Stream, e.Index)
 }
 
 func (e *Entry) BuildFilenames() {
