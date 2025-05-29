@@ -8,6 +8,7 @@ import (
 	"sync"
 	"time"
 
+	capture "github.com/kubeshark/api2/pkg/proto/capture/v1"
 	"github.com/kubeshark/gopacket"
 	corev1 "k8s.io/api/core/v1"
 )
@@ -735,6 +736,7 @@ type Dissector interface {
 	Dissect(b *bufio.Reader, reader TcpReader) (err error)
 	Analyze(item *OutputChannelItem, resolvedSource *Resolution, resolvedDestination *Resolution) *Entry
 	Summarize(entry *Entry) *BaseEntry
+	Summarize2(entry *Entry) *capture.BaseEntry
 	Represent(request interface{}, response interface{}, event *Event, data interface{}) (representation *Representation)
 	Macros() map[string]string
 	NewResponseRequestMatcher() RequestResponseMatcher
