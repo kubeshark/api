@@ -40,6 +40,7 @@ type HealthWorkerLicenseData struct {
 
 type HealthHub struct {
 	Workers              []HealthHubWorker       `json:"workers"`
+	Nodes                []HealthHubNode         `json:"nodes"`
 	NodeName             string                  `json:"nodeName"`
 	ClusterID            string                  `json:"clusterID"`
 	Version              string                  `json:"version"`
@@ -55,4 +56,9 @@ type HealthHub struct {
 type HealthHubWorker struct {
 	Addr    string `json:"addr"`
 	PodName string `json:"podName"`
+}
+
+type HealthHubNode struct {
+	NodeName string `json:"nodeName"`
+	PodCount int    `json:"podCount"`
 }
