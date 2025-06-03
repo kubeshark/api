@@ -3,7 +3,8 @@ module github.com/kubeshark/api
 go 1.22.5
 
 require (
-	github.com/kubeshark/api2 v0.0.0-20250527130622-d7fd754119b4
+	github.com/google/uuid v1.6.0
+	github.com/kubeshark/api2 v0.0.0-20250603152259-e7439f9eff8d
 	github.com/kubeshark/gopacket v1.1.30
 	k8s.io/api v0.27.2
 )

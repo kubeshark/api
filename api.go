@@ -8,7 +8,9 @@ import (
 	"sync"
 	"time"
 
+	"github.com/google/uuid"
 	capture "github.com/kubeshark/api2/pkg/proto/capture/v1"
+	common "github.com/kubeshark/api2/pkg/proto/common/v1"
 	"github.com/kubeshark/gopacket"
 	corev1 "k8s.io/api/core/v1"
 )
@@ -695,6 +697,7 @@ type OutputChannelItem struct {
 	Protocol       Protocol
 	Timestamp      int64
 	ConnectionInfo *ConnectionInfo
+	NetworkProps   *common.NetworkProperties
 	Pair           *RequestResponsePair
 	Data           *GenericMessage
 	Tls            bool
@@ -736,7 +739,7 @@ type Dissector interface {
 	Dissect(b *bufio.Reader, reader TcpReader) (err error)
 	Analyze(item *OutputChannelItem, resolvedSource *Resolution, resolvedDestination *Resolution) *Entry
 	Summarize(entry *Entry) *BaseEntry
-	Summarize2(entry *Entry) *capture.BaseEntry
+	Summarize2(entry *Entry, id uuid.UUID) *capture.BaseEntry
 	Represent(request interface{}, response interface{}, event *Event, data interface{}) (representation *Representation)
 	Macros() map[string]string
 	NewResponseRequestMatcher() RequestResponseMatcher
@@ -870,6 +873,7 @@ type Entry struct {
 	DataRef      string      `json:"dataRef"`
 	Size         int         `json:"size"`
 	MatcherKey   string      `json:"matcherKey"`
+	NetworkProps common.NetworkProperties
 }
 
 func (e *Entry) BuildId() {
@@ -1107,6 +1111,7 @@ type TcpStream interface {
 	GetTls() bool
 	GetCapture() *Capture
 	GetChecksums() []string
+	GetNetworkProps() *common.NetworkProperties
 	Lock()
 	Unlock()
 }
