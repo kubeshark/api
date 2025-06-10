@@ -4,7 +4,7 @@ go 1.22.5
 
 require (
 	github.com/google/uuid v1.6.0
-	github.com/kubeshark/api2 v0.0.0-20250610150948-9deee207cd3f
+	github.com/kubeshark/api2 v0.0.0-20250610151912-2a2c5746a82f
 	github.com/kubeshark/gopacket v1.1.30
 	k8s.io/api v0.27.2
 )
