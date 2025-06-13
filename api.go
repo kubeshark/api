@@ -11,6 +11,7 @@ import (
 	"github.com/google/uuid"
 	capture "github.com/kubeshark/api2/pkg/proto/capture/v1"
 	common "github.com/kubeshark/api2/pkg/proto/common/v1"
+	protoCommon "github.com/kubeshark/api2/pkg/proto/common/v1"
 	"github.com/kubeshark/gopacket"
 	corev1 "k8s.io/api/core/v1"
 )
@@ -698,7 +699,7 @@ type OutputChannelItem struct {
 	Timestamp      int64
 	ConnectionInfo *ConnectionInfo
 	NetworkProps   *common.NetworkProperties
-	ClientIsLocal  bool
+	CaptureSource  protoCommon.CaptureSource
 	Pair           *RequestResponsePair
 	Data           *GenericMessage
 	Tls            bool
@@ -875,7 +876,7 @@ type Entry struct {
 	Size          int         `json:"size"`
 	MatcherKey    string      `json:"matcherKey"`
 	NetworkProps  *common.NetworkProperties
-	ClientIsLocal bool
+	CaptureSource protoCommon.CaptureSource
 }
 
 func (e *Entry) BuildId() {
