@@ -8,6 +8,10 @@ import (
 	"sync"
 	"time"
 
+	"github.com/google/uuid"
+	capture "github.com/kubeshark/api2/pkg/proto/capture/v1"
+	common "github.com/kubeshark/api2/pkg/proto/common/v1"
+	protoCommon "github.com/kubeshark/api2/pkg/proto/common/v1"
 	"github.com/kubeshark/gopacket"
 	corev1 "k8s.io/api/core/v1"
 )
@@ -694,6 +698,8 @@ type OutputChannelItem struct {
 	Protocol       Protocol
 	Timestamp      int64
 	ConnectionInfo *ConnectionInfo
+	NetworkProps   *common.NetworkProperties
+	CaptureSource  protoCommon.CaptureSource
 	Pair           *RequestResponsePair
 	Data           *GenericMessage
 	Tls            bool
@@ -735,6 +741,7 @@ type Dissector interface {
 	Dissect(b *bufio.Reader, reader TcpReader) (err error)
 	Analyze(item *OutputChannelItem, resolvedSource *Resolution, resolvedDestination *Resolution) *Entry
 	Summarize(entry *Entry) *BaseEntry
+	Summarize2(entry *Entry, id uuid.UUID) *capture.BaseEntry
 	Represent(request interface{}, response interface{}, event *Event, data interface{}) (representation *Representation)
 	Macros() map[string]string
 	NewResponseRequestMatcher() RequestResponseMatcher
@@ -835,39 +842,41 @@ type Event struct {
 
 // {Worker}/{Stream}-{Index} uniquely identifies an item
 type Entry struct {
-	Id           string      `json:"id"`
-	Index        int64       `json:"index"`
-	Stream       string      `json:"stream"`
-	Worker       string      `json:"worker"`
-	Node         *Node       `json:"node"`
-	Protocol     Protocol    `json:"protocol"`
-	Tls          bool        `json:"tls"`
-	Source       *Resolution `json:"src"`
-	Destination  *Resolution `json:"dst"`
-	Timestamp    int64       `json:"timestamp"`
-	StartTime    time.Time   `json:"startTime"`
-	Request      interface{} `json:"request"`
-	Response     interface{} `json:"response"`
-	RequestRef   string      `json:"requestRef"`
-	ResponseRef  string      `json:"responseRef"`
-	RequestSize  int         `json:"requestSize"`
-	ResponseSize int         `json:"responseSize"`
-	ElapsedTime  int64       `json:"elapsedTime"`
-	Passed       bool        `json:"passed"`
-	Failed       bool        `json:"failed"`
-	Error        *Error      `json:"error"`
-	EntryFile    string      `json:"entryFile"`
-	Record       string      `json:"record"`
-	Event        *Event      `json:"event"`
-	EventRef     string      `json:"eventRef"`
-	Base         *BaseEntry  `json:"base"`
-	Capture      *Capture    `json:"capture"`
-	Checksums    []string    `json:"checksums"`
-	Duplicate    string      `json:"duplicate"`
-	Data         interface{} `json:"data"`
-	DataRef      string      `json:"dataRef"`
-	Size         int         `json:"size"`
-	MatcherKey   string      `json:"matcherKey"`
+	Id            string      `json:"id"`
+	Index         int64       `json:"index"`
+	Stream        string      `json:"stream"`
+	Worker        string      `json:"worker"`
+	Node          *Node       `json:"node"`
+	Protocol      Protocol    `json:"protocol"`
+	Tls           bool        `json:"tls"`
+	Source        *Resolution `json:"src"`
+	Destination   *Resolution `json:"dst"`
+	Timestamp     int64       `json:"timestamp"`
+	StartTime     time.Time   `json:"startTime"`
+	Request       interface{} `json:"request"`
+	Response      interface{} `json:"response"`
+	RequestRef    string      `json:"requestRef"`
+	ResponseRef   string      `json:"responseRef"`
+	RequestSize   int         `json:"requestSize"`
+	ResponseSize  int         `json:"responseSize"`
+	ElapsedTime   int64       `json:"elapsedTime"`
+	Passed        bool        `json:"passed"`
+	Failed        bool        `json:"failed"`
+	Error         *Error      `json:"error"`
+	EntryFile     string      `json:"entryFile"`
+	Record        string      `json:"record"`
+	Event         *Event      `json:"event"`
+	EventRef      string      `json:"eventRef"`
+	Base          *BaseEntry  `json:"base"`
+	Capture       *Capture    `json:"capture"`
+	Checksums     []string    `json:"checksums"`
+	Duplicate     string      `json:"duplicate"`
+	Data          interface{} `json:"data"`
+	DataRef       string      `json:"dataRef"`
+	Size          int         `json:"size"`
+	MatcherKey    string      `json:"matcherKey"`
+	NetworkProps  *common.NetworkProperties
+	CaptureSource protoCommon.CaptureSource
 }
 
 func (e *Entry) BuildId() {
@@ -1105,6 +1114,7 @@ type TcpStream interface {
 	GetTls() bool
 	GetCapture() *Capture
 	GetChecksums() []string
+	GetNetworkProps() *common.NetworkProperties
 	Lock()
 	Unlock()
 }
