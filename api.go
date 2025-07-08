@@ -63,6 +63,8 @@ type Resolution struct {
 	HostParentProcessID int                 `json:"hostParentProcessId"`
 	ProcessName         string              `json:"processName"`
 	ProcessPath         string              `json:"processPath"`
+	CpuUsage            int                 `json:"cpuUsage"`
+	MemoryUsage         int                 `json:"memoryUsage"`
 	ResolutionMechanism ResolutionMechanism `json:"resolutionMechanism"`
 	sync.Mutex
 }
@@ -278,6 +280,20 @@ func (resolution *Resolution) SetProcessPath(ProcessPath string) *Resolution {
 	resolution.Lock()
 	defer resolution.Unlock()
 	resolution.ProcessPath = ProcessPath
+	return resolution
+}
+
+func (resolution *Resolution) SetCpuUsage(CpuUsage int) *Resolution {
+	resolution.Lock()
+	defer resolution.Unlock()
+	resolution.CpuUsage = CpuUsage
+	return resolution
+}
+
+func (resolution *Resolution) SetMemoryUsage(MemoryUsage int) *Resolution {
+	resolution.Lock()
+	defer resolution.Unlock()
+	resolution.MemoryUsage = MemoryUsage
 	return resolution
 }
 
