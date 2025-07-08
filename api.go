@@ -120,7 +120,6 @@ func (resolution *Resolution) GetCgroupID() uint {
 func (resolution *Resolution) GetContainerID() string {
 	resolution.Lock()
 	defer resolution.Unlock()
-	fmt.Printf("GetContainerID: %s\n", resolution.ContainerID) //XXX
 	return resolution.ContainerID
 }
 
@@ -232,7 +231,6 @@ func (resolution *Resolution) SetContainerID(ContainerID string) *Resolution {
 	resolution.Lock()
 	defer resolution.Unlock()
 	resolution.ContainerID = ContainerID
-	fmt.Printf("SetContainerID: %s\n", resolution.ContainerID) //XXX
 	return resolution
 }
 
