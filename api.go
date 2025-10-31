@@ -1125,6 +1125,7 @@ type TcpReader interface {
 
 type TcpStream interface {
 	SetProtocol(protocol *Protocol)
+	SetProtocolOnce(protocol *Protocol)
 	GetPcapId() string
 	GetIndex() int64
 	GetReqResMatchers() []RequestResponseMatcher
