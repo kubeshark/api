@@ -723,6 +723,7 @@ type OutputChannelItem struct {
 	Capture        *Capture
 	Checksums      []string
 	MatcherKey     string
+	FlowId         []byte
 }
 
 type ReadProgress struct {
@@ -787,6 +788,7 @@ func (e *Emitting) Emit(item *OutputChannelItem) {
 	item.Stream = e.Stream.GetPcapId()
 	item.Index = e.Stream.GetIndex()
 	item.Tls = e.Stream.GetTls()
+	item.FlowId = e.Stream.GetFlowID()
 	e.Stream.IncrementItemCount()
 	e.OutputChannel <- item
 }
@@ -894,6 +896,7 @@ type Entry struct {
 	NetworkProps  *protoCommon.NetworkProperties   `json:"networkProps"`
 	CaptureSource protoCommon.CaptureSource        `json:"captureSource"`
 	SubProtocol   protoCommon.DissectedSubProtocol `json:"subProtocol"`
+	FlowId        []byte                           `json:"flowId"`
 }
 
 func (e *Entry) BuildId() {
@@ -1133,6 +1136,7 @@ type TcpStream interface {
 	GetChecksums() []string
 	GetNetworkProps() *protoCommon.NetworkProperties
 	GetCaptureSource() protoCommon.CaptureSource
+	GetFlowID() []byte
 	Lock()
 	Unlock()
 }
