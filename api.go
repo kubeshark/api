@@ -8,7 +8,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/docker/distribution/uuid"
+	"github.com/google/uuid"
 	capture "github.com/kubeshark/api2/pkg/proto/capture/v1"
 	protoCommon "github.com/kubeshark/api2/pkg/proto/common/v1"
 	"github.com/kubeshark/gopacket"
