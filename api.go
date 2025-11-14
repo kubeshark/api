@@ -8,7 +8,6 @@ import (
 	"sync"
 	"time"
 
-	"github.com/google/uuid"
 	capture "github.com/kubeshark/api2/pkg/proto/capture/v1"
 	protoCommon "github.com/kubeshark/api2/pkg/proto/common/v1"
 	"github.com/kubeshark/gopacket"
@@ -723,6 +722,7 @@ type OutputChannelItem struct {
 	Capture        *Capture
 	Checksums      []string
 	MatcherKey     string
+	FlowId         uint64
 }
 
 type ReadProgress struct {
@@ -757,7 +757,7 @@ type Dissector interface {
 	Dissect(b *bufio.Reader, reader TcpReader) (err error)
 	Analyze(item *OutputChannelItem, resolvedSource *Resolution, resolvedDestination *Resolution) *Entry
 	Summarize(entry *Entry) *BaseEntry
-	Summarize2(entry *Entry, id uuid.UUID) *capture.BaseEntry
+	Summarize2(entry *Entry, id uint64) *capture.BaseEntry
 	Represent(request interface{}, response interface{}, event *Event, data interface{}) (representation *Representation)
 	Macros() map[string]string
 	NewResponseRequestMatcher() RequestResponseMatcher
@@ -787,6 +787,7 @@ func (e *Emitting) Emit(item *OutputChannelItem) {
 	item.Stream = e.Stream.GetPcapId()
 	item.Index = e.Stream.GetIndex()
 	item.Tls = e.Stream.GetTls()
+	item.FlowId = e.Stream.GetFlowID()
 	e.Stream.IncrementItemCount()
 	e.OutputChannel <- item
 }
@@ -894,6 +895,7 @@ type Entry struct {
 	NetworkProps  *protoCommon.NetworkProperties   `json:"networkProps"`
 	CaptureSource protoCommon.CaptureSource        `json:"captureSource"`
 	SubProtocol   protoCommon.DissectedSubProtocol `json:"subProtocol"`
+	FlowId        uint64                           `json:"flowId"`
 }
 
 func (e *Entry) BuildId() {
@@ -1133,6 +1135,7 @@ type TcpStream interface {
 	GetChecksums() []string
 	GetNetworkProps() *protoCommon.NetworkProperties
 	GetCaptureSource() protoCommon.CaptureSource
+	GetFlowID() uint64
 	Lock()
 	Unlock()
 }
