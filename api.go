@@ -1127,7 +1127,7 @@ type TcpStream interface {
 	SetProtocol(protocol *Protocol)
 	SetProtocolOnce(protocol *Protocol)
 	HasProtocol() bool
-	GetProtocol() (Protocol, bool)
+	GetProtocol() (*Protocol, bool)
 	GetPcapId() string
 	GetIndex() int64
 	GetReqResMatchers() []RequestResponseMatcher
