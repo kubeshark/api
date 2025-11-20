@@ -1151,4 +1151,3 @@ type TcpStreamMap interface {
 	Close()
 	CloseTimedoutTcpStreamChannels()
 }
-Dissector stability
