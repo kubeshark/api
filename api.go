@@ -1097,6 +1097,13 @@ type Flow struct {
 	BytesReceived   uint64             `json:"bytesReceived"`
 	ResolvedLocal   *ResolutionSummary `json:"resolvedLocal"`
 	ResolvedRemote  *ResolutionSummary `json:"resolvedRemote"`
+	// bandwidth computed by backend (bytes per second)
+	BandwidthSent     uint64 `json:"bandwidthSent,omitempty"`
+	BandwidthReceived uint64 `json:"bandwidthReceived,omitempty"`
+
+	// the exact time window used to compute bandwidth (UnixNano)
+	BandwidthWindowBegin uint64 `json:"bandwidthWindowBegin,omitempty"`
+	BandwidthWindowEnd   uint64 `json:"bandwidthWindowEnd,omitempty"`
 }
 
 type TcpReaderDataMsg interface {
