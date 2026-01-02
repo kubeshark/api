@@ -1098,12 +1098,12 @@ type Flow struct {
 	ResolvedLocal   *ResolutionSummary `json:"resolvedLocal"`
 	ResolvedRemote  *ResolutionSummary `json:"resolvedRemote"`
 	// bandwidth computed by backend (bits per second)
-	BandwidthSent     uint64 `json:"bandwidthSent,omitempty"`
-	BandwidthReceived uint64 `json:"bandwidthReceived,omitempty"`
+	BandwidthSent     uint64 `json:"bandwidthSent"`
+	BandwidthReceived uint64 `json:"bandwidthReceived"`
 
 	// packets per second
-	PacketsSentPerSecond     uint64 `json:"packetsSentPerSecond,omitempty"`
-	PacketsReceivedPerSecond uint64 `json:"packetsReceivedPerSecond,omitempty"`
+	PacketsSentPerSecond     uint64 `json:"packetsSentPerSecond"`
+	PacketsReceivedPerSecond uint64 `json:"packetsReceivedPerSecond"`
 
 	// the exact time window used to compute bandwidth (UnixNano)
 	BandwidthWindowBegin uint64 `json:"bandwidthWindowBegin,omitempty"`
