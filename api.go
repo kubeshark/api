@@ -723,6 +723,7 @@ type OutputChannelItem struct {
 	Checksums      []string
 	MatcherKey     string
 	FlowId         uint64
+	FullFlowId     uint64
 }
 
 type ReadProgress struct {
@@ -896,6 +897,7 @@ type Entry struct {
 	CaptureSource protoCommon.CaptureSource        `json:"captureSource"`
 	SubProtocol   protoCommon.DissectedSubProtocol `json:"subProtocol"`
 	FlowId        uint64                           `json:"flowId"`
+	FullFlowId    uint64                           `json:"fullFlowId"`
 }
 
 func (e *Entry) BuildId() {
