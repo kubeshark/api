@@ -1141,6 +1141,7 @@ type TcpStream interface {
 	GetNetworkProps() *protoCommon.NetworkProperties
 	GetCaptureSource() protoCommon.CaptureSource
 	GetFlowID() uint64
+	GetFullFlowID() uint64
 	Lock()
 	Unlock()
 }
