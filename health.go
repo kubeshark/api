@@ -38,19 +38,26 @@ type HealthWorkerLicenseData struct {
 	StartTime      int64 `json:"startTime"`
 }
 
+type HealthHubStorage struct {
+	DiskUsed      uint64 `json:"diskUsed"`
+	DiskAvailable uint64 `json:"diskAvailable"`
+	DiskLimit     uint64 `json:"diskLimit"`
+}
+
 type HealthHub struct {
-	Workers              []HealthHubWorker       `json:"workers"`
-	Nodes                []HealthHubNode         `json:"nodes"`
-	NodeName             string                  `json:"nodeName"`
-	ClusterID            string                  `json:"clusterID"`
-	Version              string                  `json:"version"`
-	Timestamp            string                  `json:"timestamp"`
-	CPUUsage             float64                 `json:"cpuUsage"`
-	MemoryUsage          float64                 `json:"memoryUsage"`
-	LastRestartReason    string                  `json:"lastRestartReason"`
-	LastRestartTimestamp string                  `json:"lastRestartTimestamp"`
-	Resources            v1.ResourceRequirements `json:"resources"`
-	Restarts             int                     `json:"restarts"`
+	Workers              []HealthHubWorker              `json:"workers"`
+	Nodes                []HealthHubNode                `json:"nodes"`
+	NodeName             string                         `json:"nodeName"`
+	ClusterID            string                         `json:"clusterID"`
+	Version              string                         `json:"version"`
+	Timestamp            string                         `json:"timestamp"`
+	CPUUsage             float64                        `json:"cpuUsage"`
+	MemoryUsage          float64                        `json:"memoryUsage"`
+	LastRestartReason    string                         `json:"lastRestartReason"`
+	LastRestartTimestamp string                         `json:"lastRestartTimestamp"`
+	Resources            v1.ResourceRequirements        `json:"resources"`
+	Restarts             int                            `json:"restarts"`
+	Storage              map[string]*HealthHubStorage   `json:"storage,omitempty"`
 }
 
 type HealthHubWorker struct {
